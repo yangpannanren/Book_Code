@@ -1,28 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ¹¦ÄÜËµÃ÷£ºSº¯Êı·ÂÕæÏµÍ³µÄ×´Ì¬·½³ÌX(k+1)=F*x(k)+G*w(k)
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆĞ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ĞÄÑĞ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓĞÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍŞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% åŠŸèƒ½è¯´æ˜ï¼šSå‡½æ•°ä»¿çœŸç³»ç»Ÿçš„çŠ¶æ€æ–¹ç¨‹X(k+1)=F*x(k)+G*w(k)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [sys,x0,str,ts]=KalmanFilter(t,x,u,flag)
 global Xkf;
 global Z;
 switch flag
-    case 0  
+    case 0
         [sys,x0,str,ts]=mdlInitializeSizes;
-    case 2  
+    case 2
         sys=mdlUpdate(t,x,u);
-    case 3  
+    case 3
         sys=mdlOutputs(t,x,u);
     case {1,4}
         sys=[];
     case 9
         save('Zobserv','Z');
         save('Xkalman','Xkf');
-    otherwise   
+    otherwise
         error(['Unhandled flag = ',num2str(flag)]);
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,19 +24,19 @@ end
 function [sys,x0,str,ts]=mdlInitializeSizes
 global P;
 global Xkf;
-global Z;   % 
+global Z;   %
 P=0.1*eye(4);
 sizes = simsizes;
-sizes.NumContStates  = 0;  
-sizes.NumDiscStates  = 4;  
-sizes.NumOutputs     = 4;  
-sizes.NumInputs      = 2; 
+sizes.NumContStates  = 0;
+sizes.NumDiscStates  = 4;
+sizes.NumOutputs     = 4;
+sizes.NumInputs      = 2;
 sizes.DirFeedthrough = 0;
-sizes.NumSampleTimes = 1; 
+sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
-x0  = [10,5,12,5]';  
-str = [];          
-ts  = [-1 0]; 
+x0  = [10,5,12,5]';
+str = [];
+ts  = [-1 0];
 Xkf=[];
 Z=[];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,23 +44,23 @@ Z=[];
 function sys=mdlUpdate(t,x,u)
 global P;
 global Xkf;
-global Z; 
-F=[1,1,0,0;0,1,0,0;0,0,1,1;0,0,0,1]; 
-G=[0.5,0;1,0;0,0.5;0,1];            
-H=[1,0,0,0;0,0,1,0];             
-Q=diag([0.0001,0.0009]);      
-R=diag([0.04,0.04]);  
+global Z;
+F=[1,1,0,0;0,1,0,0;0,0,1,1;0,0,0,1];
+G=[0.5,0;1,0;0,0.5;0,1];
+H=[1,0,0,0;0,0,1,0];
+Q=diag([0.0001,0.0009]);
+R=diag([0.04,0.04]);
 
-Xpre=F*x; 
+Xpre=F*x;
 Ppre=F*P*F'+G*Q*G';
-K=Ppre*H'*inv(H*Ppre*H'+RR); % ´Ë´¦ÓĞ´íÎó£¬ÇëĞŞ¸ÄÎªP163´¦Ò»ÖÂ¼´¿ÉÔËĞĞ
-e=u-H*Xpre; 
+K=Ppre*H'*inv(H*Ppre*H'+R); % æ­¤å¤„æœ‰é”™è¯¯ï¼Œè¯·ä¿®æ”¹ä¸ºP163å¤„ä¸€è‡´å³å¯è¿è¡Œ
+e=u-H*Xpre;
 Xnew=Xpre+K*e;
 P=(eye(4)-K*H)*Ppre;
-sys=Xnew; 
+sys=Xnew;
 Z=[Z,u];
 Xkf=[Xkf,Xnew];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function sys=mdlOutputs(t,x,u)
-sys = x; 
+sys = x;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

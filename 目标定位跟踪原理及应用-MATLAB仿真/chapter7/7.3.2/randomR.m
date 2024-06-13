@@ -1,21 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐòËµÃ÷£º
-% µ¥Õ¾¶àÄ¿±ê¸ú×ÙµÄ½¨Ä£³ÌÐò£¬²¢ÓÃ½üÁÚ·¨·ÖÀà
-% Ö÷ÒªÄ£Äâ¶àÄ¿±êµÄÔË¶¯ºÍ¹Û²â¹ý³Ì£¬Éæ¼°ÈÚºÏËã·¨---½üÁÚ·¨
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜Žï¼š
+% å•ç«™å¤šç›®æ ‡è·Ÿè¸ªçš„å»ºæ¨¡ç¨‹åºï¼Œå¹¶ç”¨è¿‘é‚»æ³•åˆ†ç±»
+% ä¸»è¦æ¨¡æ‹Ÿå¤šç›®æ ‡çš„è¿åŠ¨å’Œè§‚æµ‹è¿‡ç¨‹ï¼Œæ¶‰åŠèžåˆç®—æ³•---è¿‘é‚»æ³•
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ëæ»ú²ÉÑù×Óº¯Êý
+% éšæœºé‡‡æ ·å­å‡½æ•°
 function outIndex = randomR(inIndex,q)
 if nargin < 2
-    error('Not enough input arguments.'); 
+    error('Not enough input arguments.');
 end
 outIndex=zeros(size(inIndex));
-[num,col]=size(q);
+[num,~]=size(q);
 u=rand(num,1);
 u=sort(u);
 l=cumsum(q);

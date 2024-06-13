@@ -1,52 +1,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐòËµÃ÷£º
-% µ¥Õ¾¶àÄ¿±ê¸ú×ÙµÄ½¨Ä£³ÌÐò£¬²¢ÓÃ½üÁÚ·¨·ÖÀà
-% Ö÷ÒªÄ£Äâ¶àÄ¿±êµÄÔË¶¯ºÍ¹Û²â¹ý³Ì£¬Éæ¼°ÈÚºÏËã·¨---½üÁÚ·¨
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜Žï¼š
+% å•ç«™å¤šç›®æ ‡è·Ÿè¸ªçš„å»ºæ¨¡ç¨‹åºï¼Œå¹¶ç”¨è¿‘é‚»æ³•åˆ†ç±»
+% ä¸»è¦æ¨¡æ‹Ÿå¤šç›®æ ‡çš„è¿åŠ¨å’Œè§‚æµ‹è¿‡ç¨‹ï¼Œæ¶‰åŠèžåˆç®—æ³•---è¿‘é‚»æ³•
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ·ÖÀàËã·¨×Óº¯Êý
-% XunÎªÊäÈëµÄÎ´ÖªÑù±¾¼¯ºÏ
-% XXÎªÊäÈëµÄÒÑÖªÑù±¾¼¯ºÏ£¨ÖÖ×ÓÑù±¾£©
-% XXoutÎª×îÖÕ·ÖºÃÀà±ðµÄÑù±¾¼¯ºÏ
+% åˆ†ç±»ç®—æ³•å­å‡½æ•°
+% Xunä¸ºè¾“å…¥çš„æœªçŸ¥æ ·æœ¬é›†åˆ
+% XXä¸ºè¾“å…¥çš„å·²çŸ¥æ ·æœ¬é›†åˆï¼ˆç§å­æ ·æœ¬ï¼‰
+% XXoutä¸ºæœ€ç»ˆåˆ†å¥½ç±»åˆ«çš„æ ·æœ¬é›†åˆ
 function [XXout,ZZout]=NNClass(Xun,XX,Zun,ZZ)
-ALL=length(Xun(1,:));   % Ê£ÓàÎ´ÖªÑù±¾µã¸öÊý
+ALL=length(Xun(1,:));   % å‰©ä½™æœªçŸ¥æ ·æœ¬ç‚¹ä¸ªæ•°
 Type=length(XX);
-% ´ÓÒÑÖªÑù±¾µã³ö·¢£¬ÕÒµ½×î½üµÄÎ´ÖªÑù±¾µã
+% ä»Žå·²çŸ¥æ ·æœ¬ç‚¹å‡ºå‘ï¼Œæ‰¾åˆ°æœ€è¿‘çš„æœªçŸ¥æ ·æœ¬ç‚¹
 while (ALL>0)
-    % ½üÁÚ·¨¸ú¿ªÊ¼·ÖÀàµÄË³ÐòÓÐ¹Ø£¬Ë³Ðò²»Ò»Ñù£¬·ÖÀàµÄ½á¹ûÒ²²»Ò»Ñù
-    d=1e5; % ÎªÁËÒªÕÒµ½×î½üµÄÑù±¾£¬¼Ù¶¨³õÊ¼¾àÀëÎÞÇî´ó
+    % è¿‘é‚»æ³•è·Ÿå¼€å§‹åˆ†ç±»çš„é¡ºåºæœ‰å…³ï¼Œé¡ºåºä¸ä¸€æ ·ï¼Œåˆ†ç±»çš„ç»“æžœä¹Ÿä¸ä¸€æ ·
+    d=1e5; % ä¸ºäº†è¦æ‰¾åˆ°æœ€è¿‘çš„æ ·æœ¬ï¼Œå‡å®šåˆå§‹è·ç¦»æ— ç©·å¤§
     for i=1:Type
-        % È¥Ñ°ÕÒÀëµÚiÀà¾àÀë×î½üµÄÑù±¾
-        [row,col]=size(XX{i}); % µÃµ½µÚiÀàÒÑÖªÀà±ðµÄÑù±¾ÖÐµÄÑù±¾Êý
+        % åŽ»å¯»æ‰¾ç¦»ç¬¬iç±»è·ç¦»æœ€è¿‘çš„æ ·æœ¬
+        [~,col]=size(XX{i}); % å¾—åˆ°ç¬¬iç±»å·²çŸ¥ç±»åˆ«çš„æ ·æœ¬ä¸­çš„æ ·æœ¬æ•°
         for j=1:col
-            % ÕÒµ½ÀëÒÑÖªÑù±¾µã×î½üµÄµã
+            % æ‰¾åˆ°ç¦»å·²çŸ¥æ ·æœ¬ç‚¹æœ€è¿‘çš„ç‚¹
             for k=1:ALL
                 dist=sqrt( (Xun(1,k)-XX{i}(1,j))^2+(Xun(2,k)-XX{i}(2,j))^2 );
                 if dist<d
                     d=dist;
-                    % ×î½üµÄÒÑÖª-Î´ÖªÑù±¾ÐòÁÐ¶Ô
-                    label.class=i; % ´æ·ÅÒÑÖªÀà±ðµÄÑù±¾µÄ±êºÅ
-                    label.unclass=k; % ´æ·ÅÎ´ÖªÀà±ðµÄÑù±¾µÄ±êºÅ
+                    % æœ€è¿‘çš„å·²çŸ¥-æœªçŸ¥æ ·æœ¬åºåˆ—å¯¹
+                    label.class=i; % å­˜æ”¾å·²çŸ¥ç±»åˆ«çš„æ ·æœ¬çš„æ ‡å·
+                    label.unclass=k; % å­˜æ”¾æœªçŸ¥ç±»åˆ«çš„æ ·æœ¬çš„æ ‡å·
                     X0=[Xun(1,k),XX{i}(1,j)];
                     Y0=[Xun(2,k),XX{i}(2,j)];
                 end
             end
         end
     end
-    % ½«¾àÀë½üµÄµã¹é²¢µ½µÚlabel.classÀà
+    % å°†è·ç¦»è¿‘çš„ç‚¹å½’å¹¶åˆ°ç¬¬label.classç±»
     XX{label.class}=[XX{label.class},Xun(:,label.unclass)];
     ZZ{label.class}=[ZZ{label.class},Zun(:,label.unclass)];
-    line(X0,Y0);  % Óë×î½üµÄÑù±¾Í¬Àà£¬Á½ÕßÖ®¼äÁ¬Ïß
-    pause(0.5);    % ÉèÖÃÍ£Ö¹Ê±¼ä¿ÉÒÔÔÚÍ¼ÐÎ½çÃæÉÏ¿´·ÖÀà¹ý³Ì
-    % Í¬Ê±½«XunµÄµÚlabel¸öÑù±¾É¾³ý
+    line(X0,Y0);  % ä¸Žæœ€è¿‘çš„æ ·æœ¬åŒç±»ï¼Œä¸¤è€…ä¹‹é—´è¿žçº¿
+    pause(0.5);    % è®¾ç½®åœæ­¢æ—¶é—´å¯ä»¥åœ¨å›¾å½¢ç•Œé¢ä¸Šçœ‹åˆ†ç±»è¿‡ç¨‹
+    % åŒæ—¶å°†Xunçš„ç¬¬labelä¸ªæ ·æœ¬åˆ é™¤
     Xun(:,label.unclass)=[];
     Zun(:,label.unclass)=[];
-    % ¼ÌÐø±éÀúÆäËûÀà
+    % ç»§ç»­éåŽ†å…¶ä»–ç±»
     ALL=ALL-1;
 end
 XXout=XX;

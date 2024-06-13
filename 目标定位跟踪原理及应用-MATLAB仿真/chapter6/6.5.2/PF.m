@@ -1,16 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌĞòËµÃ÷£ºÁ£×ÓÂË²¨×Ó³ÌĞò
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆĞ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ĞÄÑĞ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓĞÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍŞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜ï¼šç²’å­æ»¤æ³¢å­ç¨‹åº
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Xout,Tpf]=PF(Z,Station,canshu)
 T=canshu.T;M=canshu.M;Q=canshu.Q;R=canshu.R;F=canshu.F;state0=canshu.state0;
 %*************************************************************************
-N=100;          % Á£×ÓÊı
+N=100;          % ç²’å­æ•°
 zPred=zeros(1,N);
 Weight=zeros(1,N);
 xparticlePred=zeros(4,N);
@@ -18,29 +12,29 @@ Xout=zeros(4,M);
 Xout(:,1)=state0;
 Tpf=zeros(1,M);
 xparticle=zeros(4,N);
-for j=1:N      % Á£×Ó¼¯³õÊ¼»¯
+for j=1:N      % ç²’å­é›†åˆå§‹åŒ–
     xparticle(:,j)=state0;
 end
 Xpf=zeros(4,N);
 Xpf(:,1)=state0;
 for t=2:M
     tic;
-    XX=0;  % ÖĞ¼ä±äÁ¿
-    % ²ÉÑù
+    XX=0;  % ä¸­é—´å˜é‡
+    % é‡‡æ ·
     for k=1:N
-        xparticlePred(:,k)=feval('sfun',xparticle(:,k),T,F)+10*sqrtm(Q)*randn(4,1);
+        xparticlePred(:,k)=sfun(xparticle(:,k),T,F)+10*sqrtm(Q)*randn(4,1);
     end
-    % ÖØÒªĞÔÈ¨Öµ¼ÆËã
+    % é‡è¦æ€§æƒå€¼è®¡ç®—
     for k=1:N
-        zPred(1,k)=feval('hfun',xparticlePred(:,k),Station);
+        zPred(1,k)=hfun(xparticlePred(:,k),Station);
         z1=Z(1,t)-zPred(1,k);
-        Weight(1,k)=inv(sqrt(2*pi*det(R)))*exp(-.5*(z1)'*inv(R)*(z1))+ 1e-99;%È¨Öµ¼ÆËã
+        Weight(1,k)=inv(sqrt(2*pi*det(R)))*exp(-.5*(z1)'*inv(R)*(z1))+ 1e-99;%æƒå€¼è®¡ç®—
     end
-    % ¹éÒ»»¯È¨ÖØ
+    % å½’ä¸€åŒ–æƒé‡
     Weight(1,:)=Weight(1,:)./sum(Weight(1,:));
-    %ÖØĞÂ²ÉÑù
+    %é‡æ–°é‡‡æ ·
     outIndex = randomR(1:N,Weight(1,:)');          % random resampling.
-    xparticle= xparticlePred(:,outIndex); % »ñÈ¡ĞÂ²ÉÑùÖµ
+    xparticle= xparticlePred(:,outIndex); % è·å–æ–°é‡‡æ ·å€¼
     target=[mean(xparticle(1,:)),mean(xparticle(2,:)),...
         mean(xparticle(3,:)),mean(xparticle(4,:))]';
     Xout(:,t)=target;

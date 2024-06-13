@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ¹¦ÄÜËµÃ÷£ºÊı¾İ·ÖÎö³ÌĞò
+% åŠŸèƒ½è¯´æ˜ï¼šæ•°æ®åˆ†æç¨‹åº
 function DataAnalysis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load Xstate;
@@ -15,18 +15,18 @@ for k=1:T
     Dev_PF(1,k)=sqrt( (Xpf(1,k)-Xstate(1,k))^2+(Xpf(3,k)-Xstate(3,k))^2 );
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure % ¹ì¼£Í¼
+figure % è½¨è¿¹å›¾
 hold on;box on;
 plot(Xstate(1,:),Xstate(3,:),'-b.');
 plot(Xpf(1,:),Xpf(3,:),'-r+');
 legend('true','pf');
 xlabel('X/m');ylabel('Y/m');
 
-figure % Æ«²îÍ¼
+figure % åå·®å›¾
 hold on;box on;
 plot(Dev_PF,'-ko','MarkerFace','g');
 xlabel('Time/s');ylabel('Value of the Deviation/m');
-figure % ¶ÔËÙ¶ÈµÄ¹À¼Æ
+figure % å¯¹é€Ÿåº¦çš„ä¼°è®¡
 subplot(121);hold on;box on;
 plot(Xstate(2,:),'-k.')
 plot(Xpf(2,:),'-r+');

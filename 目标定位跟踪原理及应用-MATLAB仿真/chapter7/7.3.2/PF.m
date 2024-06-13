@@ -1,40 +1,34 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌĞòËµÃ÷£º
-% µ¥Õ¾¶àÄ¿±ê¸ú×ÙµÄ½¨Ä£³ÌĞò£¬²¢ÓÃ½üÁÚ·¨·ÖÀà
-% Ö÷ÒªÄ£Äâ¶àÄ¿±êµÄÔË¶¯ºÍ¹Û²â¹ı³Ì£¬Éæ¼°ÈÚºÏËã·¨---½üÁÚ·¨
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆĞ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ĞÄÑĞ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓĞÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍŞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜ï¼š
+% å•ç«™å¤šç›®æ ‡è·Ÿè¸ªçš„å»ºæ¨¡ç¨‹åºï¼Œå¹¶ç”¨è¿‘é‚»æ³•åˆ†ç±»
+% ä¸»è¦æ¨¡æ‹Ÿå¤šç›®æ ‡çš„è¿åŠ¨å’Œè§‚æµ‹è¿‡ç¨‹ï¼Œæ¶‰åŠèåˆç®—æ³•---è¿‘é‚»æ³•
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Xpf,xparticle,Tpf]=PF(Z,S,canshu,xparticle)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Q=canshu.Q;R=canshu.R;F=canshu.F;G=canshu.G;N=canshu.N; % Á£×ÓÊı
+Q=canshu.Q;R=canshu.R;F=canshu.F;G=canshu.G;N=canshu.N; % ç²’å­æ•°
 zPred=zeros(2,N);
 Weight=zeros(1,N);
 xparticlePred=zeros(4,N);
-Tpf=0;
+% Tpf=0;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic;
 x0=S.x;
 y0=S.y;
-% ²ÉÑù
+% é‡‡æ ·
 for k=1:N
     xparticlePred(:,k)=F*xparticle(:,k)+5*G*sqrtm(Q)*G'*randn(4,1);
 end
-% ÖØÒªĞÔÈ¨Öµ¼ÆËã
+% é‡è¦æ€§æƒå€¼è®¡ç®—
 for k=1:N
-    zPred(:,k)=feval('hfun',xparticlePred(:,k),x0,y0);
+    zPred(:,k)=hfun(xparticlePred(:,k),x0,y0);
     z1=Z-zPred(:,k);
-    Weight(1,k)=inv(sqrt(2*pi*det(R)))*exp(-.5*(z1)'*inv(R)*(z1))+ 1e-99;%È¨Öµ¼ÆËã
+    Weight(1,k)=inv(sqrt(2*pi*det(R)))*exp(-.5*(z1)'*inv(R)*(z1))+ 1e-99;%æƒå€¼è®¡ç®—
 end
-% ¹éÒ»»¯È¨ÖØ
+% å½’ä¸€åŒ–æƒé‡
 Weight(1,:)=Weight(1,:)./sum(Weight(1,:));
-%ÖØĞÂ²ÉÑù
+%é‡æ–°é‡‡æ ·
 outIndex = randomR(1:N,Weight(1,:)');          % random resampling.
-xparticle= xparticlePred(:,outIndex); % »ñÈ¡ĞÂ²ÉÑùÖµ
+xparticle= xparticlePred(:,outIndex); % è·å–æ–°é‡‡æ ·å€¼
 target=[mean(xparticle(1,:)),mean(xparticle(2,:)),...
     mean(xparticle(3,:)),mean(xparticle(4,:))]';
 Xpf=target;

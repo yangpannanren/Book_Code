@@ -1,8 +1,8 @@
-% ×Óº¯Êý¹¦ÄÜ£º¸ù¾Ý´øÔëÉùµÄ¹Û²âÐÅÏ¢Ö±½Ó¼ÆËãÄ¿±êµÄÎ»ÖÃ
+% å­å‡½æ•°åŠŸèƒ½ï¼šæ ¹æ®å¸¦å™ªå£°çš„è§‚æµ‹ä¿¡æ¯ç›´æŽ¥è®¡ç®—ç›®æ ‡çš„ä½ç½®
 function P=pfun(X,x0,y0)
 if length(X)>2
-    error('Not enough input arguments.'); 
+    error('Not enough input arguments.');
 end
-x=x0+X(1)*cos(X(2)); 
-y=y0+X(1)*sin(X(2)); 
+x=x0+X(1)*cos(X(2));
+y=y0+X(1)*sin(X(2));
 P=[x,y]';

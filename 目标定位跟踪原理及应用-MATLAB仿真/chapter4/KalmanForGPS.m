@@ -1,63 +1,54 @@
+function KalmanForGPS % Kalmanæ»¤æ³¢åœ¨èˆ¹èˆ¶GPSå¯¼èˆªå®šä½ç³»ç»Ÿä¸­çš„åº”ç”¨
+dt=1;%é›·è¾¾æ‰«æå‘¨æœŸ,
+T=80/dt; %æ€»çš„é‡‡æ ·æ¬¡æ•°
+F=[1,dt,0,0;0,1,0,0;0,0,1,dt;0,0,0,1];  % çŠ¶æ€è½¬ç§»çŸ©é˜µ
+H=[1,0,0,0;0,0,1,0];   % è§‚æµ‹çŸ©é˜µ
+delta_w=1e-2;  %å¦‚æžœå¢žå¤§è¿™ä¸ªå‚æ•°ï¼Œç›®æ ‡çœŸå®žè½¨è¿¹å°±æ˜¯æ›²çº¿äº†
+Q=delta_w*diag([0.5,1,0.5,1]) ; % è¿‡ç¨‹å™ªå£°æ–¹å·®
+R=10*eye(2);                   % è§‚æµ‹å™ªå£°æ–¹å·®
+W=sqrtm(Q)*randn(4,T);          % è¿‡ç¨‹å™ªå£°
+V=sqrtm(R)*randn(2,T);          % è§‚æµ‹å™ªå£°
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐò¹¦ÄÜ£ºKalmanÂË²¨ÔÚ´¬²°GPSµ¼º½¶¨Î»ÏµÍ³ÖÐµÄÓ¦ÓÃ
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function KalmanForGPS % KalmanÂË²¨ÔÚ´¬²°GPSµ¼º½¶¨Î»ÏµÍ³ÖÐµÄÓ¦ÓÃ
-dt=1;%À×´ïÉ¨ÃèÖÜÆÚ,
-T=80/dt; %×ÜµÄ²ÉÑù´ÎÊý
-F=[1,dt,0,0;0,1,0,0;0,0,1,dt;0,0,0,1];  % ×´Ì¬×ªÒÆ¾ØÕó
-H=[1,0,0,0;0,0,1,0];   % ¹Û²â¾ØÕó
-delta_w=1e-2;  %Èç¹ûÔö´óÕâ¸ö²ÎÊý£¬Ä¿±êÕæÊµ¹ì¼£¾ÍÊÇÇúÏßÁË
-Q=delta_w*diag([0.5,1,0.5,1]) ; % ¹ý³ÌÔëÉù·½²î
-R=10*eye(2);                   % ¹Û²âÔëÉù·½²î
-W=sqrtm(Q)*randn(4,T);          % ¹ý³ÌÔëÉù
-V=sqrtm(R)*randn(2,T);          % ¹Û²âÔëÉù
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-X=zeros(4,T);   % Ä¿±êÕæÊµÎ»ÖÃ¡¢ËÙ¶È
-X(:,1)=[-100,2,200,20];% Ä¿±ê³õÊ¼Î»ÖÃ¡¢ËÙ¶È
-Z=zeros(2,T);   % ´«¸ÐÆ÷¶ÔÎ»ÖÃµÄ¹Û²â
-Z(:,1)=[X(1,1),X(3,1)];  % ¹Û²â³õÊ¼»¯
-Xkf=zeros(4,T); % kalmanÂË²¨×´Ì¬³õÊ¼»¯
-Xkf(:,1)=X(:,1); 
-P=eye(4); % Ð­·½²îÕó³õÊ¼»¯
+X=zeros(4,T);   % ç›®æ ‡çœŸå®žä½ç½®ã€é€Ÿåº¦
+X(:,1)=[-100,2,200,20];% ç›®æ ‡åˆå§‹ä½ç½®ã€é€Ÿåº¦
+Z=zeros(2,T);   % ä¼ æ„Ÿå™¨å¯¹ä½ç½®çš„è§‚æµ‹
+Z(:,1)=[X(1,1),X(3,1)];  % è§‚æµ‹åˆå§‹åŒ–
+Xkf=zeros(4,T); % kalmanæ»¤æ³¢çŠ¶æ€åˆå§‹åŒ–
+Xkf(:,1)=X(:,1);
+P=eye(4); % åæ–¹å·®é˜µåˆå§‹åŒ–
 for k=2:T
-    % ´¬Ìå×ÔÉíÔË¶¯
-    X(:,k)=F*X(:,k-1)+W(:,k);%Ä¿±êÕæÊµ¹ì¼£
-    
-    % »ñÈ¡ÎÀÐÇÊý¾Ý£¬¹Û²âÐÅÏ¢¿ªÊ¼ÂË²¨
-    Z(:,k)=H*X(:,k)+V(:,k); %×Ôµ¼º½£¬¹Û²âÐÅÏ¢
-    Xpre=F*Xkf(:,k-1); % µÚÒ»²½£º×´Ì¬Ô¤²â
-    Ppre=F*P*F'+Q;     % µÚ¶þ²½£ºÐ­·½²îÔ¤²â
-    K=Ppre*H'*inv(H*Ppre*H'+R);% µÚÈý²½£ºÇóÔöÒæ
-    Xkf(:,k)=Xpre+K*(Z(:,k)-H*Xpre);% µÚËÄ²½£º×´Ì¬¸üÐÂ
-    P=(eye(4)-K*H)*Ppre;% µÚÎå²½£ºÐ­·½²î¸üÐÂ
+    % èˆ¹ä½“è‡ªèº«è¿åŠ¨
+    X(:,k)=F*X(:,k-1)+W(:,k);%ç›®æ ‡çœŸå®žè½¨è¿¹
+
+    % èŽ·å–å«æ˜Ÿæ•°æ®ï¼Œè§‚æµ‹ä¿¡æ¯å¼€å§‹æ»¤æ³¢
+    Z(:,k)=H*X(:,k)+V(:,k); %è‡ªå¯¼èˆªï¼Œè§‚æµ‹ä¿¡æ¯
+    Xpre=F*Xkf(:,k-1); % ç¬¬ä¸€æ­¥ï¼šçŠ¶æ€é¢„æµ‹
+    Ppre=F*P*F'+Q;     % ç¬¬äºŒæ­¥ï¼šåæ–¹å·®é¢„æµ‹
+    K=Ppre*H'*inv(H*Ppre*H'+R);% ç¬¬ä¸‰æ­¥ï¼šæ±‚å¢žç›Š
+    Xkf(:,k)=Xpre+K*(Z(:,k)-H*Xpre);% ç¬¬å››æ­¥ï¼šçŠ¶æ€æ›´æ–°
+    P=(eye(4)-K*H)*Ppre;% ç¬¬äº”æ­¥ï¼šåæ–¹å·®æ›´æ–°
 end
-% Îó²î·ÖÎö
+% è¯¯å·®åˆ†æž
 for i=1:T
-    Err_Observation(i)=RMS(X(:,i),Z(:,i)); % ÂË²¨Ç°µÄÎó²î
-    Err_KalmanFilter(i)=RMS(X(:,i),Xkf(:,i)); % ÂË²¨ºóµÄÎó²î
+    Err_Observation(i)=RMS(X(:,i),Z(:,i)); % æ»¤æ³¢å‰çš„è¯¯å·®
+    Err_KalmanFilter(i)=RMS(X(:,i),Xkf(:,i)); % æ»¤æ³¢åŽçš„è¯¯å·®
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% »­Í¼
-figure % ¹ì¼£Í¼
+% ç”»å›¾
+figure % è½¨è¿¹å›¾
 hold on;box on;xlabel('X/m');ylabel('Y/m');
-plot(X(1,:),X(3,:),'-k'); % ÕæÊµ¹ì¼£
-plot(Z(1,:),Z(2,:),'-b.'); % ¹Û²â¹ì¼£
-plot(Xkf(1,:),Xkf(3,:),'-r+'); % kalmanÂË²¨¹ì¼£
-legend('ÕæÊµ¹ì¼£','¹Û²â¹ì¼£','ÂË²¨¹ì¼£')
-figure % Îó²îÍ¼
+plot(X(1,:),X(3,:),'-k'); % çœŸå®žè½¨è¿¹
+plot(Z(1,:),Z(2,:),'-b.'); % è§‚æµ‹è½¨è¿¹
+plot(Xkf(1,:),Xkf(3,:),'-r+'); % kalmanæ»¤æ³¢è½¨è¿¹
+legend('çœŸå®žè½¨è¿¹','è§‚æµ‹è½¨è¿¹','æ»¤æ³¢è½¨è¿¹')
+figure % è¯¯å·®å›¾
 hold on; box on;xlabel('Time/s');ylabel('value of the deviation/m');
 plot(Err_Observation,'-ko','MarkerFace','g')
 plot(Err_KalmanFilter,'-ks','MarkerFace','r')
-legend('¹Û²âÆ«²î','ÂË²¨ºóÆ«²î')
+legend('è§‚æµ‹åå·®','æ»¤æ³¢åŽåå·®')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£º¼ÆËãÆ«²î
-function dist=RMS(X1,X2);
+% å­å‡½æ•°ï¼šè®¡ç®—åå·®
+function dist=RMS(X1,X2)
 if length(X2)<=2
     dist=sqrt( (X1(1)-X2(1))^2 + (X1(3)-X2(2))^2 );
 else

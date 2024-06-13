@@ -1,21 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌĞòËµÃ÷£º¸ú×ÙÆ«²î·ÖÎö
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆĞ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ĞÄÑĞ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓĞÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍŞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜ï¼šè·Ÿè¸ªåå·®åˆ†æ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function DeviationAnalysis
 load Xstate;
 load Xkalman;
 load Zobserv;
-Xstate 
-Xkf   
-Z 
+Xstate
+Xkf
+Z
 T1=length(Xstate(1,:))
-T2=length(Z(1,:)) 
+T2=length(Z(1,:))
 T=min(T1,T2)
 Div_Observ_Real=zeros(1,T);
 Div_Kalman_Real=zeros(1,T);
@@ -24,7 +18,7 @@ for i=2:T
     Div_Kalman_Real(i)=sqrt( (Xkf(1,i)-Xstate(1,i))^2+(Xkf(3,i)-Xstate(3,i))^2 );
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure  
+figure
 hold on;box on;
 plot(Xstate(1,:),Xstate(3,:),'-r');
 plot(Xkf(1,:),Xkf(3,:),'-k+');

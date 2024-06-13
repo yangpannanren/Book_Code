@@ -1,28 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐòËµÃ÷£ºÃÉÌØ¿¨ÂåµÄÓ¦ÓÃ¾ÙÀý-Ô²ÖÜÂÊ¦ÐµÄ¼ÆËã
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜Žï¼šè’™ç‰¹å¡æ´›çš„åº”ç”¨ä¸¾ä¾‹-åœ†å‘¨çŽ‡Ï€çš„è®¡ç®—
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function MonteCarlo_For_Pai_By_Buffon
-length=0.6;         % ÕëµÄ³¤¶È
-m=20000;           % ÊµÑé´ÎÊý
-buffon(length,m);    % µ÷ÓÃ×Óº¯Êý
+length=0.6;         % é’ˆçš„é•¿åº¦
+m=20000;           % å®žéªŒæ¬¡æ•°
+buffon(length,m);    % è°ƒç”¨å­å‡½æ•°
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function pai=buffon(needlelength,mm)
-% needlelength ÊÇÕëµÄ³¤¶È
-% mm ÊÇËæ»úÊµÑé´ÎÊý
-frq=0; % ÓëÆ½ÐÐÏßÏà½»µÄÕëµÄÊýÄ¿³õÊ¼»¯
-xrandnum = unifrnd(0,0.5,1,mm);% ²úÉú¾ùÔÈ·Ö²¼µÄËæ»úÊýX
-phi= unifrnd(0,pi,1,mm);% ¾ùÔÈ·Ö²¼µÄ½Ç¶È£¬ÕëÓëÆ½ÐÐÏßÏà½»½Ç¶È
+% needlelength æ˜¯é’ˆçš„é•¿åº¦
+% mm æ˜¯éšæœºå®žéªŒæ¬¡æ•°
+frq=0; % ä¸Žå¹³è¡Œçº¿ç›¸äº¤çš„é’ˆçš„æ•°ç›®åˆå§‹åŒ–
+xrandnum = unifrnd(0,0.5,1,mm);% äº§ç”Ÿå‡åŒ€åˆ†å¸ƒçš„éšæœºæ•°X
+phi= unifrnd(0,pi,1,mm);% å‡åŒ€åˆ†å¸ƒçš„è§’åº¦ï¼Œé’ˆä¸Žå¹³è¡Œçº¿ç›¸äº¤è§’åº¦
 for ii=1:mm
-    %  ifÌõ¼þÅÐ¶Ï²¿·Ö£¬Çë²Î¿¼ÊéÖÐ¹«Ê½
+    %  ifæ¡ä»¶åˆ¤æ–­éƒ¨åˆ†ï¼Œè¯·å‚è€ƒä¹¦ä¸­å…¬å¼
     if (xrandnum(1,ii)<=(needlelength*sin(phi(1,ii))/2))
-        frq=frq+1; % Ïà½»Ôò¼Ó1
-    end    
-end    
-pai=2*needlelength/(frq/mm) % ×îÖÕ¹À¼ÆµÄ¦ÐµÄÖµ
+        frq=frq+1; % ç›¸äº¤åˆ™åŠ 1
+    end
+end
+pai=2*needlelength/(frq/mm) % æœ€ç»ˆä¼°è®¡çš„Ï€çš„å€¼
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,81 +1,75 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌĞòËµÃ÷£ºÁ£×ÓÂË²¨ÓÃÓÚ·Ç¸ßË¹Ä£ĞÍÔëÉùµÄÂË²¨
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆĞ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ĞÄÑĞ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓĞÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍŞ
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜ï¼šç²’å­æ»¤æ³¢ç”¨äºéé«˜æ–¯æ¨¡å‹å™ªå£°çš„æ»¤æ³¢
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function main
-%³õÊ¼»¯Ïà¹Ø²ÎÊı
-M=100;                  %²ÉÑùµãÊı
-T=1;                    %²ÉÑù¼ä¸ô
-N=100;                  %Á£×ÓÊı
-number=10;              %Monte Carlo·ÂÕæ´ÎÊı
-x0=50000;y0=50000;vx=300;vy=-100; % Ä¿±êÔË¶¯³õÊ¼×´Ì¬
-delta_w=0.1;            %¹ı³ÌÔëÉù±ê×¼²î
-delta_r=50;             %ÉÁË¸ÔëÉùÏÂ¹Û²â¾àÀë±ê×¼²î
-delta_theta1=1*pi/180;  %ÈÈÔëÉù¶ÔÓ¦·½Î»½Ç±ê×¼²î
-delta_theta2=5*pi/180;  %ÉÁË¸Ğ§Ó¦¶ÔÓ¦·½Î»½Ç±ê×¼²î
-eta=0.3;                % ´Ë²ÎÊı¿ØÖÆÔëÉùĞÎÊ½£¬=0Îª¸ßË¹ÔëÉù£¬·ÇÁãÎªÉÁË¸ÔëÉù
-Q=delta_w^2*eye(2);                 %¹ı³ÌÔëÉù·½²îÕó
+%åˆå§‹åŒ–ç›¸å…³å‚æ•°
+M=100;                  %é‡‡æ ·ç‚¹æ•°
+T=1;                    %é‡‡æ ·é—´éš”
+N=100;                  %ç²’å­æ•°
+number=10;              %Monte Carloä»¿çœŸæ¬¡æ•°
+x0=50000;y0=50000;vx=300;vy=-100; % ç›®æ ‡è¿åŠ¨åˆå§‹çŠ¶æ€
+delta_w=0.1;            %è¿‡ç¨‹å™ªå£°æ ‡å‡†å·®
+delta_r=50;             %é—ªçƒå™ªå£°ä¸‹è§‚æµ‹è·ç¦»æ ‡å‡†å·®
+delta_theta1=1*pi/180;  %çƒ­å™ªå£°å¯¹åº”æ–¹ä½è§’æ ‡å‡†å·®
+delta_theta2=5*pi/180;  %é—ªçƒæ•ˆåº”å¯¹åº”æ–¹ä½è§’æ ‡å‡†å·®
+eta=0.3;                % æ­¤å‚æ•°æ§åˆ¶å™ªå£°å½¢å¼ï¼Œ=0ä¸ºé«˜æ–¯å™ªå£°ï¼Œéé›¶ä¸ºé—ªçƒå™ªå£°
+Q=delta_w^2*eye(2);                 %è¿‡ç¨‹å™ªå£°æ–¹å·®é˜µ
 R1=diag([delta_r^2,delta_theta1^2]);
 R2=diag([delta_r^2,delta_theta2^2]);
-R=(1-eta)*R1+eta*R2;                %²âÁ¿ÔëÉù·½²îÕó
+R=(1-eta)*R1+eta*R2;                %æµ‹é‡å™ªå£°æ–¹å·®é˜µ
 G=[T^2/2,0;T,0;0,T^2/2;0,T];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ²úÉúÕæÊµÊı¾İ£¦Á¿²â
+% äº§ç”ŸçœŸå®æ•°æ®ï¼†é‡æµ‹
 X=zeros(4,M);
 Z=zeros(2,M);
 Xn=zeros(2,M);
 w=sqrtm(Q)*randn(2,M);
 v=sqrtm(R)*randn(2,M);
-X(:,1)=[x0,vx,y0,vy]';%³õÊ¼×´Ì¬
-Z(:,1)=feval('hfun',X(:,1),x0,y0)+v(:,1);
+X(:,1)=[x0,vx,y0,vy]';%åˆå§‹çŠ¶æ€
+Z(:,1)=hfun(X(:,1),x0,y0)+v(:,1);
 Xn(:,1)=ffun(Z(:,1),x0,y0);
 for t=2:M
-    X(:,t)=feval('sfun',X(:,t-1),T)+G*w(:,t);%ÕæÊµÊı¾İ
-    Z(:,t)=feval('hfun',X(:,t),x0,y0)+v(:,t);
-    Xn(:,t)=ffun(Z(:,t),x0,y0);%Á¿²â
+    X(:,t)=sfun(X(:,t-1),T)+G*w(:,t);%çœŸå®æ•°æ®
+    Z(:,t)=hfun(X(:,t),x0,y0)+v(:,t);
+    Xn(:,t)=ffun(Z(:,t),x0,y0);%é‡æµ‹
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Á£×ÓÂË²¨¹À¼Æ³õÊ¼»¯
+% ç²’å­æ»¤æ³¢ä¼°è®¡åˆå§‹åŒ–
 Xmean_pf=zeros(number,4,M);
 for i=1:number
     Xmean_pf(i,:,1)=X(:,1)+randn(4,1);
 end
-% ¿ªÊ¼·ÂÕæ£¨number´Î£©
+% å¼€å§‹ä»¿çœŸï¼ˆnumberæ¬¡ï¼‰
 for j=1:number
-    % Á£×Ó¼¯³õÊ¼»¯
+    % ç²’å­é›†åˆå§‹åŒ–
     Xparticle_pf=zeros(4,M,N);
     XparticlePred_pf=zeros(4,M,N);
     zPred_pf=zeros(2,M,N);
-    weight=zeros(M,N);  % Á£×ÓÈ¨Öµ
-    %³õÊ¼»¯
+    weight=zeros(M,N);  % ç²’å­æƒå€¼
+    %åˆå§‹åŒ–
     for i=1:N
         Xparticle_pf(:,1,i)=[x0,vx,y0,vy]'+20*randn(4,1);
     end
     ww=randn(2,M);
     for t=2:M
-        %²ÉÑù
+        %é‡‡æ ·
         for i=1:N
-            XparticlePred_pf(:,t,i)=feval('sfun',Xparticle_pf(:,t-1,i),T)...
+            XparticlePred_pf(:,t,i)=sfun(Xparticle_pf(:,t-1,i),T)...
                 +G*sqrtm(Q)*ww(:,t-1);
         end
-        %ÖØÒªĞÔÈ¨Öµ¼ÆËã
+        %é‡è¦æ€§æƒå€¼è®¡ç®—
         for i=1:N
-            zPred_pf(:,t,i)=feval('hfun',XparticlePred_pf(:,t,i),x0,y0);
+            zPred_pf(:,t,i)=hfun(XparticlePred_pf(:,t,i),x0,y0);
             weight(t,i)=(1-eta)*inv(sqrt(2*pi*det(R1)))*exp(-.5*(Z(:,t)...
                 -zPred_pf(:,t,i))'*inv(R1)*(Z(:,t)-zPred_pf(:,t,i)))...
                 +eta*inv(sqrt(2*pi*det(R2)))*exp(-.5*(Z(:,t)-...
                 zPred_pf(:,t,i))'*inv(R2)*(Z(:,t)-zPred_pf(:,t,i)))...
-                + 1e-99;% È¨Öµ¼ÆËã£¬ÎªÁË±ÜÃâÈ¨ÖµÎª0£¬ÔÚ´Ë¼ÓÁË×îĞ¡Öµ1e-99
+                + 1e-99;% æƒå€¼è®¡ç®—ï¼Œä¸ºäº†é¿å…æƒå€¼ä¸º0ï¼Œåœ¨æ­¤åŠ äº†æœ€å°å€¼1e-99
         end
-        weight(t,:)=weight(t,:)./sum(weight(t,:));%¹éÒ»»¯È¨Öµ
+        weight(t,:)=weight(t,:)./sum(weight(t,:));%å½’ä¸€åŒ–æƒå€¼
         outIndex = randomR(1:N,weight(t,:)');          % random resampling.
-        Xparticle_pf(:,t,:) = XparticlePred_pf(:,t,outIndex); % »ñÈ¡ĞÂ²ÉÑùÖµ
-        % ×´Ì¬¹À¼Æ
+        Xparticle_pf(:,t,:) = XparticlePred_pf(:,t,outIndex); % è·å–æ–°é‡‡æ ·å€¼
+        % çŠ¶æ€ä¼°è®¡
         mx=mean(Xparticle_pf(1,t,:));
         my=mean(Xparticle_pf(3,t,:));
         mvx=mean(Xparticle_pf(2,t,:));
@@ -83,15 +77,15 @@ for j=1:number
         Xmean_pf(j,:,t)=[mx,mvx,my,mvy]';
     end
 end
-% ¶Ônumber´ÎÃÉÌØ¿¨Âå·ÂÕæÇó×îÖÕ¾ùÖµ
+% å¯¹numberæ¬¡è’™ç‰¹å¡æ´›ä»¿çœŸæ±‚æœ€ç»ˆå‡å€¼
 Xpf=zeros(4,M);
 for k=1:M
     Xpf(:,k)=[mean(Xmean_pf(:,1,k)),mean(Xmean_pf(:,2,k)),...
         mean(Xmean_pf(:,3,k)),mean(Xmean_pf(:,4,k))]';
 end
-% ÇóÁ£×ÓÂË²¨¹À¼Æ×´Ì¬ÓëÕæÊµ×´Ì¬Ö®¼äµÄÆ«²î
+% æ±‚ç²’å­æ»¤æ³¢ä¼°è®¡çŠ¶æ€ä¸çœŸå®çŠ¶æ€ä¹‹é—´çš„åå·®
 Div_Of_Xpf_X=Xpf-X;
-% Çó¹À¼ÆÎó²î±ê×¼²î,¼°RMSE
+% æ±‚ä¼°è®¡è¯¯å·®æ ‡å‡†å·®,åŠRMSE
 for k=1:M
     sumX=zeros(4,1);
     for j=1:number
@@ -101,35 +95,36 @@ for k=1:M
     Div_Std_Xpf(:,k)=sqrt(RMSE(:,k)-Div_Of_Xpf_X(:,k).^2);
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure(1);  % ¸ú×Ù¹ì¼£Í¼
+figure  % è·Ÿè¸ªè½¨è¿¹å›¾
 plot(X(1,:),X(3,:),'b',Xn(1,:),Xn(2,:),'g',Xpf(1,:),Xpf(3,:),'r');
-legend('ÕæÊµ¹ì¼£','¹Û²â¹ì¼£','¹À¼Æ¹ì¼£');
+legend('çœŸå®è½¨è¿¹','è§‚æµ‹è½¨è¿¹','ä¼°è®¡è½¨è¿¹');
 xlabel('X/m');ylabel('X/m');
-figure(2);
+title(['\epsilon=',num2str(eta),'æ—¶è·Ÿè¸ªè½¨è¿¹']);
+figure
 subplot(2,2,1);plot(Div_Of_Xpf_X(1,:),'b');
-ylabel('value/m');xlabel('(a) x·½ÏòÎ»ÖÃ¹À¼ÆÎó²î¾ùÖµÇúÏß');
+ylabel('value/m');xlabel('(a) xæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®å‡å€¼æ›²çº¿');
 subplot(2,2,2);plot(Div_Of_Xpf_X(2,:),'b');
-ylabel('value');xlabel('(b) x·½ÏòËÙ¶È¹À¼ÆÎó²î¾ùÖµÇúÏß');
+ylabel('value(m/s)');xlabel('(b) xæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®å‡å€¼æ›²çº¿');
 subplot(2,2,3);plot(Div_Of_Xpf_X(3,:),'b');
-ylabel('value/m');xlabel('(c) y·½ÏòÎ»ÖÃ¹À¼ÆÎó²î¾ùÖµÇúÏß');
+ylabel('value/m');xlabel('(c) yæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®å‡å€¼æ›²çº¿');
 subplot(2,2,4);plot(Div_Of_Xpf_X(4,:),'b');
-ylabel('value');xlabel('(d) y·½ÏòËÙ¶È¹À¼ÆÎó²î¾ùÖµÇúÏß');
-figure(3);
+ylabel('value(m/s)');xlabel('(d) yæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®å‡å€¼æ›²çº¿');
+figure
 subplot(2,2,1);plot(Div_Std_Xpf(1,:),'b');
-ylabel('value');xlabel('(a) x·½ÏòÎ»ÖÃ¹À¼ÆÎó²î±ê×¼²îÇúÏß');
+ylabel('value');xlabel('(a) xæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®æ ‡å‡†å·®æ›²çº¿');
 subplot(2,2,2);plot(Div_Std_Xpf(2,:),'b');
-ylabel('value');xlabel('(b) x·½ÏòËÙ¶È¹À¼ÆÎó²î±ê×¼²îÇúÏß');
+ylabel('value');xlabel('(b) xæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®æ ‡å‡†å·®æ›²çº¿');
 subplot(2,2,3);plot(Div_Std_Xpf(3,:),'b');
-ylabel('value');xlabel('(c) y·½ÏòÎ»ÖÃ¹À¼ÆÎó²î±ê×¼²îÇúÏß');
+ylabel('value');xlabel('(c) yæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®æ ‡å‡†å·®æ›²çº¿');
 subplot(2,2,4);plot(Div_Std_Xpf(4,:),'b');
-ylabel('value');xlabel('(d) y·½ÏòËÙ¶È¹À¼ÆÎó²î±ê×¼²îÇúÏß');
-figure(4);
+ylabel('value');xlabel('(d) yæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®æ ‡å‡†å·®æ›²çº¿');
+figure
 subplot(2,2,1);plot(RMSE(1,:),'b');
-ylabel('value');xlabel('(a) x·½ÏòÎ»ÖÃ¹À¼ÆÎó²î¾ù·½¸ùÇúÏß');
+ylabel('value');xlabel('(a) xæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®å‡æ–¹æ ¹æ›²çº¿');
 subplot(2,2,2);plot(RMSE(2,:),'b');
-ylabel('value');xlabel('(b) x·½ÏòËÙ¶È¹À¼ÆÎó²î¾ù·½¸ùÇúÏß');
+ylabel('value');xlabel('(b) xæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®å‡æ–¹æ ¹æ›²çº¿');
 subplot(2,2,3);plot(RMSE(3,:),'b');
-ylabel('value');xlabel('(c) y·½ÏòÎ»ÖÃ¹À¼ÆÎó²î¾ù·½¸ùÇúÏß');
+ylabel('value');xlabel('(c) yæ–¹å‘ä½ç½®ä¼°è®¡è¯¯å·®å‡æ–¹æ ¹æ›²çº¿');
 subplot(2,2,4);plot(RMSE(4,:),'b');
-ylabel('value');xlabel('(d) y·½ÏòËÙ¶È¹À¼ÆÎó²î¾ù·½¸ùÇúÏß');
+ylabel('value');xlabel('(d) yæ–¹å‘é€Ÿåº¦ä¼°è®¡è¯¯å·®å‡æ–¹æ ¹æ›²çº¿');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

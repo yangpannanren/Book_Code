@@ -1,58 +1,49 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐò¹¦ÄÜ£ºRSSI¶¨Î»Ëã·¨³ÌÐò
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function RssiEstimate
-% µÚÒ»²½£º¶¨Î»³õÊ¼»¯
-Length=100;  % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-Width=100;   % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-Node_number=3;  % ¹Û²âÕ¾µÄ¸öÊý£¬×îÉÙ±ØÐëÒª3¸ö
-for i=1:Node_number % ¹Û²âÕ¾µÄÎ»ÖÃ³õÊ¼»¯£¬ÕâÀïÎ»ÖÃÊÇËæ»ú¸ø¶¨µÄ
+% ç¬¬ä¸€æ­¥ï¼šå®šä½åˆå§‹åŒ–
+Length=100;  % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+Width=100;   % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+Node_number=3;  % è§‚æµ‹ç«™çš„ä¸ªæ•°ï¼Œæœ€å°‘å¿…é¡»è¦3ä¸ª
+for i=1:Node_number % è§‚æµ‹ç«™çš„ä½ç½®åˆå§‹åŒ–ï¼Œè¿™é‡Œä½ç½®æ˜¯éšæœºç»™å®šçš„
     Node(i).x=Width*rand; 
     Node(i).y=Length*rand;
-    Node(i).D=Node(i).x^2+Node(i).y^2;  % ¹Ì¶¨²ÎÊý±ãÓÚÎ»ÖÃ¹À¼Æ
+    Node(i).D=Node(i).x^2+Node(i).y^2;  % å›ºå®šå‚æ•°ä¾¿äºŽä½ç½®ä¼°è®¡
 end
-% Ä¿±êµÄÕæÊµÎ»ÖÃ£¬ÕâÀïÒ²Ëæ»ú¸ø¶¨
+% ç›®æ ‡çš„çœŸå®žä½ç½®ï¼Œè¿™é‡Œä¹Ÿéšæœºç»™å®š
 Target.x=Width*rand;
 Target.y=Length*rand;
-% µÚ¶þ²½£º¸÷¹Û²âÕ¾¶ÔÄ¿±êÌ½²â10´Î£¬×îºóÒÔÆ½¾ùÖµ×÷Îª×îÖÕRSSIÖµ
-Z=[];   %  ¸÷¹Û²âÕ¾²É¼¯10´ÎRSSI
+% ç¬¬äºŒæ­¥ï¼šå„è§‚æµ‹ç«™å¯¹ç›®æ ‡æŽ¢æµ‹10æ¬¡ï¼Œæœ€åŽä»¥å¹³å‡å€¼ä½œä¸ºæœ€ç»ˆRSSIå€¼
+Z=[];   %  å„è§‚æµ‹ç«™é‡‡é›†10æ¬¡RSSI
 for i=1:Node_number
-    for t=1:10 % 10´Î²ÉÑù
-        [d]=DIST(Node(i),Target);  % ¹Û²âÕ¾ÀëÄ¿±êµÄÕæÊµ¾àÀë
-        % ¾àÀëÎªdÊ±£¬µÃµ½µÄRSSI²âÁ¿Öµ
+    for t=1:10 % 10æ¬¡é‡‡æ ·
+        [d]=DIST(Node(i),Target);  % è§‚æµ‹ç«™ç¦»ç›®æ ‡çš„çœŸå®žè·ç¦»
+        % è·ç¦»ä¸ºdæ—¶ï¼Œå¾—åˆ°çš„RSSIæµ‹é‡å€¼
         Z(i,t)=GetRssiValue(d)
     end
 end
-%  Çó10´Î¹Û²âµÄÆ½¾ùÖµ
+%  æ±‚10æ¬¡è§‚æµ‹çš„å¹³å‡å€¼
 ZZ=[];
 for i=1:Node_number
     ZZ(i)=sum(Z(i,:))/10;
 end
-% µÚÈý²½£º¸ù¾Ý²ÉÑùµÄRSSIÖµ£¬Çó¹Û²â¾àÀë
-Zd=[]; % ¸ù¾ÝRSSI¼ÆËãµÃµ½µÄ¾àÀë
+% ç¬¬ä¸‰æ­¥ï¼šæ ¹æ®é‡‡æ ·çš„RSSIå€¼ï¼Œæ±‚è§‚æµ‹è·ç¦»
+Zd=[]; % æ ¹æ®RSSIè®¡ç®—å¾—åˆ°çš„è·ç¦»
 for i=1:Node_number
     Zd(i)=GetDistByRssi(ZZ(i));
 end
-% µÚËÄ²½£º¸ù¾Ý¹Û²â¾àÀë£¬ÓÃ×îÐ¡¶þ³Ë·¨¼ÆËãÄ¿±ê¹À¼ÆÎ»ÖÃ
+% ç¬¬å››æ­¥ï¼šæ ¹æ®è§‚æµ‹è·ç¦»ï¼Œç”¨æœ€å°äºŒä¹˜æ³•è®¡ç®—ç›®æ ‡ä¼°è®¡ä½ç½®
 H=[];
 b=[];
 for i=2:Node_number
-    %  ²ÎÕÕ¹«Ê½Èý±ß²â¾à·¨¹«Ê½
+    %  å‚ç…§å…¬å¼ä¸‰è¾¹æµ‹è·æ³•å…¬å¼
     H=[H;2*(Node(i).x-Node(1).x),2*(Node(i).y-Node(1).y)];  
     b=[b;Zd(1)^2-Zd(i)^2+Node(i).D-Node(1).D];  
 end
-Estimate=inv(H'*H)*H'*b;  % Ä¿±êµÄ¹À¼ÆÎ»ÖÃ
+Estimate=inv(H'*H)*H'*b;  % ç›®æ ‡çš„ä¼°è®¡ä½ç½®
 Est_Target.x=Estimate(1);Est_Target.y=Estimate(2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% »­Í¼
+% ç”»å›¾
 figure
-hold on;box on;axis([0 120 0 120]); % Êä³öÍ¼ÐÎµÄ¿ò¼Ü
+hold on;box on;axis([0 120 0 120]); % è¾“å‡ºå›¾å½¢çš„æ¡†æž¶
 for i=1:Node_number
     h1=plot(Node(i).x,Node(i).y,'ko','MarkerFace','g','MarkerSize',10);
     text(Node(i).x+2,Node(i).y,['Node ',num2str(i)]);
@@ -64,24 +55,24 @@ legend([h1,h2,h3],'Observation Station','Target Postion','Estimate Postion');
 [Error_Dist]=DIST(Est_Target,Target);
 xlabel(['error=',num2str(Error_Dist),'m']);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£¬¼ÆËãÁ½µã¼äµÄ¾àÀë
+% å­å‡½æ•°ï¼Œè®¡ç®—ä¸¤ç‚¹é—´çš„è·ç¦»
 function [dist]=DIST(A,B)
 dist=sqrt((A.x-B.x)^2+(A.y-B.y)^2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£¬¹Û²â¾àÀëÎªdÊ±£¬²ÉÑùµÃµ½RSSI
+% å­å‡½æ•°ï¼Œè§‚æµ‹è·ç¦»ä¸ºdæ—¶ï¼Œé‡‡æ ·å¾—åˆ°RSSI
 function value=GetRssiValue(d)
-% µ±¾àÀëÎªdÊ±£¬·ÂÕæÏµÍ³¸ø³öÒ»¸öÓëÊµ¼Ê¾àÀëÏà¶ÔÓ¦µÄ·ÂÕæÖµ
-A=-42;  % ×¢ÒâAºÍnÔÚ²»Í¬Ó²¼þÏµÍ³È¡ÖµÊÇ²»Ò»ÑùµÄ
+% å½“è·ç¦»ä¸ºdæ—¶ï¼Œä»¿çœŸç³»ç»Ÿç»™å‡ºä¸€ä¸ªä¸Žå®žé™…è·ç¦»ç›¸å¯¹åº”çš„ä»¿çœŸå€¼
+A=-42;  % æ³¨æ„Aå’Œnåœ¨ä¸åŒç¡¬ä»¶ç³»ç»Ÿå–å€¼æ˜¯ä¸ä¸€æ ·çš„
 n=2;
 value=A-10*n*log10(d);
-% Êµ¼Ê²âÁ¿ÖµÊÇÊÜµ½ÔëÉùµÄÎÛÈ¾µÄ£¬ÕâÀï¼Ù¶¨ÔëÉù·½²îQ·Ç³£´ó
-% ÒòÎªRSSIµÄ¸ÉÈÅÊÇ·Ç³£´ó
+% å®žé™…æµ‹é‡å€¼æ˜¯å—åˆ°å™ªå£°çš„æ±¡æŸ“çš„ï¼Œè¿™é‡Œå‡å®šå™ªå£°æ–¹å·®Qéžå¸¸å¤§
+% å› ä¸ºRSSIçš„å¹²æ‰°æ˜¯éžå¸¸å¤§
 Q=5;
-value=value+sqrt(Q)*randn; % Êµ¼Ê¹Û²âÁ¿ÊÇ´øÓÐÔëÉùµÄ£¬·ÂÕæ¾ÍÊÇÔÚÄ£·ÂÕæÊµÇé¿ö
+value=value+sqrt(Q)*randn; % å®žé™…è§‚æµ‹é‡æ˜¯å¸¦æœ‰å™ªå£°çš„ï¼Œä»¿çœŸå°±æ˜¯åœ¨æ¨¡ä»¿çœŸå®žæƒ…å†µ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£¬¸ù¾ÝRSSI¼ÆËãµÃµ½¾àÀëd
+% å­å‡½æ•°ï¼Œæ ¹æ®RSSIè®¡ç®—å¾—åˆ°è·ç¦»d
 function value=GetDistByRssi(rssi)
-A=-42;  % ×¢ÒâAºÍnÔÚ²»Í¬Ó²¼þÏµÍ³È¡ÖµÊÇ²»Ò»ÑùµÄ
+A=-42;  % æ³¨æ„Aå’Œnåœ¨ä¸åŒç¡¬ä»¶ç³»ç»Ÿå–å€¼æ˜¯ä¸ä¸€æ ·çš„
 n=2;
 value=10^((A-rssi)/10/n);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

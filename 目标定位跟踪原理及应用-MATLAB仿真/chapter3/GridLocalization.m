@@ -1,24 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐò¹¦ÄÜ£ºÍø¸ñ¶¨Î»Ëã·¨³ÌÐò
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function GridLocalization
-Length=100;  % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-Width=100;   % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-Xnum=5;      % ¹Û²âÕ¾ÔÚË®Æ½·½ÏòµÄ¸öÊý
-Ynum=5;      % ¹Û²âÕ¾ÔÚ´¹Ö±·½ÏòµÄ¸öÊý
-divX=Length/Xnum/2;divY=Width/Ynum/2; %  ÎªÁËÕýÖÐ¼ä²é¿´¹Û²âÕ¾·Ö²¼µ÷½ÚÁ¿
-d=50;        % Ä¿±êÀë¹Û²âÕ¾20Ã×ÒÔÄÚ¶¼ÄÜÌ½²âµ½£¬·´Ö®Ôò²»ÄÜ
-% Ä¿±êËæ»ú³öÏÖÔÚ³¡µØÖÐ
+Length=100;  % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+Width=100;   % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+Xnum=5;      % è§‚æµ‹ç«™åœ¨æ°´å¹³æ–¹å‘çš„ä¸ªæ•°
+Ynum=5;      % è§‚æµ‹ç«™åœ¨åž‚ç›´æ–¹å‘çš„ä¸ªæ•°
+divX=Length/Xnum/2;divY=Width/Ynum/2; %  ä¸ºäº†æ­£ä¸­é—´æŸ¥çœ‹è§‚æµ‹ç«™åˆ†å¸ƒè°ƒèŠ‚é‡
+d=50;        % ç›®æ ‡ç¦»è§‚æµ‹ç«™20ç±³ä»¥å†…éƒ½èƒ½æŽ¢æµ‹åˆ°ï¼Œåä¹‹åˆ™ä¸èƒ½
+% ç›®æ ‡éšæœºå‡ºçŽ°åœ¨åœºåœ°ä¸­
 Target.x=Width*(Xnum-1)/Xnum*rand;
 Target.y=Length*(Ynum-1)/Ynum*rand;
-DIST=[]; % ·ÅÖÃ¹Û²âÕ¾ÓëÄ¿±êÖ®¼ä¾àÀëµÄ¼¯ºÏ
-for j=1:Ynum % ¹Û²âÕ¾µÄÍø¸ñ²¿Êð
+DIST=[]; % æ”¾ç½®è§‚æµ‹ç«™ä¸Žç›®æ ‡ä¹‹é—´è·ç¦»çš„é›†åˆ
+for j=1:Ynum % è§‚æµ‹ç«™çš„ç½‘æ ¼éƒ¨ç½²
 for i=1:Xnum
         Station((j-1)*Xnum+i).x=(i-1)*Length/Xnum;
         Station((j-1)*Xnum+i).y=(j-1)*Width/Ynum;
@@ -26,18 +17,18 @@ for i=1:Xnum
         DIST=[DIST dd];
     end
 end
-% ÕÒ³öÌ½²âµ½Ä¿±êÐÅºÅ×îÇ¿µÄ3¸ö¹Û²âÕ¾£¬Ò²¾ÍÊÇÀëÄ¿±ê×î½üµÄ¹Û²âÕ¾
-[set,index]=sort(DIST);  % setÎªÅÅÁÐºÃµÄ´ÓÐ¡µ½´óµÄÊýÖµ¼¯ºÏ£¬indexÎªË÷Òý¼¯ºÏ
-NI=index(1:3); % ×î½üµÄ3¸ö£¬¼´index1-3¸öÔªËØ
+% æ‰¾å‡ºæŽ¢æµ‹åˆ°ç›®æ ‡ä¿¡å·æœ€å¼ºçš„3ä¸ªè§‚æµ‹ç«™ï¼Œä¹Ÿå°±æ˜¯ç¦»ç›®æ ‡æœ€è¿‘çš„è§‚æµ‹ç«™
+[set,index]=sort(DIST);  % setä¸ºæŽ’åˆ—å¥½çš„ä»Žå°åˆ°å¤§çš„æ•°å€¼é›†åˆï¼Œindexä¸ºç´¢å¼•é›†åˆ
+NI=index(1:3); % æœ€è¿‘çš„3ä¸ªï¼Œå³index1-3ä¸ªå…ƒç´ 
 Est_Target.x=0;Est_Target.y=0;
-if set(NI(3))<d % ¼ì²é3¸öÖÐ×î´óÄÇ¸öÊýÊÇ·ñÔÚ¹Û²âÕ¾¿ÉÌ½²â¾àÀë·¶Î§Ö®ÄÚ
+if set(3)<d % æ£€æŸ¥3ä¸ªä¸­æœ€å¤§é‚£ä¸ªæ•°æ˜¯å¦åœ¨è§‚æµ‹ç«™å¯æŽ¢æµ‹è·ç¦»èŒƒå›´ä¹‹å†…
     for i=1:3
         Est_Target.x=Est_Target.x+Station(NI(i)).x/3;
         Est_Target.y=Est_Target.y+Station(NI(i)).y/3;
     end
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure % »­Í¼
+figure % ç”»å›¾
 hold on;box on;axis([0-divX,Length-divX,0-divY,Width-divX])
 xx=[Station(NI(1)).x,Station(NI(2)).x,Station(NI(3)).x];
 yy=[Station(NI(1)).y,Station(NI(2)).y,Station(NI(3)).y];
@@ -53,8 +44,7 @@ h2=plot(Target.x,Target.y,'k^','MarkerFace','b','MarkerSize',10);
 h3=plot(Est_Target.x,Est_Target.y,'ks','MarkerFace','r','MarkerSize',10);
 legend([h1,h2,h3],'Observation Station','Target Postion','Estimate Postion');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£¬¼ÆËãÁ½µã¼äµÄ¾àÀë
+% å­å‡½æ•°ï¼Œè®¡ç®—ä¸¤ç‚¹é—´çš„è·ç¦»
 function dist=getdist(A,B)
 dist=sqrt( (A.x-B.x)^2+(A.y-B.y)^2 );
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

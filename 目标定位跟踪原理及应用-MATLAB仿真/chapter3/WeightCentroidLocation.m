@@ -1,50 +1,41 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐò¹¦ÄÜ£º¼ÓÈ¨ÖÊÐÄ¶¨Î»Ëã·¨³ÌÐò
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function WeightCentroidLocation % ¼ÓÈ¨ÖÊÐÄËã·¨
-% ¶¨Î»³õÊ¼»¯
-Length=100;  % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-Width=100;   % ³¡µØ¿Õ¼ä£¬µ¥Î»£ºÃ×
-d=50;        % Ä¿±êÀë¹Û²âÕ¾50Ã×ÒÔÄÚ¶¼ÄÜÌ½²âµ½£¬·´Ö®Ôò²»ÄÜ
-Node_number=6;  % ¹Û²âÕ¾µÄ¸öÊý
-SNR=50;         %  ÐÅÔë±È£¬µ¥Î»dB
-for i=1:Node_number % ¹Û²âÕ¾µÄÎ»ÖÃ³õÊ¼»¯£¬ÕâÀïÎ»ÖÃÊÇËæ»ú¸ø¶¨µÄ
+function WeightCentroidLocation % åŠ æƒè´¨å¿ƒç®—æ³•
+% å®šä½åˆå§‹åŒ–
+Length=100;  % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+Width=100;   % åœºåœ°ç©ºé—´ï¼Œå•ä½ï¼šç±³
+d=50;        % ç›®æ ‡ç¦»è§‚æµ‹ç«™50ç±³ä»¥å†…éƒ½èƒ½æŽ¢æµ‹åˆ°ï¼Œåä¹‹åˆ™ä¸èƒ½
+Node_number=6;  % è§‚æµ‹ç«™çš„ä¸ªæ•°
+SNR=50;         %  ä¿¡å™ªæ¯”ï¼Œå•ä½dB
+for i=1:Node_number % è§‚æµ‹ç«™çš„ä½ç½®åˆå§‹åŒ–ï¼Œè¿™é‡Œä½ç½®æ˜¯éšæœºç»™å®šçš„
     Node(i).x=Width*rand; 
     Node(i).y=Length*rand;
 end
-% Ä¿±êµÄÕæÊµÎ»ÖÃ£¬ÕâÀïÒ²Ëæ»ú¸ø¶¨
+% ç›®æ ‡çš„çœŸå®žä½ç½®ï¼Œè¿™é‡Œä¹Ÿéšæœºç»™å®š
 Target.x=Width*rand;
 Target.y=Length*rand;
-% ¹Û²âÕ¾Ì½²âÄ¿±ê
-X=[]; W=[];  % È¨Öµ
+% è§‚æµ‹ç«™æŽ¢æµ‹ç›®æ ‡
+X=[]; W=[];  % æƒå€¼
 for i=1:Node_number
     dd=getdist(Node(i),Target);
-    Q=dd/(10^(20/SNR)); %¸ù¾ÝÐÅÔë±È¹«Ê½£¬ÇóÔëÉù·½²î
+    Q=dd/(10^(SNR/20)); %æ ¹æ®ä¿¡å™ªæ¯”å…¬å¼ï¼Œæ±‚å™ªå£°æ–¹å·®
     if dd<=d
         X=[X;Node(i).x,Node(i).y];
-        W=[W,1/((dd+sqrt(Q)*randn)^2)];% ¸ù¾ÝÊéÖÐÊ½£¨3-4£©¼ÆËãÈ¨Öµ£¬ÐÅºÅË¥¼õ¹«Ê½
+        W=[W,1/((dd+sqrt(Q)*randn)^2)];% æ ¹æ®ä¹¦ä¸­å¼ï¼ˆ3-4ï¼‰è®¡ç®—æƒå€¼ï¼Œä¿¡å·è¡°å‡å…¬å¼
     end
 end
-% È¨Öµ¹éÒ»»¯
+% æƒå€¼å½’ä¸€åŒ–
 W=W./sum(W)
-N=size(X,1);   % Ì½²âµ½Ä¿±êµÄ¹Û²âÕ¾¸öÊý
+N=size(X,1);   % æŽ¢æµ‹åˆ°ç›®æ ‡çš„è§‚æµ‹ç«™ä¸ªæ•°
 sumx=0;sumy=0;
 for i=1:N
     sumx=sumx+X(i,1)*W(i); 
     sumy=sumy+X(i,2)*W(i);
 end
-Est_Target.x=sumx;  % Ä¿±ê¹À¼ÆÎ»ÖÃx
-Est_Target.y=sumy;  % Ä¿±ê¹À¼ÆÎ»ÖÃy
-Error_Dist=getdist(Est_Target,Target)  % Ä¿±êÕæÊµÎ»ÖÃÓë¹À¼ÆÎ»ÖÃµÄÆ«²î¾àÀë
+Est_Target.x=sumx;  % ç›®æ ‡ä¼°è®¡ä½ç½®x
+Est_Target.y=sumy;  % ç›®æ ‡ä¼°è®¡ä½ç½®y
+Error_Dist=getdist(Est_Target,Target)  % ç›®æ ‡çœŸå®žä½ç½®ä¸Žä¼°è®¡ä½ç½®çš„åå·®è·ç¦»
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure % »­Í¼
-hold on;box on;axis([0 100 0 100]); % Êä³öÍ¼ÐÎµÄ¿ò¼Ü
+figure % ç”»å›¾
+hold on;box on;axis([0 100 0 100]); % è¾“å‡ºå›¾å½¢çš„æ¡†æž¶
 for i=1:Node_number
     h1=plot(Node(i).x,Node(i).y,'ko','MarkerFace','g','MarkerSize',10);
     text(Node(i).x+2,Node(i).y,['Node ',num2str(i)]);
@@ -56,11 +47,11 @@ circle(Target.x,Target.y,d);
 legend([h1,h2,h3],'Observation Station','Target Postion','Estimate Postion');
 xlabel(['error=',num2str(Error_Dist),'m']);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ×Óº¯Êý£¬¼ÆËãÁ½µã¼äµÄ¾àÀë
+% å­å‡½æ•°ï¼Œè®¡ç®—ä¸¤ç‚¹é—´çš„è·ç¦»
 function dist=getdist(A,B)
 dist=sqrt( (A.x-B.x)^2+(A.y-B.y)^2 );
-% ×Óº¯Êý£¬ ÒÔÄ¿±êÎªÖÐÐÄ»­Ô²
+% å­å‡½æ•°ï¼Œ ä»¥ç›®æ ‡ä¸ºä¸­å¿ƒç”»åœ†
 function circle(x0,y0,r)
 sita=0:pi/20:2*pi;
-plot(x0+r*cos(sita),y0+r*sin(sita)); % ÖÐÐÄÔÚ(x0,y0£©£¬°ë¾¶Îªr
+plot(x0+r*cos(sita),y0+r*sin(sita)); % ä¸­å¿ƒåœ¨(x0,y0ï¼‰ï¼ŒåŠå¾„ä¸ºr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

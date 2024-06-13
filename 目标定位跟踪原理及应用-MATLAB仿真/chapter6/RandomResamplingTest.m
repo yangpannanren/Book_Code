@@ -1,22 +1,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ³ÌÐòËµÃ÷£ºËæ»ú²ÉÑù²âÊÔ³ÌÐò
-% ËµÃ÷£º
-% Çë²ÎÕÕ»ÆÐ¡Æ½µÈ±àÖøµÄ¡¶Ä¿±ê¶¨Î»¸ú×ÙÔ­Àí¼°·ÂÕæ-MATLAB·ÂÕæ¡·£¬µç×Ó¹¤Òµ³ö°æÉç
-% ¾²ÐÄÑÐ¶ÁÖ½ÖÊ°æµÄÊé¼®£¬ÓÐÖúÓÚÄúÀí½âËã·¨Ô­Àí
-% ×÷Õß£º·ÅÅ£ÍÞ 
-% ÁªÏµ£ºhxping@mail.ustc.edu.cn
-% Ê±¼ä£º2019Äê1ÔÂ12ÈÕ
+% ç¨‹åºè¯´æ˜Žï¼šéšæœºé‡‡æ ·æµ‹è¯•ç¨‹åº
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function RandomResamplingTest
-rand('seed',1);
+rng(1);
 N=10;
-W=rand(1,N);                     % ÈÎÒâ¸ø¶¨Ò»×éËæ»úÊýÑù±¾
-W(1,:)=W(1,:)./sum(W(1,:))       % ¹éÒ»»¯
-outIndex = randomR(W)            % µ÷ÓÃËæ»ú²ÉÑù·½·¨
-% ¾­¹ýËæ»ú²ÉÑùºóµÃµ½µÄÑù±¾V£¬¶ÁÕßÒªÏ¸Ï¸±È½ÏËüÓëWÑù±¾µÄÇø±ð
-V=W(1,outIndex) 
+W=rand(1,N);                     % ä»»æ„ç»™å®šä¸€ç»„éšæœºæ•°æ ·æœ¬
+W(1,:)=W(1,:)./sum(W(1,:))       % å½’ä¸€åŒ–
+outIndex = randomR(W)            % è°ƒç”¨éšæœºé‡‡æ ·æ–¹æ³•
+% ç»è¿‡éšæœºé‡‡æ ·åŽå¾—åˆ°çš„æ ·æœ¬Vï¼Œè¯»è€…è¦ç»†ç»†æ¯”è¾ƒå®ƒä¸ŽWæ ·æœ¬çš„åŒºåˆ«
+V=W(1,outIndex)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% »­Í¼Ö±¹ÛÏÔÊ¾Çø±ð                                  
+% ç”»å›¾ç›´è§‚æ˜¾ç¤ºåŒºåˆ«
 figure
 subplot(2,1,1);
 plot(W','--ro','MarkerFace','b');
@@ -26,22 +20,23 @@ subplot(2,1,2);
 plot(V','--ro','MarkerFace','b');
 ylabel('Value of V')
 xlabel('index')
+sgtitle('éšæœºé‡é‡‡æ ·çš„å¤åˆ¶è¿‡ç¨‹')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ëæ»úÖØ²ÉÑù×Óº¯Êý
+% éšæœºé‡é‡‡æ ·å­å‡½æ•°
 function outIndex = randomR(W)
-% ²ÎÊýËµÃ÷£ºWÊÇÊäÈëµÄÐèÒª±»Ëæ»ú²ÉÑùµÄÊý×é£¬ÊÇ1¡ÁNÊý×é
-% outIndexÊÇÊäÈëÊý×éWµÄÖØ²ÉÑùºóµÄË÷Òý£¬¼´ V=W(outIndex)
-% V¾ÍÊÇ¸ù¾ÝË÷Òý£¬´ÓWÊý×éÔªËØ³éÈ¡ÔªËØ×é³ÉµÄ¼¯ºÏ£¬ÊÇÖØ²ÉÑùµÄ½á¹û
-N=length(W);          % µÃµ½ÊäÈëWµÄÎ¬Êý
-outIndex=zeros(1,N); %  ³õÊ¼»¯
-% ²úÉúËæ»ú·Ö²¼Î±Ëæ»úÊý
-u=rand(1,N);  % ¶ÔÕÕÊéÖÐ6.4.1½ÚËæ»úÖØ²ÉÑù£¬Ëã·¨²½Öè£¨1£©
-u=sort(u);    % ¶ÔÕÕÊéÖÐ6.4.1½ÚËæ»úÖØ²ÉÑù£¬Ëã·¨²½Öè£¨2£©
-CS=cumsum(W); % ¶ÔWÇóÀÛ¼ÓºÍ
-i=1; 
+% å‚æ•°è¯´æ˜Žï¼šWæ˜¯è¾“å…¥çš„éœ€è¦è¢«éšæœºé‡‡æ ·çš„æ•°ç»„ï¼Œæ˜¯1Ã—Næ•°ç»„
+% outIndexæ˜¯è¾“å…¥æ•°ç»„Wçš„é‡é‡‡æ ·åŽçš„ç´¢å¼•ï¼Œå³ V=W(outIndex)
+% Vå°±æ˜¯æ ¹æ®ç´¢å¼•ï¼Œä»ŽWæ•°ç»„å…ƒç´ æŠ½å–å…ƒç´ ç»„æˆçš„é›†åˆï¼Œæ˜¯é‡é‡‡æ ·çš„ç»“æžœ
+N=length(W);          % å¾—åˆ°è¾“å…¥Wçš„ç»´æ•°
+outIndex=zeros(1,N); %  åˆå§‹åŒ–
+% äº§ç”Ÿéšæœºåˆ†å¸ƒä¼ªéšæœºæ•°
+u=rand(1,N);  % å¯¹ç…§ä¹¦ä¸­6.4.1èŠ‚éšæœºé‡é‡‡æ ·ï¼Œç®—æ³•æ­¥éª¤ï¼ˆ1ï¼‰
+u=sort(u);    % å¯¹ç…§ä¹¦ä¸­6.4.1èŠ‚éšæœºé‡é‡‡æ ·ï¼Œç®—æ³•æ­¥éª¤ï¼ˆ2ï¼‰
+CS=cumsum(W); % å¯¹Wæ±‚ç´¯åŠ å’Œ
+i=1;
 for j=1:N
     while ( i<=N ) & ( u(i)<=CS(j) )
-        outIndex(i)=j; % ½«WÊý×éË÷Òý·ÅÔÚoutIndexÖÐ
+        outIndex(i)=j; % å°†Wæ•°ç»„ç´¢å¼•æ”¾åœ¨outIndexä¸­
         i=i+1;
     end
 end
