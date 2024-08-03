@@ -1,7 +1,8 @@
 ﻿# 目标定位跟踪原理及应用-MATLAB仿真 / 黄小平, 王岩, 缪鹏程编著
 
-> 此处为《目标定位跟踪原理及应用——MATLAB仿真》书籍源码。
-> 代码地址：[Code_link](https://github.com/yangpannanren/Book_Code/tree/main/目标定位跟踪原理及应用-MATLAB仿真)
+> 《目标定位跟踪原理及应用——MATLAB仿真》书籍代码。
+> 代码地址：[Code_Link](https://github.com/yangpannanren/Book_Code/tree/main/目标定位跟踪原理及应用-MATLAB仿真)
+> 作者：洋盘男人
 
 ## 说明
 
