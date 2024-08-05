@@ -561,7 +561,7 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 其中，Rxx为QxQ的协方差矩阵。如果对所有选定的发射天线等分功率， $R_{\textrm{xx}} =I_Q$ ，那么对于给定的 $\lbrace p_i \rbrace_{i=1}^Q$ ，得到的信道容量为：
 
- $$ C_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \triangleq \log_2 \det \biggl(I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_x }{QN_0 }H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }^{{\mathrm{H}}} \biggr){\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
+ $$ C_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \triangleq \log_2 \det \biggl(I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{QN_0 }H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }^{\mathrm{H}} \biggr){\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
 
 对所有可能的天线组合计算上式，可以实现Q根天线的最优选择。为了最大化系统容，必须选择具有最大容量的天线，即：
 
@@ -579,15 +579,15 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 在上节中，将信道容量作为天线选择的设计准则。也可以将差错性能作为设计准则。换句话说，选择发射天线以使差错概率最小。令 $\mathrm{Pr}\left(C_i \to C_j \right|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } )$ 表示在给定信道的条件下，发射空\-时码字为 $C_i$ ,而解码为 $C_j$ 的成对差错概率。对于一个由H的Q列组成的有效信道 $H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }$ ，OSTBC的成对差错概率的上限为：
 
- $$ {\mathrm{P}\mathrm{r}}\biggl(C_i \to C_j \bigg|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \biggr)=Q\left(\sqrt{\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{2N_{\mathrm{T}\mathrm{x}} }}\right)\le \exp \left(-\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{4N_{\mathrm{T}\mathrm{x}} }\right) $$ 
+ $$ {\mathrm{P}\mathrm{r}}\biggl(C_i \to C_j \bigg|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \biggr)=Q\left(\sqrt{\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{\mathrm{F}}^2 }{2N_{\mathrm{T}\mathrm{x}} }}\right)\le \exp \left(-\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{\mathrm{F}}^2 }{4N_{\mathrm{T}\mathrm{x}} }\right) $$ 
 
 选择Q根发射天线，使上式中的上限最小，或等价于：
 
- $$ \left\lbrace p_1^{\mathrm{o}\mathrm{p}\mathrm{t}} ,p_2^{\mathrm{o}\mathrm{p}\mathrm{t}} ,\cdots ,p_Q^{\mathrm{o}\mathrm{p}\mathrm{t}} \right\rbrace =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } E_{i,j} \right\|}_{{\mathrm{F}}}^2 =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } \right\|}_{{\mathrm{F}}}^2 $$ 
+ $$ \left\lbrace p_1^{\mathrm{o}\mathrm{p}\mathrm{t}} ,p_2^{\mathrm{o}\mathrm{p}\mathrm{t}} ,\cdots ,p_Q^{\mathrm{o}\mathrm{p}\mathrm{t}} \right\rbrace =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } E_{i,j} \right\|}_{\mathrm{F}}^2 =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } \right\|}_{\mathrm{F}}^2 $$ 
 
 在的推导过程中使用了误差矩阵 $E_{i,j}$ ，的性质： $E_{i,j} E_{i,j}^{\mathrm{H}} =aI$ ，其中a是常数。从上式可以看出，为了最小化差错概率，选择最高列范数对应的天线。在接收端，选择的Q根天线 $\lbrace p_i \rbrace_{i=1}^Q$ 的平均SNR为：
 
- $$ \eta_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } =\frac{\rho }{Q}\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } {\|}_{{\mathrm{F}}}^2  $$ 
+ $$ \eta_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } =\frac{\rho }{Q}\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } {\|}_{\mathrm{F}}^2  $$ 
 
 可以看出一定要选择接收SNR最大的天线。
 
@@ -603,17 +603,17 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 考虑有K个独立用户的多用户 MIMO 系统。假设 BS和每个 MS 分别配置 $N_{\mathrm{B}}$ 和 $N_{\mathrm{M}}$ 根天线。在上行信道中，令 $x_u \in {\mathbb{C}}^{N_{\mathrm{M}} \times 1} ,~~u=1,\cdots ,K$ ，表示来自第u个用户的发送信号； $y_{\mathrm{M}\mathrm{A}\mathrm{C}} \in {\mathbb{C}}^{N_{\mathrm{B}} \times 1}$ 表示BS的接收信号； $H_u^{\mathrm{U}\mathrm{L}} \in {\mathbb{C}}^{N_{\mathrm{B}} \times N_{\mathrm{M}} } ,u=1,\cdots ,K$ ，表示第u个用户和基站之间的信道增益。那么，接收信号可以表示为：
 
- $$ y_{MAC} =H_1^{{\mathrm{U}\mathrm{L}}} x_1 +H_2^{{\mathrm{U}\mathrm{L}}} x_2 +\cdots +H_K^{{\mathrm{U}\mathrm{L}}} x_K +z\left.=\underset{H^{{\mathrm{U}\mathrm{L}}} }{\underbrace{\left\lbrack H_1^{{\mathrm{U}\mathrm{L}}} H_2^{{\mathrm{U}\mathrm{L}}} \cdots H_K^{{\mathrm{U}\mathrm{L}}} \right\rbrack } } \left\lbrack \begin{array}{c} x_1 \newline \vdots \\ x_K  \end{array}\right.\right\rbrack +z=H^{{\mathrm{U}\mathrm{L}}} \left\lbrack \begin{array}{c} x_1 \\ \vdots \\ x_K  \end{array}\right\rbrack +z $$ 
+ $$ y_{MAC} =H_1^{\mathrm{U}\mathrm{L}} x_1 +H_2^{\mathrm{U}\mathrm{L}} x_2 +\cdots +H_K^{\mathrm{U}\mathrm{L}} x_K +z\left.=\underset{H^{\mathrm{U}\mathrm{L}} }{\underbrace{\left\lbrack H_1^{\mathrm{U}\mathrm{L}} H_2^{\mathrm{U}\mathrm{L}} \cdots H_K^{\mathrm{U}\mathrm{L}} \right\rbrack } } \left\lbrack \begin{array}{c} x_1 \newline \vdots \\ x_K  \end{array}\right.\right\rbrack +z=H^{\mathrm{U}\mathrm{L}} \left\lbrack \begin{array}{c} x_1 \\ \vdots \\ x_K  \end{array}\right\rbrack +z $$ 
 
 其中， $z\in {\mathbb{C}}^{N_{\mathrm{B}} \times 1}$ 为接收机的加性噪声，将其建模为一个ZMCSCG随机向量。
 
 在下行信道中，为 $x\in {\mathbb{C}}^{N_{\mathrm{B}} \times 1}$ 为BS的发射信号， $y_u \in {\mathbb{C}}^{N_{\mathrm{M}} \times 1}$ 为第u个用户的接收信号， $u=1,2,\cdots ,K$ 。令 $H_u^{\mathrm{D}\mathrm{L}} \in {\mathbb{C}}^{N_{\mathrm{M}} \times N_{\mathrm{B}} }$ 表示 BS 和第u个用户之间的信道增益。在 BC中，第u个用户的接收信号可以表示为：
 
- $$ y_u =H_u^{{\mathrm{D}\mathrm{L}}} x+z_u ,u=1,2,\cdots ,K $$ 
+ $$ y_u =H_u^{\mathrm{D}\mathrm{L}} x+z_u ,u=1,2,\cdots ,K $$ 
 
 其中， $z\in {\mathbb{C}}^{N_M \times 1}$ 为第u个用户的加性ZMCSCG噪声。用单个向量表示所有用户的信号，则整个系统可以表示为：
 
- $$ \underset{y_{\mathrm{B}\mathrm{C}} }{\underbrace{{\left[\begin{array}{c} y_1 \newline y_2 \newline \vdots \newline y_K  \end{array}\right]}} } =\underset{H_{\mathrm{D}\mathrm{L}} }{\underbrace{{\left[\begin{array}{c} H_1^{\mathrm{D}\mathrm{L}} \newline H_2^{\mathrm{D}\mathrm{L}} \newline \vdots \newline H_K^{\textrm{DL}}  \end{array}\right]}} } x+\underset{z}{\underbrace{{\left[\begin{array}{c} z_1 \newline z_2 \newline \vdots \newline z_K  \end{array}\right]}} } $$ 
+ $$ \underset{y_{\mathrm{B}\mathrm{C}} }{\underbrace{\left[\begin{array}{c} y_1 \newline y_2 \newline \vdots \newline y_K  \end{array}\right]} } =\underset{H_{\mathrm{D}\mathrm{L}} }{\underbrace{\left[\begin{array}{c} H_1^{\mathrm{D}\mathrm{L}} \newline H_2^{\mathrm{D}\mathrm{L}} \newline \vdots \newline H_K^{\textrm{DL}}  \end{array}\right]} } x+\underset{z}{\underbrace{\left[\begin{array}{c} z_1 \newline z_2 \newline \vdots \newline z_K  \end{array}\right]} } $$ 
 
 ## 多用户MIMO系统的信道容量
 ### MAC容量
