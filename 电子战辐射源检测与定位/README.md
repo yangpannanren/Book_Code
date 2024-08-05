@@ -87,7 +87,7 @@ $$ P_{\mathrm{D}} =1-F_{\chi^2 } {\left(\eta ;2M,2M\xi \right)} $$
 发射和接收功率相关的单项链路方程： $S=\frac{P_t G_t G_r }{L_{\textrm{prop}} L_{\textrm{atm}} L_t L_r }$ 。其中， $P_t$ 为发射功率； $G_t$ 为发射天线增益； $G_r$ 为接收天线增益； $L_{\textrm{prop}}$ 为传播损耗（如自由空间或双径）； $L_{\textrm{atm}}$ 为大气损耗； $L_t$ 包括待检测发射机中的所有系统损耗； $L_r$ 包括检测器硬件的所有损耗以及处理损耗。
 
 
-自由空间路径损耗，指（通过各向同性天线）接收到的功率与（接收机方向上）辐射源功率之比： $L_{\mathrm{f}\mathrm{s}\mathrm{p}\mathrm{l}} ={{\left(\frac{4\pi R}{\lambda }\right)}}^2$ 。收发机之间没有障碍物，且视线附近没有主要反射物。
+自由空间路径损耗，指（通过各向同性天线）接收到的功率与（接收机方向上）辐射源功率之比： $L_{\mathrm{f}\mathrm{s}\mathrm{p}\mathrm{l}} =\left(\frac{4\pi R}{\lambda }\right)^2$ 。收发机之间没有障碍物，且视线附近没有主要反射物。
 
 
 双射线路径损耗，存在主要反射物（如地球表面）的情况下，主要反射会与直接路径信号重叠，从而造成相消干扰。 $L_{2-\mathrm{r}\mathrm{a}\mathrm{y}} =\frac{R^4 }{h_t^2 h_r^2 }$ 。其中， $h_t$ 和 $h_r$ 分别为发射机和接收机的离地高度。

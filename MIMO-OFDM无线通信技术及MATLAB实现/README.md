@@ -432,7 +432,7 @@ MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO
 
  $$ y=Hx+z=h_1 x_1 +h_2 x_2 +\cdots +h_{N_{\mathrm{T}\mathrm{x}} } x_{N_{\mathrm{T}\mathrm{x}} } +z $$ 
 
-其中， $\mathbf{z}=[z_1,z_2,\cdots,z_{{\mathrm{N}}_{\textrm{Rx}}} ]^T$ 。
+其中， $\mathbf{z}=[z_1,z_2,\cdots,z_{ \mathrm{N}_\textrm{Rx}} ]^T$ 。
 
 ![空间复用MIMO系统](./img/Fig_11.1.png)
 
