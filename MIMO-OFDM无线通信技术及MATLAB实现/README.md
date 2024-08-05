@@ -314,7 +314,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 # MIMO信道容量
 
-与传统的单天线系统相比，在不需要额外的发射功率或频带的情况下，多天线系统容量以 $\min (N_{{\mathrm{T}\mathrm{x}}} ,N_{{\mathrm{R}\mathrm{x}}} )$ 因子增加，其中 $N_{{\mathrm{T}\mathrm{x}}}$ 为发射天线数， $N_{{\mathrm{R}\mathrm{x}}}$ 为接收天线数。多天线技术可以分为两类：分级技术和空间复用技术。
+与传统的单天线系统相比，在不需要额外的发射功率或频带的情况下，多天线系统容量以 $\min (N_{\mathrm{T}\mathrm{x}} ,N_{\mathrm{R}\mathrm{x}} )$ 因子增加，其中 $N_{\mathrm{T}\mathrm{x}}$ 为发射天线数， $N_{\mathrm{R}\mathrm{x}}$ 为接收天线数。多天线技术可以分为两类：分级技术和空间复用技术。
 
 ## 确定性MIMO信道容量
 
