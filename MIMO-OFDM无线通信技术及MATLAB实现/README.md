@@ -495,7 +495,7 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 最大似然(Maximum likelihood，ML)检测计算接收信号向量和所有可能的后处理向量(所有可能的发射信号向量和给定信道H的乘积)之间的欧氏距离，并找到一个最小的距离。令C和 $N_{\textrm{Tx}}$ 分别表示信号的星座集和发射天线数。ML检测将发射的信号向量x估计为：
 
- $$ {\hat{x} }_{{\mathrm{M}\mathrm{L}}} =\arg \min_{x\in C^{N_{\mathrm{T}\mathrm{x}} } } \|y-Hx{\|}^2 $$ 
+ $$ {\hat{x} }_{\mathrm{M}\mathrm{L}} =\arg \min_{x\in C^{N_{\mathrm{T}\mathrm{x}} } } \|y-Hx{\|}^2 $$ 
 
 其中， $\|y-Hx{\|}^2$ 是ML的度量。当所有的发射向量等可能时，ML方法达到最大后验概率(MAP)检测的最佳性能。然而它的复杂度随调制阶数和/或发射天线数量的增加而上升，总共需要计算 $|C|^{N_{\mathrm{T}\mathrm{x}} }$ 个ML度量，呈指数上升。
 
