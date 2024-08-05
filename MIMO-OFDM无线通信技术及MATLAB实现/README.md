@@ -384,7 +384,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO 信道的容量也是随机时变的。换句话说，MIMO 信道的容量可以通过它的时间平均给出。在实际中，假设随机信道是遍历过程。然后，考虑MIMO信道容量的统计概念：
 
- $$ \overline{C} =E\lbrace C(H)\rbrace =E\lbrace \max_{\mathrm{T}\mathrm{r}(R_{{\mathrm{x}\mathrm{x}}} )=N_{\mathrm{T}\mathrm{x}} } \log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_{{\mathrm{x}}} }{N_{\mathrm{T}\mathrm{x}} N_0 }{HR}_{{\mathrm{x}\mathrm{x}}} H^{{\mathrm{H}}} )\rbrace $$ 
+ $$ \overline{C} =E\lbrace C(H)\rbrace =E\lbrace \max_{\mathrm{T}\mathrm{r}(R_{{\mathrm{x}\mathrm{x}}} )=N_{\mathrm{T}\mathrm{x}} } \log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_{{\mathrm{x}}} }{N_{\mathrm{T}\mathrm{x}} N_0 }{HR}_{\mathrm{x}\mathrm{x}} H^{\mathrm{H}} )\rbrace $$ 
 
  $\bar{C}$ 通常被称为遍历信道容量。
 
