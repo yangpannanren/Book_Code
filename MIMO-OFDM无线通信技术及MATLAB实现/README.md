@@ -557,7 +557,7 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 从 $N_{\textrm{Tx}}$ 根发射天线中选取Q根天线以便使信道容量最大。当限定总的发射功率为P时，Q根选定发射天线的信道容量为：
 
- $$ C=\max_{R_{{\mathrm{x}\mathrm{x}}} ,\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \log_2 \det (I_{N_{{\mathrm{g}\mathrm{x}}} } +\frac{E_{{\mathrm{x}}} }{QN_0 }H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } R_{{\mathrm{x}\mathrm{x}}} H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }^{{\mathrm{H}}} ){\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
+ $$ C=\max_{R_{\mathrm{x}\mathrm{x}} ,\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \log_2 \det (I_{N_{\mathrm{g}\mathrm{x}} } +\frac{E_{\mathrm{x}} }{QN_0 }H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } R_{\mathrm{x}\mathrm{x}} H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }^{\mathrm{H}} ){\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
 
 其中，Rxx为QxQ的协方差矩阵。如果对所有选定的发射天线等分功率， $R_{\textrm{xx}} =I_Q$ ，那么对于给定的 $\lbrace p_i \rbrace_{i=1}^Q$ ，得到的信道容量为：
 
