@@ -157,7 +157,7 @@ $$J(\hat{H} )=\|Y-X\hat{H} {\|}^2 =(Y-X\hat{H} )^{{\mathrm{H}}} (Y-X\hat{H} )=Y^
 
 然后，将剩余的L个信道系数再变换到频域：
 
- $$ {\hat{H} }_{\mathrm{DFT}} [k]={\mathrm{DFT}}\lbrace {\hat{h} }_{{\mathrm{D}\mathrm{F}\mathrm{T}}} [n]\rbrace $$ 
+ $$ {\hat{H} }_{\mathrm{DFT}} [k]={\mathrm{DFT}}\lbrace {\hat{h} }_{\mathrm{D}\mathrm{F}\mathrm{T}} [n]\rbrace $$ 
 
 下图显示了在给定LS信道估计的情况下基于DFT的信道估计的框图。注意，必须事先知道最大的信道时延L。
 
