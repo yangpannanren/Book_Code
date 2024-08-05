@@ -788,7 +788,7 @@ $$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mat
 
 类似TDOA中每对传感器产生一组等时线，FDOA中的每对传感器都有一组等多普勒轮廓（isoDoppler contours），或恒定多普勒差分线。定义两个传感器之间的频率差：
 
- $$ f_{m,n} (\mathbf{x},\mathbf{v})=f_m (\mathbf{x},\mathbf{v})-f_n (\mathbf{x},\mathbf{v})=\frac{f_0 }{c}{[\frac{({\mathbf{v}}_m -\mathbf{v})^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{\|\mathbf{x}-{\mathbf{x}}_m \|}_2 }-\frac{{({\mathbf{v}}_n -\mathbf{v})}^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2 }]} $$ 
+ $$ f_{m,n} (\mathbf{x},\mathbf{v})=f_m (\mathbf{x},\mathbf{v})-f_n (\mathbf{x},\mathbf{v})=\frac{f_0 }{c}{[\frac{({\mathbf{v}}_m -\mathbf{v})^T {(\mathbf{x}-{\mathbf{x}}_m )}}{\|\mathbf{x}-{\mathbf{x}}_m \|_2 }-\frac{{({\mathbf{v}}_n -\mathbf{v})}^T {(\mathbf{x}-{\mathbf{x}}_n )}}{\|\mathbf{x}-{\mathbf{x}}_n \|_2 }]} $$ 
 
 为简单起见，假设 $v=0$ 。如果v不为0，则v表示一个额外的未知数（实际上，每个空间维度有一个未知数）。为了估计位置x以外的速度v，必须通过额外的传感器或模式（如TDOA或AOA）收集额外的信息，见下一章。
 
