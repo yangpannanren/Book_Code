@@ -338,13 +338,13 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 确定性 MIMO 信道的容量可以表示为：
 
- $$ C=\max_{{\mathrm{T}\mathrm{r}}(R_{xx} )=N_{{\mathrm{T}\mathrm{x}}} } \log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} N_0 }HR_{xx} H^{{\mathrm{H}}} )~{\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
+ $$ C=\max_{\mathrm{T}\mathrm{r}(R_{xx} )=N_{\mathrm{T}\mathrm{x}} } \log_2 \det (I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }HR_{xx} H^{\mathrm{H}} )~{\mathrm{b}\mathrm{p}\mathrm{s}/\mathrm{H}\mathrm{z}} $$ 
 
 其中， $E_x$ 为发射信号的能量， $N_0$ 为加性噪声的功率谱密度。
 
 当发射端已知信道状态信息(Channel State Information，CSI)时，通过求解下面的功率分配问题，能够得到最大容量：
 
- $$ \begin{array}{l} C=\max_{\lbrace \gamma_i \rbrace } \sum_{i=1}^r \log_2 (1+\frac{E_x \gamma_i }{N_{{\mathrm{T}\mathrm{x}}} N_0 }\lambda_i )\\ {\mathrm{s}.\mathrm{t}.}\sum_{i=1}^r \gamma_i =N_{{\mathrm{T}\mathrm{x}}}  \end{array} $$ 
+ $$ \begin{array}{l} C=\max_{\lbrace \gamma_i \rbrace } \sum_{i=1}^r \log_2 (1+\frac{E_x \gamma_i }{N_{\mathrm{T}\mathrm{x}} N_0 }\lambda_i )\\ {\mathrm{s}.\mathrm{t}.}\sum_{i=1}^r \gamma_i =N_{\mathrm{T}\mathrm{x}}  \end{array} $$ 
 
 可通过注水功率算法求解，注水算法给更高的 SNR 模式分配更多的功率。但是若模式的 SNR 低于给定门限μ，则该模式不能被使用，即不给该模式分配功率。
 
@@ -352,23 +352,23 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 当发射机未知H时，在所有发射天线上平均分配功率。也就是说，发射信号向量x的自相关函数为 $R_{xx} =I_{N_{{\mathrm{T}\mathrm{x}}} }$ ，在这种情况下，信道容量可以表示为：
 
- $$ C=\log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} N_0 }HH^{{\mathrm{H}}} ) $$ 
+ $$ C=\log_2 \det (I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }HH^{\mathrm{H}} ) $$ 
 
-化简为： $\textrm{C}=\log_2 \det \biggl(I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} N_0 }Q\Lambda Q^{{\mathrm{H}}} \biggr)=\log_2 \det \biggl(I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} N_0 }A\biggr)=\sum_{i=1}^r \log_2 (1+\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} N_0 }\lambda_i )$ 
+化简为： $\textrm{C}=\log_2 \det \biggl(I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }Q\Lambda Q^{\mathrm{H}} \biggr)=\log_2 \det \biggl(I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }A\biggr)=\sum_{i=1}^r \log_2 (1+\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }\lambda_i )$ 
 
-其中，r为H的秩，即 $r=N_{{\mathrm{m}\mathrm{i}\mathrm{n}}} \triangleq \min (N_{{\mathrm{T}\mathrm{x}}} ,N_{{\mathrm{R}\mathrm{x}}} )$ 。从上式可以看出，MIMO 信道转换为r个虚拟的 SISO信道，每个信道的发射功率为 $\frac{E_x }{N_{\textrm{Tx}} }$ ，并且第i个SISO信道的增益为 $\lambda_i$ 。当发射机不能获得CSI时，总功率平均分配给所有的发射天线。
+其中，r为H的秩，即 $r=N_{\mathrm{m}\mathrm{i}\mathrm{n}} \triangleq \min (N_{\mathrm{T}\mathrm{x}} ,N_{\mathrm{R}\mathrm{x}} )$ 。从上式可以看出，MIMO 信道转换为r个虚拟的 SISO信道，每个信道的发射功率为 $\frac{E_x }{N_{\textrm{Tx}} }$ ，并且第i个SISO信道的增益为 $\lambda_i$ 。当发射机不能获得CSI时，总功率平均分配给所有的发射天线。
 
 ### SIMO和MISO信道容量
 
-对于具有一根发射天线、 $N_{{\mathrm{R}\mathrm{x}}}$ 根接收天线的 SIMO 信道，信道增益为 $h\in {\mathbb{C}}^{N_{{\mathrm{R}\mathrm{x}}} \times 1}$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{{\mathrm{F}}}^2$ 。不论发射机已知或者未知 CSI，信道容量都为：
+对于具有一根发射天线、 $N_{\mathrm{R}\mathrm{x}}$ 根接收天线的 SIMO 信道，信道增益为 $h\in {\mathbb{C}}^{N_{\mathrm{R}\mathrm{x}} \times 1}$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{{\mathrm{F}}}^2$ 。不论发射机已知或者未知 CSI，信道容量都为：
 
  $$ C_{{\mathrm{S}\mathrm{I}\mathrm{M}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
 
 可以看出，信道容量随天线数量对数增加；此外，只能发射一个数据流，且发射机对CSI的获取根本不能改善信道容量。
 
-在 MISO 信道下，信道增益为 $h\in {\mathbb{C}}^{1\times N_{{\mathrm{T}\mathrm{x}}} }$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{{\mathrm{F}}}^2$ 。当发射机未知 CSI时，信道容量为：
+在 MISO 信道下，信道增益为 $h\in {\mathbb{C}}^{1\times N_{\mathrm{T}\mathrm{x}} }$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{\mathrm{F}}^2$ 。当发射机未知 CSI时，信道容量为：
 
- $$ C_{{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_{Tx} N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
+ $$ C_{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_{Tx} N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
 
 可以看出，MISO信道容量与SISO信道容量相同。人们可能会问:当与单发射天线系统的容量相同时，多发射天线系统的优势是什么?尽管两个系统能够获得相同的最大传输速率，但是有多种方法利用多天线。例如，空时编码技术可以提高传输的可靠性，这将在下一章中进行讨论。
 
