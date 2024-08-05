@@ -378,7 +378,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 上式中接收信号的功率提高了NTx倍，因此信道容量为：
 
- $$ C_{{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 )=\log_2 (1+\frac{E_x }{N_0 }N_{\mathrm{T}\mathrm{x}} ) $$ 
+ $$ C_{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{\mathrm{F}}^2 )=\log_2 (1+\frac{E_x }{N_0 }N_{\mathrm{T}\mathrm{x}} ) $$ 
 
 ## 随机MIMO信道容量
 
