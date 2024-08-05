@@ -539,7 +539,7 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 ## 采用预编码的OSTBC
 
-考虑一个具有 $N_{\textrm{Tx}}$ 根天线的MISO系统，即 $h\in {\mathbb{C}}^{1\times N_{\textrm{Tx}} }$ 。令 $C\in {\mathbb{C}}^{M\times T}$ 表示一个长度为M的空\-时码字： $C={[c_1  , c_2 ,  \cdots ,c_T  ]}$ 。其中， $c_k ={{[ c_{k,1}  , c_{k,2}  , \cdots c_{k,M}  ]}}^{\mathrm{T}} ,k=1,2,\cdots T,M\le N_{\textrm{Tx}}$ 。在采用预编码的OSTBC系统中，从码本 $F={\{ W_1 ,W_2 ,W_3 ,\cdots ,W_L  \}}$ 中选择一个预编码矩阵 $W\in {\mathbb{C}}^{N_{\mathrm{T}\mathrm{x}} \times M}$ ，然后与空\-时码字C相乘。通过选择适合的码字来改善系统的整体性能，如信道容量或误码率等。
+考虑一个具有 $N_{\textrm{Tx}}$ 根天线的MISO系统，即 $h\in {\mathbb{C}}^{1\times N_{\textrm{Tx}} }$ 。令 $C\in {\mathbb{C}}^{M\times T}$ 表示一个长度为M的空\-时码字： $C=[c_1,c_2,\cdots,c_T]$ 。其中， $c_k =[c_{k,1} ,c_{k,2},\cdots,c_{k,M}]^{\mathrm{T}},k=1,2,\cdots T,M\le N_{\textrm{Tx}}$ 。在采用预编码的OSTBC系统中，从码本 $F=\{W_1,W_2,W_3,\cdots,W_L\}$ 中选择一个预编码矩阵 $W\in\mathbb{C}^{N_\mathrm{Tx}\times M}$ ，然后与空\-时码字C相乘。通过选择适合的码字来改善系统的整体性能，如信道容量或误码率等。
 
 ## 采用预编码的空间复用系统
 
