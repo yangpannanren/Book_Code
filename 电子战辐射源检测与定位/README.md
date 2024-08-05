@@ -26,9 +26,9 @@
 
 CFAR检测器可以通过最大不变检验统计量的阈值检验来实现，该检测器可在噪声功率条件未知条件下检测出已知信号：
 
-$$ T(\mathbf{z})=\frac{{\mathbf{s}}^H {\mathbf{P}}_s \mathbf{z}}{\sqrt{{\mathbf{s}}^H \mathbf{s}}\sqrt{{\mathbf{z}}^H {\left(\mathbf{I}-{\mathbf{P}}_s \right)}\mathbf{z}}} $$
+$$ T(\mathbf{z})=\frac{\mathbf{s}^H {\mathbf{P}}_s \mathbf{z}}{\sqrt{\mathbf{s}^H \mathbf{s}}\sqrt{\mathbf{z}^H {\left(\mathbf{I}-{\mathbf{P}}_s \right)}\mathbf{z}}} $$
  
-其中， ${\mathbf{P}}_s$ 为已知信号 $\mathbf{s}$ （ ${\mathbf{P}}_s =\frac{\mathbf{s}{\mathbf{s}}^H }{{\mathbf{s}}^H \mathbf{s}}$ ）的投影矩阵。分子项 ${\mathbf{s}}^H {\mathbf{P}}_s \mathbf{z}$ 用于计算与预期信号 $\mathbf{s}$ 相关的接收能量，而分母为 $T(\mathbf{z})$ 大小的缩放因子。第一项 $\sqrt{{\mathbf{s}}^H \mathbf{s}}$ 控制与 $\mathbf{s}$ 相乘的尺度，而 $\sqrt{{\mathbf{z}}^H {\left(\mathbf{I}-{\mathbf{P}}_s \right)}\mathbf{z}}$ 计算噪声功率，以使噪声能量的变化不会影响测试统计量 $T(\mathbf{z})$ 。
+其中， ${\mathbf{P}}_s$ 为已知信号 $\mathbf{s}$ （ ${\mathbf{P}}_s =\frac{\mathbf{s}{\mathbf{s}}^H }{\mathbf{s}^H \mathbf{s}}$ ）的投影矩阵。分子项 ${\mathbf{s}}^H {\mathbf{P}}_s \mathbf{z}$ 用于计算与预期信号 $\mathbf{s}$ 相关的接收能量，而分母为 $T(\mathbf{z})$ 大小的缩放因子。第一项 $\sqrt{\mathbf{s}^H \mathbf{s}}$ 控制与 $\mathbf{s}$ 相乘的尺度，而 $\sqrt{\mathbf{z}^H {\left(\mathbf{I}-{\mathbf{P}}_s \right)}\mathbf{z}}$ 计算噪声功率，以使噪声能量的变化不会影响测试统计量 $T(\mathbf{z})$ 。
 
 测试统计量 $T(\mathbf{z})$ 是按照学生t分布（student\-t distribution）进行分布的，该分布可以用于计算一些预期 $P_{\textrm{FA}}$ 的阈值η。但该分布无法表示为闭式解形式，因此必须使用数值计算方法。
 CA\-CFAR（Cell Averaging\-Constant False Alarm Rate）使用滑动窗口来计算相邻单元内的平均功率强度，并与被测单元的功率强度比较。可以在预期噪声稳定的任何维度（如时间或频率）中完成这一点。CA\-CFAR的主要参数包括窗口大小、计算噪声功率估计值的平均单元数、保护带大小、被测单元附近被忽略的单元数。保护带可以防止被测单元中的信号泄露污染相邻单元或影响噪声功率估计值。
@@ -37,7 +37,7 @@ CA\-CFAR估计：
 
 $$\overline{\sigma}_n^2=\frac{1}{K(M-1)}\sum _{i=1}^M\overline{\mathbf{z}}_i^H\overline{\mathbf{z}}_i$$
 
-$$T(\mathbf{z})=\frac{1}{\sqrt{2NE_s}}\sum_{i=1}^K\Re\{{\mathbf{s}}^H{\mathbf{z}}_i\}$$
+$$T(\mathbf{z})=\frac{1}{\sqrt{2NE_s}}\sum_{i=1}^K\Re\{\mathbf{s}^H{\mathbf{z}}_i\}$$
 
 $$\eta=\sqrt{2{\overline{\sigma}}_n^2}\textrm{erfinv}{(1-2P _{\textrm{FA}})}$$
 
@@ -389,7 +389,7 @@ CEP值是圆的半径，该圆以给定的概率包围误差。定义总误差�
 
 对于 ${\textrm{CEP}}_{50\%}$ ，给出近似计算：
 
- $$ {{\mathrm{C}\mathrm{E}\mathrm{P}}}_{50}=\begin{cases} 0.59(\sigma_s +\sigma_l ) & \frac{\sigma_s }{\sigma_l }\ge 0.5\\ \sigma_l \left(0.67+0.8\frac{\sigma_s^2 }{\sigma_l^2 }\right) & \frac{\sigma_s }{\sigma_l }<0.5 \end{cases} $$ 
+ $$ {\mathrm{C}\mathrm{E}\mathrm{P}}_{50}=\begin{cases} 0.59(\sigma_s +\sigma_l ) & \frac{\sigma_s }{\sigma_l }\ge 0.5\\ \sigma_l \left(0.67+0.8\frac{\sigma_s^2 }{\sigma_l^2 }\right) & \frac{\sigma_s }{\sigma_l }<0.5 \end{cases} $$ 
 
 其中， $\sigma_s$ 是两个误差项中的较小者， $\sigma_l$ 是较大者。
 
@@ -439,7 +439,7 @@ CEP值是圆的半径，该圆以给定的概率包围误差。定义总误差�
 ## 求解
 ### 两次测量的几何解
 
-设有两个AOA解，则可根据他们的交点求出估计的辐射源位置 $\hat{{\mathbf{x}}}$ 。可以通过求解以 $y=mx+b$ 形式定义两条直线方差，然后求解：
+设有两个AOA解，则可根据他们的交点求出估计的辐射源位置 $\hat{\mathbf{x}}$ 。可以通过求解以 $y=mx+b$ 形式定义两条直线方差，然后求解：
 
  $$ {\left[\begin{array}{rcl} y =  \frac{\sin (\psi_0 )}{\cos (\psi_0 )}x+{\left(y_0 -\frac{\sin (\psi_0 )}{\cos (\psi_0 )}x_0 \right)}\newline y =  \frac{\sin (\psi_1 )}{\cos (\psi_1 )}x+{\left(y_1 -\frac{\sin (\psi_1 )}{\cos (\psi_1 )}x_1 \right)} \end{array}\right]} $$ 
 
@@ -457,7 +457,7 @@ CEP值是圆的半径，该圆以给定的概率包围误差。定义总误差�
 
 $$\mathbf{J}(\mathbf{x})\triangleq {[\nabla_{\mathbf{x}} p_0 (\mathbf{x}),  \nabla_{\mathbf{x}} p_1 (\mathbf{x}), \cdots, \nabla_{\mathbf{x}} p_{N-1}(\mathbf{x})]}$$
 
-$$\nabla_{\mathbf{x}} p_i (\mathbf{x})=\frac{1}{{{\|\mathbf{x}-{\mathbf{x}}_i \|}}^2 }{{[ -(\mathbf{y}-\mathbf{y}_i),  \mathbf{x}-\mathbf{x}_i]}}^T$$
+$$\nabla_{\mathbf{x}} p_i (\mathbf{x})=\frac{1}{ {\|\mathbf{x}-{\mathbf{x}}_i \|}^2 }{[ -(\mathbf{y}-\mathbf{y}_i),  \mathbf{x}-\mathbf{x}_i]}^T$$
 
 令 $\nabla_{\mathbf{x}} \ell (\psi |\mathbf{x})=0$ 求解 ${\mathbf{x}}$ 可以求出最大似然估计。然而由于 $\mathbf{J}(\mathbf{x})$ 在 ${\mathbf{x}}$ 中不是线性的，因此没有解析解。下面讨论两个迭代解。
 
@@ -485,7 +485,7 @@ $$\nabla_{\mathbf{x}} p_i (\mathbf{x})=\frac{1}{{{\|\mathbf{x}-{\mathbf{x}}_i \|
 
 采用最小二乘解：
 
-$$ \Delta {\mathbf{x}}^{(i)} ={{\left[\mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\psi }^{-1} {\mathbf{J}}^T {\left({\mathbf{x}}^{(i)} \right)}\right]}}^{-1} \mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\psi }^{-1} \mathbf{y}{\left({\mathbf{x}}^{(i)} \right)} $$
+$$ \Delta {\mathbf{x}}^{(i)} ={ \left[\mathbf{J}\left({\mathbf{x}}^{(i)} \right) {\mathbf{C}}_{\psi }^{-1} {\mathbf{J}}^T {\left({\mathbf{x}}^{(i)} \right)}\right]}^{-1} \mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\psi }^{-1} \mathbf{y}{\left({\mathbf{x}}^{(i)} \right)} $$
 
 上述方法AOA测量次数必须大于或等于空间维度数量。该方法的主要局限性是需要重复计算以达到收敛，并且需要足够准确的初始位置估计。此外，该技术还存在稳健性问题，即估算值可能与实际辐射源位置大相径庭。因此有必要及逆行约束和其他优化以提高准确性。
 
@@ -493,7 +493,7 @@ $$ \Delta {\mathbf{x}}^{(i)} ={{\left[\mathbf{J}{\left({\mathbf{x}}^{(i)} \right
 
 目标函数 $f(x)$ 最小化白化残差 $\tilde{\mathbf{y}} (\mathbf{x})$ 的范数：
 
- $$ f(x)={\|\tilde{y} (x)\|}_2^2 ={(\psi -p(x))}^T C_{{\psi }}^{-1} (\psi -p(x)) $$ 
+ $$ f(x)={\|\tilde{y} (x)\|}_2^2 ={(\psi -p(x))}^T C_{\psi }^{-1} (\psi -p(x)) $$ 
 
 这等同于对数似然函数 $\ell (\psi |\mathbf{x})$ 的负数。因此，得到梯度如下：
 
@@ -510,7 +510,7 @@ $$ \Delta {\mathbf{x}}^{(i)} ={{\left[\mathbf{J}{\left({\mathbf{x}}^{(i)} \right
 
 费歇尔信息矩阵： ${\mathbf{F}}_{\mathbf{x}} (\psi )=\mathbf{J}(\mathbf{x}){\mathbf{C}}_{\psi }^{-1} {\mathbf{J}}^T (\mathbf{x})$ 
 
-CRLB指明误差协方差的下界为 ${\mathbf{F}}_{\mathbf{x}} (\psi )$ 的倒数： ${\mathbf{C}}_{\mathbf{x}} \ge {{\left[\mathbf{J}(\mathbf{x}){\mathbf{C}}_{\psi }^{-1} {\mathbf{J}}^T (\mathbf{x})\right]}}^{-1}$ 
+CRLB指明误差协方差的下界为 ${\mathbf{F}}_{\mathbf{x}} (\psi )$ 的倒数： ${\mathbf{C}}_{\mathbf{x}} \ge {\left[\mathbf{J}(\mathbf{x}){\mathbf{C}}_{\psi }^{-1} {\mathbf{J}}^T (\mathbf{x})\right]}^{-1}$ 
 
 # TDOA
 
@@ -534,7 +534,7 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
 考虑任意两个传感器 $S_m$ 和 $S_n$ ，它们之间的时间差测量定义为 $t_{m,n} =\tau_m -\tau_n$ ，则距离差为 $R_{m,n}=c t_{m,n}$ 。两个信号之间的时间差勾勒出双曲线：
 
- $$ R_{m,n} {(x,y)}=\sqrt{{{(x-x_m )}}^2 +{{(y-y_m )}}^2 }-\sqrt{{{(x-x_n )}}^2 +{{(y-y_n )}}^2 } $$ 
+ $$ R_{m,n} {(x,y)}=\sqrt{{(x-x_m )}^2 +{(y-y_m )}^2 }-\sqrt{{(x-x_n )}^2 +{(y-y_n )}^2 } $$ 
 此TDOA双曲线即为等时线。
 
 ### 传感器的数量
@@ -545,11 +545,11 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
 由于TDOA方程非线性，故没有解析解。方便推导，用 $\ell_2$ （欧几里得）范数以矢量形式重写TDOA方程：
 
- $$ R_{m,n} (\mathbf{x})={{\|\mathbf{x}-{\mathbf{x}}_m \|}}_2 -{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2 $$ 
+ $$ R_{m,n} (\mathbf{x})={\|\mathbf{x}-{\mathbf{x}}_m \|}_2 -{\|\mathbf{x}-{\mathbf{x}}_n \|}_2 $$ 
 
-其中， ${\mathbf{x}}$ 是辐射源位置； ${{\mathbf{x}}}_m$ 是第m个传感器的位置； $R_{m,n} ({\mathbf{x}})$ 是第m个和第n个传感器观测到的到辐射源位置 ${\mathbf{x}}$ 的距离差。则相对传感器N的所有距离差矢量为：
+其中， ${\mathbf{x}}$ 是辐射源位置； ${\mathbf{x}}_m$ 是第m个传感器的位置； $R_{m,n} ({\mathbf{x}})$ 是第m个和第n个传感器观测到的到辐射源位置 ${\mathbf{x}}$ 的距离差。则相对传感器N的所有距离差矢量为：
 
- $$ {\mathbf{r}}{(\mathbf{x})}={{[R_{1,N} {(\mathbf{x})},\cdots,R_{N-1,N} {(\mathbf{x})}]}}^T $$ 
+ $$ {\mathbf{r}}{(\mathbf{x})}={[R_{1,N} {(\mathbf{x})},\cdots,R_{N-1,N} {(\mathbf{x})}]}^T $$ 
 
 该矢量有 $N-1$ 个元素，每个元素均为相对传感器N的值。将第N个传感器作为参考传感器。
 
@@ -563,11 +563,11 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
 其中， $\sigma_i^2$ 是第i个传感器TOA测量值的方差； $c$ 是光速。则概率密度函数为：
 
- $$ f_{\mathbf{x}} {(\rho)}={{(2\pi)}}^{-\frac{{(N-1)}}{2}} {{∣{\mathbf{C}}_{\rho }∣}}^{-1/2} e^{-\frac{1}{2}(\rho -\mathbf{r}(\mathbf{x}))^T {\mathbf{C}}_{\rho }^{-1} (\rho -\mathbf{r}(\mathbf{x}))} $$ 
+ $$ f_{\mathbf{x}} {(\rho)}={(2\pi)}^{-\frac{(N-1)}{2}} {∣{\mathbf{C}}_{\rho }∣}^{-1/2} e^{-\frac{1}{2}(\rho -\mathbf{r}(\mathbf{x}))^T {\mathbf{C}}_{\rho }^{-1} (\rho -\mathbf{r}(\mathbf{x}))} $$ 
 
 对数似然函数为：
 
- $$ \ell {(\mathbf{x}|\rho )}=-\frac{1}{2}{{(\rho -\mathbf{r}{(\mathbf{x})})}}^T {\mathbf{C}}_{\rho }^{-1} {(\rho -\mathbf{r}{(\mathbf{x})})} $$ 
+ $$ \ell {(\mathbf{x}|\rho )}=-\frac{1}{2}{(\rho -\mathbf{r}{(\mathbf{x})})}^T {\mathbf{C}}_{\rho }^{-1} {(\rho -\mathbf{r}{(\mathbf{x})})} $$ 
 
 ### 最大似然估计
 
@@ -581,7 +581,7 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
  $\nabla_{\mathbf{x}} R_{i,N}$ 是第i个传感器和参考传感器之间辐射源的距离差的梯度：
 
- $$ \nabla_{\mathbf{x}} R_{i,N} =\frac{\mathbf{x}-{\mathbf{x}}_i }{{{∣\mathbf{x}-{\mathbf{x}}_i ∣}}_2 }-\frac{\mathbf{x}-{\mathbf{x}}_N }{{{∣\mathbf{x}-{\mathbf{x}}_N∣}}_2 } $$ 
+ $$ \nabla_{\mathbf{x}} R_{i,N} =\frac{\mathbf{x}-{\mathbf{x}}_i }{{∣\mathbf{x}-{\mathbf{x}}_i ∣}}_2 -\frac{\mathbf{x}-{\mathbf{x}}_N }{{∣\mathbf{x}-{\mathbf{x}}_N∣}}_2  $$ 
 
 ### 迭代最小二乘解
 
@@ -605,7 +605,7 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
 对该线性方式的求解得出当前估计值与辐射源真实位置之间的偏移量 $\Delta x$ 估计值，采用最小二乘解：
 
- $$ \Delta {\mathbf{x}}^{(i)} ={{\left[\mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\rho }^{-1} {\mathbf{J}}^T {\left({\mathbf{x}}^{(i)} \right)}\right]}}^{-1} \mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\rho }^{-1} \mathbf{y}{\left({\mathbf{x}}^{(i)} \right)} $$ 
+ $$ \Delta {\mathbf{x}}^{(i)} = {\left[\mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\rho }^{-1} {\mathbf{J}}^T {\left({\mathbf{x}}^{(i)} \right)}\right]}^{-1} \mathbf{J}{\left({\mathbf{x}}^{(i)} \right)}{\mathbf{C}}_{\rho }^{-1} \mathbf{y}{\left({\mathbf{x}}^{(i)} \right)} $$ 
 
 其中雅可比矩阵 $\mathbf{J}$ 的列数不得超过行数，即TDOA对的数量 $(N-1)$ 必须不小于空间维度数量。上式最小二乘解不能保证是最优的，只是比初始估计值 $x^{(i)}$ 更接近（假设 $x^{(i)}$ 足够接近真实位置且问题是局凸的）最优解。为了获得准确的解，必须以迭代方式重新进行该过程。
 
@@ -643,24 +643,24 @@ Chan\-Ho方法需要 $N_{\dim } +2$ 个传感器，原因是定义了一个辅�
 
 $$G=-\left[ \begin{array}{c} x_1^{T } -x_N^{T } \\ \vdots \\ x_{N-1}^{T } -x_N^{T }  \end{array}\right] ，\mathbf{y}=\frac{1}{2} \left[\begin{array}{c} R_{1,N}^2 -\| {\mathbf{x}}_1 \| +\| {\mathbf{x}}_N \| \\ \vdots \\ R_{N-1,N}^2 -\| {\mathbf{x}}_{N-1} \| +\| {\mathbf{x}}_N \|  \end{array}\right]$$ 
 
-由于 $\theta$ 的单元由非线性方程关联，因此无法直接求解该方程组。提出的解忽略了这一事实，并先求解线性方程组，就好像 $\theta$ 的单元不相关一样，然后回过头来将它们的关系应用于估计的解。产生这种差异的原因是， $\bar{{\mathbf{n}}}$ 的误差协方差矩阵取决于从辐射源到 $N-1$ 个非参考传感器中每个传感器的距离。在辐射源教员的情况下，可以将其假定为缩小的单位矩阵，但在辐射源较近的情况下，也必须对其进行估计。
+由于 $\theta$ 的单元由非线性方程关联，因此无法直接求解该方程组。提出的解忽略了这一事实，并先求解线性方程组，就好像 $\theta$ 的单元不相关一样，然后回过头来将它们的关系应用于估计的解。产生这种差异的原因是， $\bar{\mathbf{n}}$ 的误差协方差矩阵取决于从辐射源到 $N-1$ 个非参考传感器中每个传感器的距离。在辐射源教员的情况下，可以将其假定为缩小的单位矩阵，但在辐射源较近的情况下，也必须对其进行估计。
 
 无论哪种情况，首先估计参数矢量：
 
- $$ \hat{\theta} ={{[{\mathbf{G}}^T {\mathbf{C}}^{-1} \mathbf{G}]}}^{-1} {\mathbf{G}}^T {\mathbf{C}}^{-1} \mathbf{y} $$
+ $$ \hat{\theta} ={[{\mathbf{G}}^T {\mathbf{C}^{-1} \mathbf{G}]}}^{-1} {\mathbf{G}}^T {\mathbf{C}}^{-1} \mathbf{y} $$
 
 若是近场辐射源，则使用 $\theta$ 的估计值构建距离矩阵 ${\mathbf{B}}$ ，并使用定位误差协方差矩阵 $\hat{\mathbf{C}}$ ：
 
 $$\mathbf{B}=2\mathrm{diag}[ \mathbf{R}(\hat{\mathbf{x}} )] ，\hat{\mathbf{C}} ={\mathbf{BCB}}^T  $$ 
-其中， $\hat{{\mathbf{x}}}$ 是 $\hat{\theta}$ 的前 $N_{\dim}$ 个单元。然后将估计参数矢量方程中的 ${\mathbf{C}}$ 替换为 $\hat{\mathbf{C}}$ ，可以使用新的估计协方差矩阵 $\hat{\mathbf{C}}$ 来更新 $\hat{\theta}$ 。
+其中， $\hat{\mathbf{x}}$ 是 $\hat{\theta}$ 的前 $N_{\dim}$ 个单元。然后将估计参数矢量方程中的 ${\mathbf{C}}$ 替换为 $\hat{\mathbf{C}}$ ，可以使用新的估计协方差矩阵 $\hat{\mathbf{C}}$ 来更新 $\hat{\theta}$ 。
 
-第二步是利用参数单元之间的关系来更新参数估计值。为此，我们使用距离估计位置 $\hat{{\mathbf{x}}}$ 的偏移量重新定义系统矩阵。算法第二阶段使用的新参数矢量 $\theta_1$ 为： $\theta_1 =\hat{\theta} -{\left[\begin{array}{c} {\mathbf{x}}_N \\ 0 \end{array}\right]}$ 。更新后的方程组写为：
+第二步是利用参数单元之间的关系来更新参数估计值。为此，我们使用距离估计位置 $\hat{\mathbf{x}}$ 的偏移量重新定义系统矩阵。算法第二阶段使用的新参数矢量 $\theta_1$ 为： $\theta_1 =\hat{\theta} -{\left[\begin{array}{c} {\mathbf{x}}_N \\ 0 \end{array}\right]}$ 。更新后的方程组写为：
 
  $$ {\mathbf{y}}_1 ={\mathbf{G}}_1 \theta_1 +{\mathbf{n}}_1 $$ 
 
 其中， ${\mathbf{n}}_1$ 的协方差矩阵为：
 
- $$ {\mathbf{C}}_1 ={\mathbf{B}}_1 {{({\mathbf{G}}^T {\hat{\mathbf{C}} }^{-1} \mathbf{G})}}^{-1} {\mathbf{B}}_1^T $$ 
+ $$ {\mathbf{C}}_1 ={\mathbf{B}}_1 {({\mathbf{G}}^T {\hat{\mathbf{C}} }^{-1} \mathbf{G})}^{-1} {\mathbf{B}}_1^T $$ 
 
 更新后的系统矩阵为：
 
@@ -668,7 +668,7 @@ $$ [{\mathbf{y}}_1 ]_i =[ \theta_1 ]_i^2  ， {\mathbf{G}}_1 = {\left[\begin{arr
 
 注意，参数矢量现在在每个维度上都具有参考传感器和辐射源之间的平方距离。该方程组的解将为我们提供距参考传感器的偏移平方；初始解可用于确定应在哪个方向上应用偏移。根据以下方程求解偏移量：
 
-$$\mathbf{A}={\mathbf{G}}_1^T {\mathbf{B}}_1^{-1} {\mathbf{G}}^T {\mathbf{C}}_1^{-1} \mathbf{G}{\mathbf{B}}_1^{-1} ， {\hat{\theta} }_1 ={{[\mathbf{A}{\mathbf{G}}_1 ]}}^{-1} \mathbf{A}{\mathbf{y}}_1， {\hat{\mathbf{x}} }_1 =\pm \sqrt{{\hat{\theta} }_1 }+{\mathbf{x}}_N $$ 
+$$\mathbf{A}={\mathbf{G}}_1^T {\mathbf{B}}_1^{-1} {\mathbf{G}}^T {\mathbf{C}}_1^{-1} \mathbf{G}{\mathbf{B}}_1^{-1} ， {\hat{\theta} }_1 ={[\mathbf{A}{\mathbf{G}}_1 ]}^{-1} \mathbf{A}{\mathbf{y}}_1， {\hat{\mathbf{x}} }_1 =\pm \sqrt{\hat{\theta} }_1 +{\mathbf{x}}_N $$ 
 
 根据提供与初始位置估算值 $\hat{\mathit{\mathbf{x}}}$ 位于同一象限的估算值 ${\hat{\mathbf{x}} }_1$ 的值来选择平方根的正解。
 
@@ -689,7 +689,7 @@ $$\mathbf{A}={\mathbf{G}}_1^T {\mathbf{B}}_1^{-1} {\mathbf{G}}^T {\mathbf{C}}_1^
 
 无论那种情况，都已经证明TDOA估计中的误差项 $\mathbf{n}$ 近似为高斯。方差取决于下面使用的形式，但协方差矩阵的结构取决于如何计算TDOA估计。在单个参考传感器的情况下，如本章前面所讨论的，协方差矩阵的形式是每个唯一传感器误差项的单位矩阵，以及来自共同参考的所有估计中的共同误差项， ${\mathbf{C}}_{\rho } =c^2 {\left[\begin{array}{cccc} \sigma_1^2 +\sigma_N^2  & \sigma_N^2  & \cdots  & \sigma_N^2 \newline \sigma_N^2  & \sigma_2^2 +\sigma_N^2  & \ldots & \sigma_N^2 \newline \vdots  & \vdots  & \ddots  & \vdots \newline \sigma_N^2  & \sigma_N^2  & \cdots  & \sigma_{N-1}^2 +\sigma_N^2  \end{array}\right]}$ 。
 
-另一种常见方案是定义唯一的TDOA传感器对。这样做的好处是提供对角协方差矩阵，但要求传感器的数量是维数的两倍，并且不能有效地利用给定的所有信息。这种情况下的协方差矩阵为 $\mathbf{C}=c^2 \mathrm{diag}{\left\{{\overline{\sigma} }_1^2 ,\cdots,{\overline{\sigma} }_N^2 \right\}}$ 。
+另一种常见方案是定义唯一的TDOA传感器对。这样做的好处是提供对角协方差矩阵，但要求传感器的数量是维数的两倍，并且不能有效地利用给定的所有信息。这种情况下的协方差矩阵为 $\mathbf{C}=c^2 \mathrm{diag}{\left\{\overline{\sigma} _1^2 ,\cdots,{\overline{\sigma} }_N^2 \right\}}$ 。
 
 其中，方差 ${\bar{\sigma} }_n^2$ 是对于测量值n的两个传感器的方差之和，再通过乘以光速的平方转化为距离差。接下来讨论如何获得到达时间估计。
 
@@ -701,7 +701,7 @@ TDOA的第一种方法是独立测量到达每个传感器的时间，然后只�
 
 一种改进的边缘检测基于估计输入信号自相关前缘的形状。改进的TOA检测器具有误差方差：
 
- $$ \sigma_{\textrm{TOA,Edge}}^2 =\frac{1}{\xi }{\left[1+2\frac{\alpha }{\tau }+2{{\left(\frac{\alpha }{\tau }\right)}}^2 \right]} $$ 
+ $$ \sigma_{\textrm{TOA,Edge}}^2 =\frac{1}{\xi }{\left[1+2\frac{\alpha }{\tau }+2{\left(\frac{\alpha }{\tau }\right)}^2 \right]} $$ 
 
 其中ξ是信噪比，α是阈值参数， $\tau$ 是用于估计前缘形状的连续点之间的时间延迟(以码片为单位)。另一种技术是峰值检测，它基于对接收信号自相关函数峰值的估计，其误差方差为：
 
@@ -741,9 +741,9 @@ GPS已经成为事实上的时间同步标准，因为它的全球可用性和�
 
  $$ \mathbf{F}(\mathbf{x})=\mathbf{J}(\mathbf{x}){\mathbf{C}}_{\rho }^{-1} {\mathbf{J}}^T (\mathbf{x}) $$ 
 
-其中， $\mathbf{J}(\mathbf{x})$ 是对数似然函数的雅可比矩阵（对于TDOA， $\mathbf{J}{(\mathbf{x})}=[ \nabla_{\mathbf{x}} R_{1,N} ,\cdots,\nabla_{\mathbf{x}} R_{N-1,N} ]$ ），因此辐射源估计位置 $\hat{{\mathbf{x}}}$ 的协方差矩阵 $C_{\hat{\mathbf{x}} }$ 的阈值为：
+其中， $\mathbf{J}(\mathbf{x})$ 是对数似然函数的雅可比矩阵（对于TDOA， $\mathbf{J}{(\mathbf{x})}=[ \nabla_{\mathbf{x}} R_{1,N} ,\cdots,\nabla_{\mathbf{x}} R_{N-1,N} ]$ ），因此辐射源估计位置 $\hat{\mathbf{x}}$ 的协方差矩阵 $C_{\hat{\mathbf{x}} }$ 的阈值为：
 
- $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {{\left[\mathbf{J}{(\mathbf{x})}{\mathbf{C}}_{\rho }^{-1} {\mathbf{J}}^T {(\mathbf{x})} \right]}}^{-1} $$ 
+ $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {\left[\mathbf{J}{(\mathbf{x})}{\mathbf{C}}_{\rho }^{-1} {\mathbf{J}}^T {(\mathbf{x})} \right]}^{-1} $$ 
 
 该边界必须以数值方式求解。
 
@@ -780,7 +780,7 @@ TDOA 依赖于目标发出信号，并且容易受到电子静默（Emissions Co
 
 其中 $\tau_i$ 是第i个接收器的时间延迟， $f_i$ 是由发射器和接收器之间的相对运动引起的多普勒频移， $n_i (t)$ 是噪声项。定义目标（位置x，速度v）与第i个传感器的的距离，以及距离变化率（距离随时间的变化）：
 
-$$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mathbf{x},\mathbf{v})\triangleq \frac{{{({\mathbf{v}}_i -\mathbf{v})}}^T (\mathbf{x}-{\mathbf{x}}_i )}{R_i (\mathbf{x})}$$
+$$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mathbf{x},\mathbf{v})\triangleq \frac{({\mathbf{v}}_i -\mathbf{v})^T (\mathbf{x}-{\mathbf{x}}_i )}{R_i (\mathbf{x})}$$
 
 根据该几何形状，时间延迟和多普勒频移给定为：
 
@@ -788,7 +788,7 @@ $$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mat
 
 类似TDOA中每对传感器产生一组等时线，FDOA中的每对传感器都有一组等多普勒轮廓（isoDoppler contours），或恒定多普勒差分线。定义两个传感器之间的频率差：
 
- $$ f_{m,n} (\mathbf{x},\mathbf{v})=f_m (\mathbf{x},\mathbf{v})-f_n (\mathbf{x},\mathbf{v})=\frac{f_0 }{c}{[\frac{{{({\mathbf{v}}_m -\mathbf{v})}}^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{{\|\mathbf{x}-{\mathbf{x}}_m \|}}_2 }-\frac{{{({\mathbf{v}}_n -\mathbf{v})}}^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2 }]} $$ 
+ $$ f_{m,n} (\mathbf{x},\mathbf{v})=f_m (\mathbf{x},\mathbf{v})-f_n (\mathbf{x},\mathbf{v})=\frac{f_0 }{c}{[\frac{{({\mathbf{v}}_m -\mathbf{v})}^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{{\|\mathbf{x}-{\mathbf{x}}_m \|}}_2 }-\frac{{({\mathbf{v}}_n -\mathbf{v})}^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2 }]} $$ 
 
 为简单起见，假设 $v=0$ 。如果v不为0，则v表示一个额外的未知数（实际上，每个空间维度有一个未知数）。为了估计位置x以外的速度v，必须通过额外的传感器或模式（如TDOA或AOA）收集额外的信息，见下一章。
 
@@ -800,11 +800,11 @@ $$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mat
 
 通过第m个传感器与第n个传感器之间的多普勒频移计算距离变化率差 ${\dot{R} }_{m,n} (\mathbf{x})$ ：
 
- $$ {\dot{R} }_{m,n} (\mathbf{x})=\frac{c}{f_0 }f_{m,n} (\mathbf{x})={\frac{{\mathbf{v}}_m^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{{\|\mathbf{x}-{\mathbf{x}}_m \|}}_2 }-\frac{{\mathbf{v}}_n^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2 }} $$ 
+ $$ {\dot{R} }_{m,n} (\mathbf{x})=\frac{c}{f_0 }f_{m,n} (\mathbf{x})={\frac{\mathbf{v}_m^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{\|\mathbf{x}-{\mathbf{x}}_m \|}_2 }-\frac{\mathbf{v}_n^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{\|\mathbf{x}-{\mathbf{x}}_n \|}_2 }} $$ 
 
 收集全矢量：
 
- $$ \dot{\mathbf{r}} (\mathbf{x})={{[ {\dot{R} }_{1,N} (\mathbf{x}),\cdots,{\dot{R} }_{N-1,N} (\mathbf{x}) }}^T $$ 
+ $$ \dot{\mathbf{r}} (\mathbf{x})={[ {\dot{R} }_{1,N} (\mathbf{x}),\cdots,{\dot{R} }_{N-1,N} (\mathbf{x}) }^T $$ 
 
 距离变化率差分矢量的噪声测量给定为：
 
@@ -816,9 +816,9 @@ $$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mat
 
 其中， ${\mathbf{C}}_{\dot{\mathbf{r}} }$ 以 $m^2 /s^2$ 为单位。这与我们在距离差分矢量 $\dot{\mathbf{r}} (\mathbf{x})$ 中测量 $\dot{\rho}$ 具有相同的形式。因此，概率密度函数（probability density function，PDF）和对数似然函数类似地给出：
 
-$$f_{\mathbf{x}} {(\dot{\rho} )}={{(2\pi )}}^{-\frac{{(N-1)}}{2}} {{∣{\mathbf{C}}_{\dot{\mathbf{r}} } ∣}}^{-1/2} e^{-\frac{1}{2}{{(\dot{\rho} -\dot{\mathbf{r}} (\mathbf{x}))}}^T {\mathbf{C}}_{\dot{\mathbf{r}} }^{-1} {(\dot{\rho} -\dot{\mathbf{r}} (\mathbf{x}))}}$$
+$$f_{\mathbf{x}} {(\dot{\rho} )}={ (2\pi )}^{-\frac{(N-1)}{2}} {∣{\mathbf{C}}_{\dot{\mathbf{r}} } ∣}^{-1/2} e^{-\frac{1}{2}{(\dot{\rho} -\dot{\mathbf{r}} (\mathbf{x}))}^T {\mathbf{C}}_{\dot{\mathbf{r}} }^{-1} {(\dot{\rho} -\dot{\mathbf{r}} (\mathbf{x}))}}$$
 
- $$\ell {(\mathbf{x}|\dot{\rho} )}=-\frac{1}{2}{{(\dot{\rho} -\dot{\mathbf{r}} {(\mathbf{x})})}}^T {\mathbf{C}}_{\dot{\mathbf{r}} }^{-1} {(\dot{\rho} -\dot{\mathbf{r}} {(\mathbf{x})})}$$
+ $$\ell {(\mathbf{x}|\dot{\rho} )}=-\frac{1}{2}{ (\dot{\rho} -\dot{\mathbf{r}} {(\mathbf{x})})}^T {\mathbf{C}}_{\dot{\mathbf{r}} }^{-1} {(\dot{\rho} -\dot{\mathbf{r}} {(\mathbf{x})})}$$
 
 ### 最大似然估计
 
@@ -832,9 +832,9 @@ $$f_{\mathbf{x}} {(\dot{\rho} )}={{(2\pi )}}^{-\frac{{(N-1)}}{2}} {{∣{\mathbf{
 
  $\nabla_{\mathbf{x}} {\dot{R} }_{n,N}^T$ 是距离差变化率对辐射源（第n个传感器和参考传感器之间）的梯度矩阵：
 
- $$ \nabla_{\mathbf{x}} {\dot{R} }_{n,N} ={(\mathbf{I}-{\mathbf{P}}_n (\mathbf{x}))}\frac{{\mathbf{v}}_n }{{{\|{\mathbf{x}}_n -\mathbf{x}\|}}_2 }-{(\mathbf{I}-{\mathbf{P}}_N (\mathbf{x}))}\frac{{\mathbf{v}}_N }{{{\|{\mathbf{x}}_N -\mathbf{x}\|}}_2 } $$ 
+ $$ \nabla_{\mathbf{x}} {\dot{R} }_{n,N} ={(\mathbf{I}-{\mathbf{P}}_n (\mathbf{x}))}\frac{\mathbf{v}_n }{{\|{\mathbf{x}}_n -\mathbf{x}\|}_2 }-{(\mathbf{I}-{\mathbf{P}}_N (\mathbf{x}))}\frac{\mathbf{v}_N }{{\|{\mathbf{x}}_N -\mathbf{x}\|}_2 } $$ 
 
-其中， $P_n (\mathbf{x})=\frac{{(\mathbf{x}-{\mathbf{x}}_n )}{{(\mathbf{x}-{\mathbf{x}}_n )}}^T }{{{\|\mathbf{x}-{\mathbf{x}}_n \|}}_2^2 }$ 是在第n个传感器和辐射源之间视距上的投影矩阵。该式表明传感器n和参考传感器N之间距离差变化率主要对与该传感器的视距正交的每个传感器的速度分量以及该传感器与辐射源之间的距离敏感。同时，当vn正交于x—xn或vN正交于x—xN时，性能将最大化（梯度对x的变化最敏感），因为这将导致 ${\dot{R} }_{n,N}$ 的最大变化。
+其中， $P_n (\mathbf{x})=\frac{ (\mathbf{x}-{\mathbf{x}}_n ){(\mathbf{x}-{\mathbf{x}}_n )}^T }{{\|\mathbf{x}-{\mathbf{x}}_n \|}_2^2 }$ 是在第n个传感器和辐射源之间视距上的投影矩阵。该式表明传感器n和参考传感器N之间距离差变化率主要对与该传感器的视距正交的每个传感器的速度分量以及该传感器与辐射源之间的距离敏感。同时，当vn正交于x—xn或vN正交于x—xN时，性能将最大化（梯度对x的变化最敏感），因为这将导致 ${\dot{R} }_{n,N}$ 的最大变化。
 
 ### 迭代最小二乘解
 
@@ -890,7 +890,7 @@ Stein在1981年给出了两个接收器之间FDOA测量的CRLB的经典结果。
 
  $\xi_{eff}$ 在上章中被定义为结合两次测量得到的有效SNR：
 
- $$ \xi_{eff} =2{{\left[\frac{1}{\xi_1 }+\frac{1}{\xi_2 }+\frac{1}{\xi_1 \xi_2 }\right]}}^{-1} $$ 
+ $$ \xi_{eff} =2{\left[\frac{1}{\xi_1 }+\frac{1}{\xi_2 }+\frac{1}{\xi_1 \xi_2 }\right]}^{-1} $$ 
 
 对于持续时间为 $T_s$ 恒定包络的信号，RMS持续时间简化为：
 
@@ -910,7 +910,7 @@ Stein在1981年给出了两个接收器之间FDOA测量的CRLB的经典结果。
 
 类似TDOA，使用CRLB将定位性能作为几何形状和单个传感器性能的函数。上章中TDOA的CRLB可以直接应用，只需替换可比较的变量即可。协方差矩阵 ${\mathbf{C}}_{\rho }$ 被 ${\mathbf{C}}_{\dot{\rho} }$ 替换，雅可比矩阵 $\mathbf{J}$ 替换为其对应的FDOA：
 
- $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {{\left[\mathbf{J}{(\mathbf{x})}{\mathbf{C}}_{\dot{\rho} }^{-1} {\mathbf{J}}^T {(\mathbf{x})}\right]}}^{-1} $$ 
+ $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {\left[\mathbf{J}{(\mathbf{x})}{\mathbf{C}}_{\dot{\rho} }^{-1} {\mathbf{J}}^T {(\mathbf{x})}\right]}^{-1} $$ 
 
 该解必须用数值形式求解。
 
@@ -944,7 +944,7 @@ FDOA 依赖于来自多个来源的信息融合，TDOA 和 AOA 也是如此。�
 
 由于测量矩阵 $\zeta$ 只是分量测量向量的堆叠形式（高斯联合），因此对数似然函数 $\ell {(\mathbf{x}|\zeta )}$ 为：
 
- $$ \ell {(\mathbf{x}|\zeta )}=-\frac{1}{2}{{(\zeta -\mathbf{z}(\mathbf{x}))}}^H {\mathbf{C}}_{\mathbf{z}}^{-1} {(\zeta -\mathbf{z}(\mathbf{x}))} $$ 
+ $$ \ell {(\mathbf{x}|\zeta )}=-\frac{1}{2}{(\zeta -\mathbf{z}(\mathbf{x}))}^H {\mathbf{C}}_{\mathbf{z}}^{-1} {(\zeta -\mathbf{z}(\mathbf{x}))} $$ 
 
 同理，可以使用上几章中的分量来定义雅可比矩阵：
 
@@ -992,15 +992,15 @@ Stein在1981年给出了两个接收机之间TDOA和FDOA的CRLB经典结果，�
 
 $$\mathbf{W}=\frac{1}{\sqrt{M}}\exp{(-j\frac{2\pi }{M}{\mathbf{m}\mathbf{m}}^T )} ,{\mathbf{D}}_{\kappa } =\textrm{diag}{\left\{\exp {(-j\frac{2\pi }{M}\kappa \mathbf{m})}\right\}}$$ 
  
-$${\mathbf{D}}_{\nu } =\textrm{diag}{\{\exp {(-j\nu \mathbf{m})}\}}, \mathbf{m}={{[-\frac{M}{2},-\frac{M}{2}+1,\cdots,\frac{M}{2}-1]}}^T$$
+$${\mathbf{D}}_{\nu } =\textrm{diag}{\{\exp {(-j\nu \mathbf{m})}\}}, \mathbf{m}={[-\frac{M}{2},-\frac{M}{2}+1,\cdots,\frac{M}{2}-1]}^T$$
 
 全未知参数矢量为：
 
- $$ \vartheta =[ \Re \{{\mathbf{s}}^T \} ,\Im\{{\mathbf{s}}^T \} ,a,\phi ,\kappa ,\nu ]^T $$ 
+ $$ \vartheta =[ \Re \{\mathbf{s}^T \} ,\Im\{\mathbf{s}^T \} ,a,\phi ,\kappa ,\nu ]^T $$ 
 
 可以看出，费歇尔信息矩阵（fisher information matrix，FIM）是块对角矩阵，上子块为未知信号( $\mathbf{s}$ )和振幅差( $a$ )，下子块为相位( $\phi$ )、时延( $\kappa$ )和多普勒( $\nu$ )。这些块的交叉项均为0，因此当我们求逆时，下对角子块(对于 $\bar{\vartheta} =[ \phi ,\kappa ,\nu ]^T$ )不会受到上子块的影响。因此，我们可以忽略估计 $\mathbf{s}$ 和 $a$ 时的不确定性。第二个子块为：
 
- $$ {\mathbf{F}}_{\bar{\vartheta} } =\frac{2}{a^2 \sigma_1^2 +\sigma_2^2 }\times {\left[\begin{array}{ccc} E_s  & -{\mathbf{s}}^H \bar{\mathbf{s}}  & {\tilde{\mathbf{s}} }^H \mathbf{M}\tilde{\mathbf{s}} \\ -{\mathbf{s}}^H \bar{\mathbf{s}}  & {\bar{\mathbf{s}} }^H \bar{\mathbf{s}}  & -\Re {{{\bar{\mathbf{s}} }^H {\mathbf{Q}}_{\kappa ,\nu }^H \mathbf{M}\tilde{\mathbf{s}} }}\\ {\tilde{\mathbf{s}} }^H \mathbf{M}\tilde{\mathbf{s}}  & -\Re {{{\bar{\mathbf{s}} }^H {\mathbf{Q}}_{\kappa ,\nu }^H \mathbf{M}\tilde{\mathbf{s}}}} & {\tilde{\mathbf{s}} }^H {\mathbf{M}}^2 \tilde{\mathbf{s}}  \end{array}\right]} $$
+ $$ {\mathbf{F}}_{\bar{\vartheta} } =\frac{2}{a^2 \sigma_1^2 +\sigma_2^2 }\times {\left[\begin{array}{ccc} E_s  & -{\mathbf{s}}^H \bar{\mathbf{s}}  & {\tilde{\mathbf{s}} }^H \mathbf{M}\tilde{\mathbf{s}} \\ -{\mathbf{s}}^H \bar{\mathbf{s}}  & {\bar{\mathbf{s}} }^H \bar{\mathbf{s}}  & -\Re {{\bar{\mathbf{s}} ^H {\mathbf{Q}}_{\kappa ,\nu }^H \mathbf{M}\tilde{\mathbf{s}} }}\\ {\tilde{\mathbf{s}} }^H \mathbf{M}\tilde{\mathbf{s}}  & -\Re {{{\bar{\mathbf{s}} }^H {\mathbf{Q}}_{\kappa ,\nu }^H \mathbf{M}\tilde{\mathbf{s}}}} & {\tilde{\mathbf{s}} }^H {\mathbf{M}}^2 \tilde{\mathbf{s}}  \end{array}\right]} $$
 
 其中， $\mathbf{F}$ 是单个DFT矩阵； $\sigma_1^2$ 和 $\sigma_2^2$ 分别是 $s_1 (t)$ 和 $s_2 (t)$ 的噪声方差。修正后的信号矢量和辅助矩阵定义为：
 
@@ -1032,15 +1032,15 @@ $$\overline{\mathrm{s}} =\frac{2\pi }{M}{\mathbf{W}}^H \mathbf{MWs} , \tilde{\ma
 
 如果存在一个公共参考传感器（如前几章中所述），则误差协方差矩阵将采用与前几章相同的形式，具有块对角矩阵和公共方差项：
 
- $$ {\mathbf{C}}_{\mathbf{r},\dot{\mathbf{r}} } ={\left[\begin{array}{cc} {\mathbf{C}}_{\mathbf{r}} +\sigma_{r_N }^2  & {\mathbf{S}}_{\mathbf{r},\dot{\mathbf{r}} } +\sigma_{r_N ,{\dot{r} }_N } \\ {\mathbf{S}}_{\mathbf{r},\dot{\mathbf{r}} } +\sigma_{r_N ,{\dot{r} }_N }  & {\mathbf{C}}_{\dot{\mathbf{r}} } +\sigma_{{\dot{r} }_N }^2  \end{array}\right]} $$ 
+ $$ {\mathbf{C}}_{\mathbf{r},\dot{\mathbf{r}} } ={\left[\begin{array}{cc} {\mathbf{C}}_{\mathbf{r}} +\sigma_{r_N }^2  & {\mathbf{S}}_{\mathbf{r},\dot{\mathbf{r}} } +\sigma_{r_N ,{\dot{r} }_N } \\ {\mathbf{S}}_{\mathbf{r},\dot{\mathbf{r}} } +\sigma_{r_N ,{\dot{r} }_N }  & {\mathbf{C}}_{\dot{\mathbf{r}} } +\sigma_{\dot{r} _N }^2  \end{array}\right]} $$ 
 
-其中，矩阵项由 $N-1$ 个唯一传感器给出，标量项 $\sigma_{r_N }^2$ 、 $\sigma_{{\dot{r} }_N }^2$ 和 $\sigma_{r_N ,{\dot{r} }_N }$ 是公共参考传感器的误差。
+其中，矩阵项由 $N-1$ 个唯一传感器给出，标量项 $\sigma_{r_N }^2$ 、 $\sigma_{\dot{r} _N }^2$ 和 $\sigma_{r_N ,{\dot{r} }_N }$ 是公共参考传感器的误差。
 
 ## 性能分析
 
 对于定位性能，使用CRLB，定义为FIM的倒数：
 
- $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {{[ \mathbf{J}{(\mathbf{x})}{\mathbf{C}}^{-1} {\mathbf{J}}^T {(\mathbf{x})} ]}}^{-1} $$ 
+ $$ {\mathbf{C}}_{\hat{\mathbf{x}} } \ge {[ \mathbf{J}{(\mathbf{x})}{\mathbf{C}}^{-1} {\mathbf{J}}^T {(\mathbf{x})} ]}^{-1} $$ 
 
 其中，雅可比矩阵 $\mathbf{J}{(\mathbf{x})}$ 和 $\mathbf{C}$ 是完整形式，包含本章中定义的所有AOA、TDOA和FDOA测量。
 
