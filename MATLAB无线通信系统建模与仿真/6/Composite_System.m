@@ -1,0 +1,13 @@
+edit dspdemo.CompositeObj_MultiNotch
+
+methods (Access=protected)
+        function setupImpl(obj,~)
+            % Construct two notch filters with default values
+            obj.NotchFilter1 = dsp.NotchPeakFilter(...
+                'Specification', 'Quality factor and center frequency',...
+                'CenterFrequency',400);
+            obj.NotchFilter2 = dsp.NotchPeakFilter(...
+                'Specification', 'Quality factor and center frequency',...
+                'CenterFrequency',800);
+        end
+end

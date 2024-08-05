@@ -1,0 +1,280 @@
+NFrames = 2;                %帧数
+SNRIn = [10.3 12.3 14.3];   % 信噪比范围(dB)
+
+txMode = 'TM4'; % TM1, TM2, TM3, TM4, TM6
+
+simulationParameters = []; % 清除simulationParameters
+simulationParameters.NDLRB = 50;
+simulationParameters.PDSCH.TargetCodeRate = 0.5;
+simulationParameters.PDSCH.PRBSet = (0:49)';
+switch txMode
+% 单天线(Port0)模式(TM1)
+    case 'TM1'
+        fprintf('\nTM1 - 单天线(port 0)\n');
+        simulationParameters.PDSCH.TxScheme = 'Port0';
+        simulationParameters.PDSCH.DCIFormat = 'Format1';
+        simulationParameters.CellRefP = 1;
+        simulationParameters.PDSCH.Modulation = {'16QAM'};
+% 发射分集模式(TM2)
+    case 'TM2'
+        fprintf('\nTM2 - Transmit diversity\n');
+        simulationParameters.PDSCH.TxScheme = 'TxDiversity';
+        simulationParameters.PDSCH.DCIFormat = 'Format1';
+        simulationParameters.CellRefP = 2;
+        simulationParameters.PDSCH.Modulation = {'16QAM'};
+        simulationParameters.PDSCH.NLayers = 2;
+% CDD模式(TM3)
+    case 'TM3'
+        fprintf('\nTM3 - CDD\n');
+        simulationParameters.PDSCH.TxScheme = 'CDD';
+        simulationParameters.PDSCH.DCIFormat = 'Format2A';
+        simulationParameters.CellRefP = 2;
+        simulationParameters.PDSCH.Modulation = {'16QAM', '16QAM'};
+        simulationParameters.PDSCH.NLayers = 2;
+% 空间复用模式(TM4)
+    case 'TM4'
+        fprintf('\nTM4 - 基于码本的空间多路复用\n');
+        simulationParameters.CellRefP = 2;
+        simulationParameters.PDSCH.Modulation = {'16QAM', '16QAM'};
+        simulationParameters.PDSCH.DCIFormat = 'Format2';
+        simulationParameters.PDSCH.TxScheme = 'SpatialMux';
+        simulationParameters.PDSCH.NLayers = 2;
+        % No codebook restriction
+        simulationParameters.PDSCH.CodebookSubset = '';
+% Single layer spatial multiplexing mode (TM6)
+    case 'TM6'
+        fprintf(...
+        '\nTM6 - 基于码本的单层空间多路复用\n');
+        simulationParameters.CellRefP = 4;
+        simulationParameters.PDSCH.Modulation = {'QPSK'};
+        simulationParameters.PDSCH.DCIFormat = 'Format2';
+        simulationParameters.PDSCH.TxScheme = 'SpatialMux';
+        simulationParameters.PDSCH.NLayers = 1;
+        % 没有电报密码本限制
+        simulationParameters.PDSCH.CodebookSubset = '';
+    otherwise
+        error('传播方式应该是其中之一：TM1, TM2, TM3, TM4 or TM6.')
+end
+% 设置适用于所有TM的其他simulationParameters字段
+simulationParameters.TotSubframes = 1; % 每次生成一个子帧
+simulationParameters.PDSCH.CSI = 'On'; % 软比特由CSI加权
+
+enb = lteRMCDL(simulationParameters);
+
+rvSequence = enb.PDSCH.RVSeq;
+trBlkSizes = enb.PDSCH.TrBlkSizes;
+
+ncw = length(string(enb.PDSCH.Modulation));
+
+pmiDelay = 8;
+
+hDisplayENBParameterSummary(enb, txMode);
+
+channel.Seed = 6;                    % 通道的种子
+channel.NRxAnts = 2;                 % 2个接收天线
+channel.DelayProfile = 'EPA';        % 时延特性
+channel.DopplerFreq = 5;             % 多普勒频率
+channel.MIMOCorrelation = 'Low';     % 多路天线相关性
+channel.NTerms = 16;                 % 衰落模型中的振荡器
+channel.ModelType = 'GMEDS';         % 瑞利衰落模型类型
+channel.InitPhase = 'Random';        % 随机初始阶段
+channel.NormalizePathGains = 'On';   % 归一化延迟功率
+channel.NormalizeTxAnts = 'On';      % 对发射天线进行标准化
+% 从返回的值来设置通道模型的采样率。
+ofdmInfo = lteOFDMInfo(enb);
+channel.SamplingRate = ofdmInfo.SamplingRate;
+
+% 精准的信道估计标志
+perfectChanEstimator = false;
+
+%配置信道估计
+cec.PilotAverage = 'UserDefined';   % 平均的类型导频符号
+cec.FreqWindow = 41;                % REs中的频率窗口大小
+cec.TimeWindow = 27;                % 以REs表示的时间窗口大小
+cec.InterpType = 'Cubic';           % 二维插值
+cec.InterpWindow = 'Centered';      % 插值窗口类型
+cec.InterpWinSize = 1;              % 插值窗口大小
+
+displaySimulationInformation = true;
+
+
+
+
+
+
+% 由资源网格维数得到发射天线数P。dims是M × N × P，其中M是子载波数，N是符号数，P是发射天线数。
+dims = lteDLResourceGridSize(enb);
+P = dims(3);
+% %初始化变量用于模拟和分析阵列存储所有信噪比点的最大吞吐量
+maxThroughput = zeros(length(SNRIn),1);
+% 阵列存储所有信噪比点的模拟吞吐量
+simThroughput = zeros(length(SNRIn),1);
+% 获取用于HARQ处理的HARQ ID序列，这是HARQ进程调度的索引列表。
+[~,~,enbOut] = lteRMCDLTool(enb, []);
+harqProcessSequence = enbOut.PDSCH.HARQProcessSequence;
+% 临时变量'enb_init'， 'channel_init'和'harqProcessSequence_init'用于优化并行处理
+enb_init = enb;
+channel_init = channel;
+harqProcessSequence_init = harqProcessSequence;
+legendString = ['Throughput: ' char(enb.PDSCH.TxScheme)];
+allRvSeqPtrHistory = cell(1,numel(SNRIn));
+nFFT = ofdmInfo.Nfft;
+for snrIdx = 1:numel(SNRIn)
+% parfor snrIdx = 1:numel(SNRIn)
+%要使用并行计算提高速度，请注释掉上面的'for'语句，取消下面的'parfor'语句的注释。
+%这需要并行计算工具箱。如果没有安装，'parfor'将默认为'for'语句。如果使用'parfor'，
+%建议将上面的变量'displaySimulationInformation'设置为false，否则每个信噪比点的模拟信息显示将重叠。
+
+    %根据循环变量设置随机数生成器种子，以确保独立的随机流
+    rng(snrIdx,'combRecursive');
+    SNRdB = SNRIn(snrIdx);
+    fprintf('\n模拟在 %g dB SNR for %d Frame(s)\n' ,SNRdB, NFrames);
+
+    % 初始化仿真和分析中使用的变量
+    offsets = 0;            % 初始化帧偏移值
+    offset = 0;             %初始化无线电帧的帧偏移值
+    blkCRC = [];            % 初始化所有子帧的帧偏移量
+    bitTput = [];           %每子帧成功接收的比特数
+    txedTrBlkSizes = [];    % Number of transmitted bits per subframe
+    enb = enb_init;         % 初始化RMC配置
+    channel = channel_init; % 初始化通道配置
+    harqProcessSequence = harqProcessSequence_init; % 初始化HARQ进程序列
+    pmiIdx = 0;             % 在延迟队列中的PMI索引
+   %变量harqPtrTable存储所有HARQ进程的RV序列值指针的历史值。由于一些子帧没有数据，所以用nan预分配
+    rvSeqPtrHistory = NaN(ncw, NFrames*10);
+    % 初始化所有HARQ进程的状态
+    harqProcesses = hNewHARQProcess(enb);
+    %使用随机pm为第一个“pmiddelay”子帧，直到从UE获得反馈;请注意，PMI反馈只适用于
+    %空间复用的TMM（TM4和TM6），但是这里的代码需要在使用并行计算工具箱时对SNR循环中的变量进行完全初始化。
+    pmidims = ltePMIInfo(enb,enb.PDSCH);
+    txPMIs = randi([0 pmidims.MaxPMI], pmidims.NSubbands, pmiDelay);
+    for subframeNo = 0:(NFrames*10-1)
+        % 更新子帧数
+        enb.NSubframe = subframeNo;
+        % 从HARQ进程序列中获取子帧的HARQ进程ID
+        harqID = harqProcessSequence(mod(subframeNo, length(harqProcessSequence))+1);
+        % 如果在当前子帧中有一个传输阻塞(由非零的'harqID'表示)，执行传输和接收。否则继续下一帧
+        if harqID == 0
+            continue;
+        end
+        %更新当前的HARQ流程
+        harqProcesses(harqID) = hHARQScheduling(harqProcesses(harqID), subframeNo, rvSequence);
+        %提取当前子帧传输块大小
+        trBlk = trBlkSizes(:, mod(subframeNo, 10)+1).';
+        % 显示运行时信息
+        if displaySimulationInformation
+            disp(' ');
+            disp(['子帧: ' num2str(subframeNo)...
+                            '. HARQ 进程 ID: ' num2str(harqID)]);
+        end
+        % 更新RV序列指针表
+        rvSeqPtrHistory(:,subframeNo+1) = ...
+                               harqProcesses(harqID).txConfig.RVIdx.';
+        % 使用HARQ进程状态更新PDSCH传输配置
+        enb.PDSCH = harqProcesses(harqID).txConfig;
+        data = harqProcesses(harqID).data;
+        % 在延迟队列中设置相应的PMI值
+        if strcmpi(enb.PDSCH.TxScheme,'SpatialMux')
+            pmiIdx = mod(subframeNo, pmiDelay);  % 在延迟队列中的PMI索引
+            enb.PDSCH.PMISet = txPMIs(:, pmiIdx+1); % 设置PMI
+        end
+        % 产生传输波形
+        txWaveform = lteRMCDLTool(enb, data);
+        % 添加25个填充样本。这将涵盖从信道建模中预期的时延范围(实现时延和信道时延扩展的组合)
+        txWaveform =  [txWaveform; zeros(25, P)]; %#ok<AGROW>
+        % 从'enbOut'获取HARQ ID序列用于HARQ处理
+        harqProcessSequence = enbOut.PDSCH.HARQProcessSequence;
+        % 初始化每个子帧的信道时间
+        channel.InitTime = subframeNo/1000;
+        % 通过通道模型传递数据
+        rxWaveform = lteFadingChannel(channel, txWaveform);
+        % 计算包含下行功率分配补偿的噪声增益
+        SNR = 10^((SNRdB-enb.PDSCH.Rho)/20);
+        % 采样率是OFDM调制中IFFT大小和天线数量的函数
+        N0 = 1/(sqrt(2.0*enb.CellRefP*double(nFFT))*SNR);
+        % 创建加性高斯白噪声
+        noise = N0*complex(randn(size(rxWaveform)),randn(size(rxWaveform)));
+        %在接收到的时域波形中加入AWGN
+        rxWaveform = rxWaveform + noise;
+        %每一帧，在子帧0上计算一个新的同步偏移量
+        if (mod(subframeNo,10) == 0)
+            offset = lteDLFrameOffset(enb, rxWaveform);
+            if (offset > 25)
+                offset = offsets(end);
+            end
+            offsets = [offsets offset]; %#ok
+        end
+        %同步接收波形
+        rxWaveform = rxWaveform(1+offset:end, :);
+        % 对接收到的数据进行OFDM解调，重建资源网格
+        rxSubframe = lteOFDMDemodulate(enb, rxWaveform);
+        % 信道估计
+        if(perfectChanEstimator)
+            estChannelGrid = lteDLPerfectChannelEstimate(enb, channel, offset); %#ok
+            noiseGrid = lteOFDMDemodulate(enb, noise(1+offset:end ,:));
+            noiseEst = var(noiseGrid(:));
+        else
+            [estChannelGrid, noiseEst] = lteDLChannelEstimate( ...
+                enb, enb.PDSCH, cec, rxSubframe);
+        end
+        % 得到PDSCH指数
+        pdschIndices = ltePDSCHIndices(enb, enb.PDSCH, enb.PDSCH.PRBSet);
+        %从接收的子帧中获取PDSCH资源元素。根据PDSCH功率因数Rho对接收的子帧进行缩放。
+        [pdschRx, pdschHest] = lteExtractResources(pdschIndices, ...
+            rxSubframe*(10^(-enb.PDSCH.Rho/20)), estChannelGrid);
+        % 解密 PDSCH
+        dlschBits = ltePDSCHDecode(...
+                             enb, enb.PDSCH, pdschRx, pdschHest, noiseEst);
+        %解码DL-SCH
+        [decbits, harqProcesses(harqID).blkerr,harqProcesses(harqID).decState] = ...
+            lteDLSCHDecode(enb, enb.PDSCH, trBlk, dlschBits, ...
+                           harqProcesses(harqID).decState);
+
+        % 显示块错误
+        if displaySimulationInformation
+            if any(harqProcesses(harqID).blkerr)
+                disp(['块错误. RV 序列: ' num2str(harqProcesses(harqID).txConfig.RVIdx)...
+                      ', CRC: ' num2str(harqProcesses(harqID).blkerr)])
+            else
+                disp(['没有错误. RV序列: ' num2str(harqProcesses(harqID).txConfig.RVIdx)...
+                      ', CRC: ' num2str(harqProcesses(harqID).blkerr)])
+            end
+        end
+
+        % Store values to calculate throughput
+        % Only for subframes with data
+        if any(trBlk)
+            blkCRC = [blkCRC harqProcesses(harqID).blkerr]; %#ok<AGROW>
+            bitTput = [bitTput trBlk.*(1- ...
+                harqProcesses(harqID).blkerr)]; %#ok<AGROW>
+            txedTrBlkSizes = [txedTrBlkSizes trBlk]; %#ok<AGROW>
+        end
+
+        % 向eNodeB提供循环反馈
+        if strcmpi(enb.PDSCH.TxScheme,'SpatialMux')
+            PMI = ltePMISelect(enb, enb.PDSCH, estChannelGrid, noiseEst);
+            txPMIs(:, pmiIdx+1) = PMI;
+        end
+    end
+    % 计算最大吞吐量和模拟吞吐量
+    maxThroughput(snrIdx) = sum(txedTrBlkSizes); % 最大可能的吞吐量
+    simThroughput(snrIdx) = sum(bitTput,2);      % 模拟吞吐量
+
+    % 在命令窗口中动态显示结果
+    fprintf([['\n吞吐量(Mbps) 为 ', num2str(NFrames) ' 帧(s) '],...
+        '= %.4f\n'], 1e-6*simThroughput(snrIdx)/(NFrames*10e-3));
+    fprintf(['吞吐量(%%) 为', num2str(NFrames) '帧(s) = %.4f\n'],...
+        simThroughput(snrIdx)*100/maxThroughput(snrIdx));
+    allRvSeqPtrHistory{snrIdx} = rvSeqPtrHistory;
+end
+%绘制所有HARQ过程的RV序列
+hPlotRVSequence(SNRIn,allRvSeqPtrHistory,NFrames);
+
+% 绘制吞吐量
+figure
+plot(SNRIn, simThroughput*10000./maxThroughput,'*-.');
+xlabel('SNR (dB)');
+ylabel('吞吐量(%)');
+title('吞吐量与SNR')
+legend(legendString,'Location','NorthWest');
+grid on;
