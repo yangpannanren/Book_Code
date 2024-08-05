@@ -1,3 +1,7 @@
-# Radar Systems Analysis and Design Using MATLAB
+# Radar Systems Analysis and Design Using MATLAB (4th)
 
-> 此文件夹为《Radar Systems Analysis and Design Using MATLAB》第四版书籍及源码。
+作者：洋盘男人
+
+> 《Radar Systems Analysis and Design Using MATLAB》第四版代码
+
+> 代码链接：[Code_Link](https://github.com/yangpannanren/Book_Code/tree/main/Radar Systems Analysis and Design Using MATLAB)

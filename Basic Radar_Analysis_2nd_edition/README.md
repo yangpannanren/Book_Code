@@ -1,3 +1,7 @@
-# Basic Radar Analysis 2nd edition
+# Basic Radar Analysis (2nd)
 
-> 此文件夹为《Basic Radar Analysis》第二版相关材料，[代码下载链接](https://us.artechhouse.com/Assets/downloads/budge_555.zip)。
+作者：洋盘男人
+
+> 《Basic Radar Analysis》第二版代码
+
+> 代码链接：[Code_Link](https://us.artechhouse.com/Assets/downloads/budge_555.zip)
