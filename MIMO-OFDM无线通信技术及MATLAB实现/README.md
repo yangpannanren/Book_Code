@@ -464,7 +464,7 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 注意MMSE接收机需要噪声的统计信息 $\sigma_z^2$ 。检测后的噪声功率的期望值为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{(\sigma_i^2 +\sigma_z^2 )^2 } $$ 
+ $$ E\lbrace \|{\tilde{z} }_{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{(\sigma_i^2 +\sigma_z^2 )^2 } $$ 
 
 其中， $\sigma_i$ 为矩阵 ${\tilde{z} }_{\textrm{MMSE}}$ 的奇异值。
 
