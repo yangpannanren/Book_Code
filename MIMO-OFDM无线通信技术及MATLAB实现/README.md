@@ -362,7 +362,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 对于具有一根发射天线、 $N_{\mathrm{R}\mathrm{x}}$ 根接收天线的 SIMO 信道，信道增益为 $h\in {\mathbb{C}}^{N_{\mathrm{R}\mathrm{x}} \times 1}$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{{\mathrm{F}}}^2$ 。不论发射机已知或者未知 CSI，信道容量都为：
 
- $$ C_{{\mathrm{S}\mathrm{I}\mathrm{M}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
+ $$ C_{\mathrm{S}\mathrm{I}\mathrm{M}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
 
 可以看出，信道容量随天线数量对数增加；此外，只能发射一个数据流，且发射机对CSI的获取根本不能改善信道容量。
 
