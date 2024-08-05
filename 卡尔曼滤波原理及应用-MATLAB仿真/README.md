@@ -31,7 +31,7 @@
 
 式中，k为离散时间，系统在时刻k的状态为 $\mathrm{X}(\mathrm{k})\in {\mathbb{R}}^{\mathrm{n}}$ ； $\mathrm{Y}(\mathrm{k})\in {\mathbb{R}}^{\mathrm{m}}$ 为对应状态的观测信号； $\textrm{W(k)}\in {\mathbb{R}}^{\mathrm{r}}$ 为输入的白噪声； $V(k)\in {\mathbb{R}}^{\mathrm{m}}$ 为观测噪声。称上式为状态方程，称下式为观测方程。称Φ为状态转移矩阵，Γ为噪声驱动矩阵，H为观测矩阵。
 
-【假设1】W(k)和V(k)是均值为零、方差阵各为Q和R的不相关白噪声，即： $\mathrm{E}{W}(\mathrm{k})=0$ ， $\mathrm{E}{V}(\mathrm{k})=0$ ， $E[ {W}(\mathrm{k}){{W}}^{\mathrm{T}}(\mathrm{j})]=\mathrm{Q}\delta_{\mathrm{k}\mathrm{j}} $ ， $\mathrm{E}[ {V}(\mathrm{k}){{V}}^{\mathrm{T}}(\mathrm{j})]=\mathrm{R}\delta_{\mathrm{k}\mathrm{j}}$ ， ${W}(\mathrm{k})$ 和 ${V}(\mathrm{k})$ 互不相关，因此有 ${E}[ {{W(k)V}}^{\mathrm{T}} \textrm{(j)}] =0,\forall \textrm{k},\textrm{j}$ ，其中 $\delta_{\mathrm{k}\mathrm{k}} =1,\delta_{\mathrm{k}\mathrm{j}} =0$ 。
+【假设1】W(k)和V(k)是均值为零、方差阵各为Q和R的不相关白噪声，即： $\mathrm{E}{W}(\mathrm{k})=0$ ， $\mathrm{E}{V}(\mathrm{k})=0$ ， $E[ {W}(\mathrm{k}){W}^{\mathrm{T}}(\mathrm{j})]=\mathrm{Q}\delta_{\mathrm{k}\mathrm{j}} $ ， $\mathrm{E}[ {V}(\mathrm{k}){V}^{\mathrm{T}}(\mathrm{j})]=\mathrm{R}\delta_{\mathrm{k}\mathrm{j}}$ ， ${W}(\mathrm{k})$ 和 ${V}(\mathrm{k})$ 互不相关，因此有 ${E}[ {W(k)V}^{\mathrm{T}} \textrm{(j)}] =0,\forall \textrm{k},\textrm{j}$ ，其中 $\delta_{\mathrm{k}\mathrm{k}} =1,\delta_{\mathrm{k}\mathrm{j}} =0$ 。
 
 【假设2】初始状态X(0)不相关于W(k)和V(k)， 即：
 
@@ -46,10 +46,10 @@ Kalman滤波问题是：基于观测信号 $\{Y(1),Y(2),\cdots,Y(k)\}$ ，求状
 （Kalman滤波器）上面状态空间模型在【假设1】和【假设2】下，递推Kalman滤波器如下：
 
 -  状态一步预测： $\hat{X} (k+1\left|k)=\Phi \hat{X} (k\right|k)$ 
--  状态更新： $\begin{array}{l} \hat{X} (k+1\left|k+1)=\hat{X} (k+1\right|k)+{\mathbf{K}}(k+1)\varepsilon (k+1)\\ \varepsilon (k+1)={\mathbf{Y}}(k+1)-{\mathbf{H}}\hat{{\mathbf{X}}} (k+1\left|k)\right. \end{array}$ 
--  滤波增益矩阵： ${\mathbf{K}}(k+1)={\mathbf{P}}(k+1\left|k){{\mathbf{H}}}^{\mathrm{T}} [ {\mathbf{H}}{\mathbf{P}}(k+1\right|k){{\mathbf{H}}}^{\mathrm{T}} +{\mathbf{R}}]^{-1}$ 
+-  状态更新： $\begin{array}{l} \hat{X} (k+1\left|k+1)=\hat{X} (k+1\right|k)+{\mathbf{K}}(k+1)\varepsilon (k+1)\\ \varepsilon (k+1)={\mathbf{Y}}(k+1)-{\mathbf{H}}\hat{\mathbf{X}} (k+1\left|k)\right. \end{array}$ 
+-  滤波增益矩阵： ${\mathbf{K}}(k+1)={\mathbf{P}}(k+1\left|k){\mathbf{H}}^{\mathrm{T}} [ {\mathbf{H}}{\mathbf{P}}(k+1\right|k){\mathbf{H}}^{\mathrm{T}} +{\mathbf{R}}]^{-1}$ 
 -  一步预测协方差阵： ${\mathbf{P}}(k+1\left|k)=\Phi {\mathbf{P}}(k\right|k)\Phi^{\mathrm{T}} +\Gamma {\mathbf{Q}}\Gamma^{\mathrm{T}}$ 
--  协方差阵更新： $\begin{array}{l} {\mathbf{P}}(k+1\left|k+1)=[ {{\mathbf{I}}}_n -{\mathbf{K}}(k+1){\mathbf{H}}] {\mathbf{P}}(k+1\right|k)\\ \hat{{\mathbf{X}}} (0\left|0)=\mu_0 ,{\mathbf{P}}(0\right|0)={{\mathbf{P}}}_0  \end{array}$ 
+-  协方差阵更新： $\begin{array}{l} {\mathbf{P}}(k+1\left|k+1)=[ {\mathbf{I}}_n -{\mathbf{K}}(k+1){\mathbf{H}}] {\mathbf{P}}(k+1\right|k)\\ \hat{\mathbf{X}} (0\left|0)=\mu_0 ,{\mathbf{P}}(0\right|0)={\mathbf{P}}_0  \end{array}$ 
 
 在一个滤波周期内，从Kalman滤波在使用系统信息和观测信息的先后次序来看，Kalman滤波具有两个明显的信息更新过程：时间更新过程和观测更新过程。状态一步预测说明了根据k\-1时刻的状态估计预测k时刻状态的方法，一步预测协方差阵对这种预测的质量优劣做了定量描述。该两式的计算中仅使用了与系统的动态特性有关的信息，如状态一步转移矩阵、噪声输入阵、过程噪声方差阵。从时间的推移过程来看，该两式将时间从k\-1时刻推进至k时刻，描述了Kalman滤波的时间更新过程。其余各式用来计算对时间更新值的修正量，该修正量由时间更新的质量优劣（P（k|k\-1））、观测信息的质量优劣（R）、观测与状态的关系（H）以及具体的观测信息Y（k）所确定，所有这些方程围绕一个目的，即正确、合理地利用观测Y（k），所以这一过程描述了Kalman滤波的观测更新过程。
 
@@ -89,7 +89,7 @@ EKF的优点是不必预先计算标称轨迹（过程噪声W（k）与观测噪
 
 扩展Kalman滤波递推方程：
 
- $$ \begin{array}{c} \hat{{\mathbf{X}}} (k|k+1)=f(\hat{X} (k|k))\\ {\mathbf{P}}(k+1\left|k)=\Phi (k+1\right|k){\mathbf{P}}(k\left|k)\Phi^{\mathrm{T}} (k+1\right|k)+{\mathbf{Q}}(k+1)\\ K(k+1)={\mathbf{P}}(k+1\left|k){{\mathbf{H}}}^{\mathrm{T}} (k+1)[ {\mathbf{H}}(k+1){\mathbf{P}}(k+1\right|k){{\mathbf{H}}}^{\mathrm{T}} (k+1)+{\mathbf{R}}(k+1)]^{-1} \\ \hat{{\mathbf{X}}} (k+1\left|k+1)=\hat{{\mathbf{X}}} (k+1\right|k)+{\mathbf{K}}(k+1)[ {\mathbf{Z}}(k+1)-{\mathbf{h}}(\hat{{\mathbf{X}}} (k+1\left|k)] \right.\\ {\mathbf{P}}(k+1)=[ {\mathbf{I}}-{\mathbf{K}}(k+1){\mathbf{H}}(k+1)] {\mathbf{P}}(k+1\left|k)\right. \end{array} $$ 
+ $$ \begin{array}{c} \hat{\mathbf{X}} (k|k+1)=f(\hat{X} (k|k))\\ {\mathbf{P}}(k+1\left|k)=\Phi (k+1\right|k){\mathbf{P}}(k\left|k)\Phi^{\mathrm{T}} (k+1\right|k)+{\mathbf{Q}}(k+1)\\ K(k+1)={\mathbf{P}}(k+1\left|k){\mathbf{H}}^{\mathrm{T}} (k+1)[ {\mathbf{H}}(k+1){\mathbf{P}}(k+1\right|k){\mathbf{H}}^{\mathrm{T}} (k+1)+{\mathbf{R}}(k+1)]^{-1} \\ \hat{\mathbf{X}} (k+1\left|k+1)=\hat{\mathbf{X}} (k+1\right|k)+{\mathbf{K}}(k+1)[ {\mathbf{Z}}(k+1)-{\mathbf{h}}(\hat{\mathbf{X}} (k+1\left|k)] \right.\\ {\mathbf{P}}(k+1)=[ {\mathbf{I}}-{\mathbf{K}}(k+1){\mathbf{H}}(k+1)] {\mathbf{P}}(k+1\left|k)\right. \end{array} $$ 
 
 其中， $\Phi (k+1|k)=\frac{\partial f}{\partial \hat{X} (k)}=\frac{\partial f[ \hat{X} (k),k] }{\partial \hat{X} (k)}{\left|\right.}_{\hat{X} (k)=X(k)}$ ， ${\mathbf{H}}(k)=\frac{\partial h}{\partial \hat{X} (k)}|_{X(k)=\hat{X} (k)}$ ，滤波初值和滤波误差方差矩阵的初值分别为： ${X(0)=E[X(0)],P(0)=var[X(0)]}$ 。
 
@@ -115,14 +115,14 @@ UT变换实现方法为：在原状态分布中按某一规则选取一些采样
 ![非线性变换比较](./img/Fig_5.1.png)
 
 
-设一个非线性变换 $y=f(x)$ 。状态向量x为n维随机变量，并且已知其均值 $\bar{{\mathbf{x}}}$ 和方差P。 则可通过下面的UT变换得到2n+1个Sigma点X和相应的权值ω来计算y的统计特征：
+设一个非线性变换 $y=f(x)$ 。状态向量x为n维随机变量，并且已知其均值 $\bar{\mathbf{x}}$ 和方差P。 则可通过下面的UT变换得到2n+1个Sigma点X和相应的权值ω来计算y的统计特征：
 
 1.  计算2n+1个Sigma点，即采样点，这里的n指的是状态的维数。 $ \begin{cases} X^{(0)} =\overline{X} ,i=0\\ X^{(i)} =\overline{X} +(\sqrt{(n+\lambda )P})_i ,i=1\sim n\\ X^{(i)} =\overline{X} -(\sqrt{(n+\lambda )P})_i ,i=n+1\sim 2n \end{cases}$ 式中， $(\sqrt{P})^{\mathrm{T}} (\sqrt{P})=P$ ， $(\sqrt{P})_i$ 表示矩阵方根的第i列。
-2. 计算这些采样点相应的权值。 $ \begin{cases} \omega_m^0 =\frac{\lambda }{n+\lambda }\\ \omega_c^0 =\frac{\lambda }{n+\lambda }+(1-a^2 +\beta )\\ \omega_c^0 =\omega_{{\mathrm{c}}}^{(i)} =\frac{\lambda }{2(n+\lambda )},i=1\sim 2n \end{cases}$ 式中，下标m为均值，c为协方差，上标为第几个采样点。参数 $\lambda ={\mathrm{a}}^2 (\mathrm{n}+\kappa )-\mathrm{n}$ 是一个缩放比例参数，用来降低总的预测误差，a的选取控制了采样点的分布状态，κ为待选参数，其具体取值虽然没有界限，但通常应确保矩阵 $(n+\lambda)P$ 为半正定矩阵。待选参数 $\beta\ge0$ 是一个非负的权系数，它可以合并方程中高阶项的动差，这样就可以把高阶项的影响包括在内。
+2. 计算这些采样点相应的权值。 $ \begin{cases} \omega_m^0 =\frac{\lambda }{n+\lambda }\\ \omega_c^0 =\frac{\lambda }{n+\lambda }+(1-a^2 +\beta )\\ \omega_c^0 =\omega_{\mathrm{c}}^{(i)} =\frac{\lambda }{2(n+\lambda )},i=1\sim 2n \end{cases}$ 式中，下标m为均值，c为协方差，上标为第几个采样点。参数 $\lambda ={\mathrm{a}}^2 (\mathrm{n}+\kappa )-\mathrm{n}$ 是一个缩放比例参数，用来降低总的预测误差，a的选取控制了采样点的分布状态，κ为待选参数，其具体取值虽然没有界限，但通常应确保矩阵 $(n+\lambda)P$ 为半正定矩阵。待选参数 $\beta\ge0$ 是一个非负的权系数，它可以合并方程中高阶项的动差，这样就可以把高阶项的影响包括在内。
 
 UT变换得到的Sigma点集具有下述的性质：
 
-1.  由于Sigma点集围绕均值对称分布并且对称点具有相同的权值，因此Sigma集合的样本均值为 $\bar{{\mathbf{x}}}$ ，与随机向量X的均值相同。
+1.  由于Sigma点集围绕均值对称分布并且对称点具有相同的权值，因此Sigma集合的样本均值为 $\bar{\mathbf{x}}$ ，与随机向量X的均值相同。
 2. 对于Sigma点集的样本方差与随机向量X的方差相同。
 3. 任意正态分布的Sigma点集，是由标准正态分布的Sigma集合经过一个变换得到的。
 
@@ -136,12 +136,12 @@ UT变换得到的Sigma点集具有下述的性质：
 
 1.  利用UT公式获得一组采样点（称为Sigma点集）及其对应权值。 $X^{(i)} (k\left|k)=[ \hat{X} (k\right|k)\quad \hat{X} (k\left|k)+\sqrt{(n+\lambda ){\mathbf{P}}(k\left|k)\right.}\quad\hat{X} (k\right|k)-\sqrt{(n+\lambda ){\mathbf{P}}(k\left|k)\right.}]$
 2. 计算2n+1个Sigma点集的一步预测。 ${\mathrm{X}}^{(\mathrm{i})} (\mathrm{k}+1|\mathrm{k})=\mathrm{f}[ \mathrm{k},{\mathrm{X}}^{(\mathrm{i})} (\mathrm{k}|\mathrm{k})] , i=1,2,\cdots,2n+1$
-3. 计算系统状态量的一步预测及协方差矩阵，它由Sigma点集的预测值加权求和得到，其中权值 $\omega^{(\textrm{i})}$ 通过UT变换得到。这一点不同于传统的Kalman滤波算法，传统Kalman算法只需通过上一时刻的状态代入状态方程，仅计算一次便获得状态的预测；而UKF在此利用一组Sigma点的预测，并计算对它们加权求均值，得到系统状态量的一步预测。 $\begin{array}{l} \hat{{\mathbf{X}}} (k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} {{\mathbf{X}}}^{(i)} (k+1\right|k)\\ {\mathbf{P}}(k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} \lbrack \hat{{\mathbf{X}}} (k+1\right|k)-{{\mathbf{X}}}^{(i)} (k+1\left|k)\rbrack \lbrack \hat{{\mathbf{X}}} (k+1\right|k)-{{\mathbf{X}}}^{(i)} (k+1\left|k)\rbrack^{\mathrm{T}} +{\mathbf{Q}}\right. \end{array}$
-4. 根据一步预测值，再次使用UT变换，产生新的Sigma点集。 $X^{(i)} (k+1\left|k)=\lbrack \hat{\mathrm{X}} (k+1\right|k)~~\hat{\mathrm{X}} (k+1\left|k)+\sqrt{(n+\lambda ){\mathbf{P}}(k+1\left|k)\right.}~~\hat{{\mathbf{X}}} (k+1\right|k)-\sqrt{(n+\lambda ){\mathbf{P}}(k+1\left|k)\right.}\rbrack$
+3. 计算系统状态量的一步预测及协方差矩阵，它由Sigma点集的预测值加权求和得到，其中权值 $\omega^{(\textrm{i})}$ 通过UT变换得到。这一点不同于传统的Kalman滤波算法，传统Kalman算法只需通过上一时刻的状态代入状态方程，仅计算一次便获得状态的预测；而UKF在此利用一组Sigma点的预测，并计算对它们加权求均值，得到系统状态量的一步预测。 $\begin{array}{l} \hat{\mathbf{X}} (k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} {\mathbf{X}}^{(i)} (k+1\right|k)\\ {\mathbf{P}}(k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} \lbrack \hat{\mathbf{X}} (k+1\right|k)-{\mathbf{X}}^{(i)} (k+1\left|k)\rbrack \lbrack \hat{{mathbf{X}} (k+1\right|k)-{\mathbf{X}}^{(i)} (k+1\left|k)\rbrack^{\mathrm{T}} +{\mathbf{Q}}\right. \end{array}$
+4. 根据一步预测值，再次使用UT变换，产生新的Sigma点集。 $X^{(i)} (k+1\left|k)=\lbrack \hat{\mathrm{X}} (k+1\right|k)~~ \hat{\mathrm{X}} (k+1\left|k)+\sqrt{(n+\lambda ){\mathbf{P}}(k+1\left|k)\right.}~~ \hat{\mathbf{X}} (k+1\right|k)-\sqrt{(n+\lambda ){\mathbf{P}}(k+1\left|k)\right.}\rbrack$
 5. 将由步骤（4）预测的Sigma点集代入观测方程，得到预测的观测量。 ${\mathrm{Z}}^{(\mathrm{i})} (\mathrm{k}+1|\mathrm{k})=\mathrm{h}\lbrack {\mathrm{X}}^{(\mathrm{i})} (\mathrm{k}+1|\mathrm{k})\rbrack , i=1,2,...,2n+1$
-6. 由步骤（5）得到Sigma点集的观测预测值，通过加权求和得到系统预测的均值及协方差。 $\begin{array}{c} \overline{{\mathbf{Z}}} (k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} {{\mathbf{Z}}}^{(i)} (k+1\right|k)\\ {{\mathbf{P}}}_{z_k z_k }=\sum_{i=0}^{2n} \omega^{(i)} \lbrack {{\mathbf{Z}}}^{(i)} (k+1|k)-{\overline{{\mathbf{Z}}} } (k+1|k)\rbrack \lbrack {{\mathbf{Z}}}^{(i)} (k+1|k)-{\overline{{\mathbf{Z}}} }( k+1|k)\rbrack^{\mathrm{T}} +R\\ {{\mathbf{P}}}_{x_k z_k } =\sum_{i=0}^{2n} \omega^{(i)} \lbrack X^{(i)} (k+1\left|k)-\overline{{\mathbf{Z}}} (k+1\right|k)\rbrack \lbrack {{\mathbf{Z}}}^{(i)} (k+1\left|k)-\overline{{\mathbf{Z}}} (k+1\right|k)\rbrack^{\mathrm{T}}  \end{array}$
+6. 由步骤（5）得到Sigma点集的观测预测值，通过加权求和得到系统预测的均值及协方差。 $\begin{array}{c} \overline{\mathbf{Z}} (k+1\left|k)=\sum_{i=0}^{2n} \omega^{(i)} {{\mathbf{Z}}}^{(i)} (k+1\right|k)\\ {{\mathbf{P}}}_{z_k z_k }=\sum_{i=0}^{2n} \omega^{(i)} \lbrack {\mathbf{Z}}^{(i)} (k+1|k)-{\overline{\mathbf{Z}} } (k+1|k)\rbrack \lbrack {\mathbf{Z}}^{(i)} (k+1|k)-{\overline{\mathbf{Z}} }( k+1|k)\rbrack^{\mathrm{T}} +R\\ {{\mathbf{P}}}_{x_k z_k } =\sum_{i=0}^{2n} \omega^{(i)} \lbrack X^{(i)} (k+1\left|k)-\overline{{\mathbf{Z}}} (k+1\right|k)\rbrack \lbrack {{\mathbf{Z}}}^{(i)} (k+1\left|k)-\overline{{\mathbf{Z}}} (k+1\right|k)\rbrack^{\mathrm{T}}  \end{array}$
 7. 计算Kalman增益矩阵。 $K(k+1)=P_{x_k z_k } P_{z_k z_k }^{-1}$
-8. 最后，计算系统的状态更新和协方差更新。 $\begin{array}{c} \hat{{\mathbf{X}}} (k+1\left|k+1)=\hat{{\mathbf{X}}} (k+1\right|k)+{\mathbf{K}}(k+1)\lbrack {\mathbf{Z}}(k+1)-\hat{{\mathbf{Z}}} (k+1\left|k)\rbrack \right.\\ {\mathbf{P}}(k+1\left|k+1)={\mathbf{P}}(k+1\right|k)-{\mathbf{K}}(k+1){{\mathbf{P}}}_{z_k z_k } {{\mathbf{K}}}^{\mathrm{T}} (k+1) \end{array}$
+8. 最后，计算系统的状态更新和协方差更新。 $\begin{array}{c} \hat{\mathbf{X}} (k+1\left|k+1)=\hat{\mathbf{X}} (k+1\right|k)+{\mathbf{K}}(k+1)\lbrack {\mathbf{Z}}(k+1)-\hat{\mathbf{Z}} (k+1\left|k)\rbrack \right.\\ {\mathbf{P}}(k+1\left|k+1)={\mathbf{P}}(k+1\right|k)-{\mathbf{K}}(k+1){\mathbf{P}}_{z_k z_k } {\mathbf{K}}^{\mathrm{T}} (k+1) \end{array}$
 
 由此可以看出，无迹Kalman滤波在处理非线性滤波时并不需要在估计点处做Taylor级数展开，然后再进行前N阶近似，而是在估计点附近进行UT变换，使获得的Sigma点集的均值和协方差与原统计特性匹配，再直接对这些Sigma点集进行非线性映射，以近似得到状态概率密度函数。这种近似其实质是一种统计近似而非解。
 
