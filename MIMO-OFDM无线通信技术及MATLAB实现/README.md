@@ -472,7 +472,7 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
  $$ E\lbrace \|{\tilde{z} }_{\mathrm{Z}\mathrm{F}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 }\approx \frac{\sigma_z^2 }{\sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 },{\mathrm{Z}\mathrm{F}} $$ 
 
- $$ E\lbrace \|{\tilde{z} }_{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 }{{ \left(\sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 +\sigma_z^2 \right)}^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
+ $$ E\lbrace \|{\tilde{z} }_{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 }{ \left(\sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 +\sigma_z^2 \right)^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
 
 其中， $\sigma_{\min }^2 =\min \left\lbrace \sigma_1^2 ,\sigma_2^2 ,\cdots ,\sigma_{N_{\mathrm{T}\mathrm{x}} }^2 \right\rbrace$ 。观察上面两式，很明显噪声增强的影响在ZF滤波中比在MMSE滤波中更加显著。如果 $\sigma_{\min }^2 \gg \sigma_z^2$ ，那么 $\sigma_{\min }^2 +\sigma_z^2 \approx \sigma_{\min }^2$ ，所以在两种线性滤波中噪声增强的影响是相同的。由于ZF技术实现的分集阶数为N\-N+1,在单发射天线和多接收天线的情况下，ZF接收机相当于一个最大比合并(MRC)接收机，可以实现的分集阶数为Nx。
 
