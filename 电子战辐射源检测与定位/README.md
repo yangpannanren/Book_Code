@@ -581,7 +581,7 @@ TDOA是一种高精度的辐射源定位技术，经常用于随时间生成非�
 
  $\nabla_{\mathbf{x}} R_{i,N}$ 是第i个传感器和参考传感器之间辐射源的距离差的梯度：
 
- $$ \nabla_{\mathbf{x}} R_{i,N} =\frac{\mathbf{x}-{\mathbf{x}}_i }{∣\mathbf{x}-{\mathbf{x}}_i ∣}_2 -\frac{\mathbf{x}-{\mathbf{x}}_N }{{∣\mathbf{x}-{\mathbf{x}}_N∣}}_2  $$ 
+ $$ \nabla_{\mathbf{x}} R_{i,N} =\frac{\mathbf{x}-{\mathbf{x}}_i }{∣\mathbf{x}-{\mathbf{x}}_i ∣}_2 -\frac{\mathbf{x}-{\mathbf{x}}_N }{∣\mathbf{x}-{\mathbf{x}}_N∣}_2  $$ 
 
 ### 迭代最小二乘解
 
