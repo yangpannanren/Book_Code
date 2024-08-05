@@ -800,7 +800,7 @@ $$ R_i (\mathbf{x})\triangleq |\mathbf{x}-{\mathbf{x}}_i | ，{\dot{R} }_i (\mat
 
 通过第m个传感器与第n个传感器之间的多普勒频移计算距离变化率差 ${\dot{R} }_{m,n} (\mathbf{x})$ ：
 
- $$ {\dot{R} }_{m,n} (\mathbf{x})=\frac{c}{f_0 }f_{m,n} (\mathbf{x})={\frac{\mathbf{v}_m^T {(\mathbf{x}-{\mathbf{x}}_m )}}{{\|\mathbf{x}-{\mathbf{x}}_m \|}_2 }-\frac{\mathbf{v}_n^T {(\mathbf{x}-{\mathbf{x}}_n )}}{{\|\mathbf{x}-{\mathbf{x}}_n \|}_2 }} $$ 
+ $$ {\dot{R} }_{m,n} (\mathbf{x})=\frac{c}{f_0 }f_{m,n} (\mathbf{x})={\frac{\mathbf{v}_m^T {(\mathbf{x}-{\mathbf{x}}_m )}}{\|\mathbf{x}-{\mathbf{x}}_m \|_2 }-\frac{\mathbf{v}_n^T {(\mathbf{x}-{\mathbf{x}}_n )}}{\|\mathbf{x}-{\mathbf{x}}_n \|_2 }} $$ 
 
 收集全矢量：
 
@@ -834,7 +834,7 @@ $$f_{\mathbf{x}} {(\dot{\rho} )}={ (2\pi )}^{-\frac{(N-1)}{2}} {∣{\mathbf{C}}_
 
  $$ \nabla_{\mathbf{x}} {\dot{R} }_{n,N} ={(\mathbf{I}-{\mathbf{P}}_n (\mathbf{x}))}\frac{\mathbf{v}_n }{{\|{\mathbf{x}}_n -\mathbf{x}\|}_2 }-{(\mathbf{I}-{\mathbf{P}}_N (\mathbf{x}))}\frac{\mathbf{v}_N }{{\|{\mathbf{x}}_N -\mathbf{x}\|}_2 } $$ 
 
-其中， $P_n (\mathbf{x})=\frac{ (\mathbf{x}-{\mathbf{x}}_n ){(\mathbf{x}-{\mathbf{x}}_n )}^T }{{\|\mathbf{x}-{\mathbf{x}}_n \|}_2^2 }$ 是在第n个传感器和辐射源之间视距上的投影矩阵。该式表明传感器n和参考传感器N之间距离差变化率主要对与该传感器的视距正交的每个传感器的速度分量以及该传感器与辐射源之间的距离敏感。同时，当vn正交于x—xn或vN正交于x—xN时，性能将最大化（梯度对x的变化最敏感），因为这将导致 ${\dot{R} }_{n,N}$ 的最大变化。
+其中， $P_n (\mathbf{x})=\frac{ (\mathbf{x}-{\mathbf{x}}_n ){(\mathbf{x}-{\mathbf{x}}_n )}^T }{\|\mathbf{x}-{\mathbf{x}}_n \|_2^2 }$ 是在第n个传感器和辐射源之间视距上的投影矩阵。该式表明传感器n和参考传感器N之间距离差变化率主要对与该传感器的视距正交的每个传感器的速度分量以及该传感器与辐射源之间的距离敏感。同时，当vn正交于x—xn或vN正交于x—xN时，性能将最大化（梯度对x的变化最敏感），因为这将导致 ${\dot{R} }_{n,N}$ 的最大变化。
 
 ### 迭代最小二乘解
 
