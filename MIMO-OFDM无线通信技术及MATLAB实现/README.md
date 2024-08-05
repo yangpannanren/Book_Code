@@ -138,10 +138,10 @@ STO（Symbol Time Offset）、CFO（Carrier Frequency Offset）
 
 1.  LS信道估计。最小化下面的代价函数： 
 
-$$J(\hat{H} )=\|Y-X\hat{H} {\|}^2 =(Y-X\hat{H} )^{{\mathrm{H}}} (Y-X\hat{H} )=Y^{{\mathrm{H}}} Y-Y^{{\mathrm{H}}} X\hat{H} -{\hat{H} }^{{\mathrm{H}}} X^{{\mathrm{H}}} Y+{\hat{H} }^{{\mathrm{H}}} X^{{\mathrm{H}}} X\hat{H}$$
+$$J(\hat{H} )=\|Y-X\hat{H} {\|}^2 =(Y-X\hat{H} )^{\mathrm{H}} (Y-X\hat{H} )=Y^{\mathrm{H}} Y-Y^{\mathrm{H}} X\hat{H} -{\hat{H} }^{\mathrm{H}} X^{\mathrm{H}} Y+{\hat{H} }^{\mathrm{H}} X^{\mathrm{H}} X\hat{H}$$
 
-令上面的代价函数关于的偏导数等于0，得到LS信道估计的解为： ${\hat{H} }_{\mathrm{LS}} =(X^{{\mathrm{H}}} X)^{-1} X^{{\mathrm{H}}} Y=X^{-1} Y$ 。LS信道估计的均方误差（MSE）为： ${\mathrm{MSE}}_{\mathrm{LS}} =\frac{\sigma_z^2 }{\sigma_x^2 }$ 。MSE与信噪比 $\frac{\sigma_z^2 }{\sigma_x^2 }$ ,成反比，这意味着LS估计增强了噪声，在信道处于深度衰落时更是如此。
-2. MMSE信道估计。根据LS解 ${\hat{H} }_{\mathrm{LS}} =X^{-1} Y\triangleq \tilde{H}$ 。利用加权矩阵W，定义MMSE估计为 $\hat{H} \triangleq W\tilde{H}$ ，则MMSE信道估计的MSE为： $J(\hat{H} )=E\lbrace \|e{\|}^2 \rbrace =E\lbrace \|H-\hat{H} {\|}^2 \rbrace$ ，在MMSE信道估计中，通过选择W最小化上式， 可以证明估计误差向量 $e$ 与 $\tilde{H}$ 正交，则得到 $W=R_{H{\tilde{H} }^{{\mathrm{H}}} } R_{\tilde{H} \tilde{H} }^{-1}$ ，式中R为相关矩阵， $R_{\tilde{H} \tilde{H} }$ 是 $\tilde{H}$ 的自相关矩阵， $R_{H\tilde{H} }$ 是频域上真实信道向量和临时信道估计向量之间的互相关矩阵。则MMSE信道估计为： $\hat{H} =W\tilde{H} =R_{H\tilde{H} } R_{\tilde{H} \tilde{H} }^{-1} \tilde{H} =R_{H\tilde{H} } {\left(R_{HH} +\frac{\sigma_z^2 }{\sigma_x^2 }I\right)}^{-1} \tilde{H}$ 。
+令上面的代价函数关于的偏导数等于0，得到LS信道估计的解为： ${\hat{H} }_{\mathrm{LS}} =(X^{\mathrm{H}} X)^{-1} X^{\mathrm{H}} Y=X^{-1} Y$ 。LS信道估计的均方误差（MSE）为： ${\mathrm{MSE}}_{\mathrm{LS}} =\frac{\sigma_z^2 }{\sigma_x^2 }$ 。MSE与信噪比 $\frac{\sigma_z^2 }{\sigma_x^2 }$ ,成反比，这意味着LS估计增强了噪声，在信道处于深度衰落时更是如此。
+2. MMSE信道估计。根据LS解 ${\hat{H} }_{\mathrm{LS}} =X^{-1} Y\triangleq \tilde{H}$ 。利用加权矩阵W，定义MMSE估计为 $\hat{H} \triangleq W\tilde{H}$ ，则MMSE信道估计的MSE为： $J(\hat{H} )=E\lbrace \|e{\|}^2 \rbrace =E\lbrace \|H-\hat{H} {\|}^2 \rbrace$ ，在MMSE信道估计中，通过选择W最小化上式， 可以证明估计误差向量 $e$ 与 $\tilde{H}$ 正交，则得到 $W=R_{H{\tilde{H} }^{\mathrm{H}} } R_{\tilde{H} \tilde{H} }^{-1}$ ，式中R为相关矩阵， $R_{\tilde{H} \tilde{H} }$ 是 $\tilde{H}$ 的自相关矩阵， $R_{H\tilde{H} }$ 是频域上真实信道向量和临时信道估计向量之间的互相关矩阵。则MMSE信道估计为： $\hat{H} =W\tilde{H} =R_{H\tilde{H} } R_{\tilde{H} \tilde{H} }^{-1} \tilde{H} =R_{H\tilde{H} } {\left(R_{HH} +\frac{\sigma_z^2 }{\sigma_x^2 }I\right)}^{-1} \tilde{H}$ 。
 
 为了估计承载数据符号的信道，必须对导频子载波进行插值，如线性插值、二次多项式插值、三次样条插值等。
 
@@ -187,11 +187,11 @@ $$J(\hat{H} )=\|Y-X\hat{H} {\|}^2 =(Y-X\hat{H} )^{{\mathrm{H}}} (Y-X\hat{H} )=Y^
 
 峰值\-平均功率比(PAPR)是复通频带信号s(t)的最大功率与最小功率之比：
 
- $$ {\mathrm{PAPR}}\lbrace \tilde{s} (t)\rbrace =\frac{\max |{\mathrm{Re}}(\tilde{s} (t){{\mathrm{e}}}^{{\mathrm{j}}2\pi f_c t} )|^2 }{E\lbrace |{\mathrm{Re}}(\tilde{s} (t){{\mathrm{e}}}^{{\mathrm{j}}2\pi f_c t} )|^2 \rbrace }=\frac{\max |s(t)|^2 }{E\lbrace |s(t)|^2 \rbrace } $$ 
+ $$ {\mathrm{PAPR}}\lbrace \tilde{s} (t)\rbrace =\frac{\max |{\mathrm{Re}}(\tilde{s} (t){\mathrm{e}}^{\mathrm{j}2\pi f_c t} )|^2 }{E\lbrace |{\mathrm{Re}}(\tilde{s} (t){\mathrm{e}}^{\mathrm{j}2\pi f_c t} )|^2 \rbrace }=\frac{\max |s(t)|^2 }{E\lbrace |s(t)|^2 \rbrace } $$ 
 
 在具有N个子载波的PSK/OFDM系统中，当N个子载波都以相同的相位相加时，信号出现最大功率。假设 $E\lbrace |s(t)|^2 \rbrace =1$ ，这时PAPR=N，即最大功率等于N倍的平均功率。当M>4时，M\-QAM比M\-PSK的PAPR大。此外，当N增大时，信号出现最大功率的可能性降低。例如，在MPSK/OFDM系统中，假设 $M^N$ 个OFDM信号中有 $M^2$ 个具有最的大功率，那么最大PAPR出现的可能性为 $M^2 /M^N =M^{2-N}$ 。因此，在N=64的QPSKIOFDM系统中，最大PAPR出现的可能性为 $4.7\times {10}^{-38}$ 。换句话说，很少出现最大的 PAPR。当N足够大时，时域复OFDM信号的实部和虚部都渐进服从高斯分布，其幅度服从瑞丽分布。
 
-在发射机，对于已调的PSK或QAM数据符号序列(X\[k\]}，经IFFT的离散时间信号{x\[n\]}可以表示为： $x[n]=\frac{1}{N}\sum_{k=0}^{N-1} X[k]{{\mathrm{e}}}^{{\mathrm{j}}\frac{2\pi }{N}kn}$ 。换句话说，将N个离散时间信号 $\lbrace e^{j2\pi kn/N} \rbrace$ 相加得到{x\[n\]}，其中的每一个信号对应不同的正交子载波，第k个子载波被数据符号X\[k\]调制。
+在发射机，对于已调的PSK或QAM数据符号序列(X\[k\]}，经IFFT的离散时间信号{x\[n\]}可以表示为： $x[n]=\frac{1}{N}\sum_{k=0}^{N-1} X[k]{\mathrm{e}}^{\mathrm{j}\frac{2\pi }{N}kn}$ 。换句话说，将N个离散时间信号 $\lbrace e^{j2\pi kn/N} \rbrace$ 相加得到{x\[n\]}，其中的每一个信号对应不同的正交子载波，第k个子载波被数据符号X\[k\]调制。
 
 总的来说，当N增大时，PAPR变得更加明显。
 
@@ -207,7 +207,7 @@ PAPR和过采样：由于 $f_c$ 通常远大于1/T，因此符号周期为T的�
 
 则OFDM符号调制中IFFT输出信号x\[n\]可以用L倍插值的形式表示：
 
- $$ x^{\prime } [m]=\frac{1}{\sqrt{L\cdot N}}\sum_{k=0}^{L\cdot N-1} X^{\prime } [k]\cdot {{\mathrm{e}}}^{{\mathrm{j}}2\pi m\Delta fk/L\cdot N} ,m=0,1,\cdots ,NL-1 $$ 
+ $$ x^{\prime } [m]=\frac{1}{\sqrt{L\cdot N}}\sum_{k=0}^{L\cdot N-1} X^{\prime } [k]\cdot {\mathrm{e}}^{\mathrm{j}2\pi m\Delta fk/L\cdot N} ,m=0,1,\cdots ,NL-1 $$ 
 
 其中， $X^{\prime } [k]= \begin{cases} X[k], & 0\le k<N/2,NL-N/2<k<NL\\ 0, & \textrm{其他} \end{cases}$ ，N、Δf和X\[k\]分别表示FFT的大小(或子载波总数)、子载波间隔和子载波k上的复符号。
 
@@ -360,21 +360,21 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 ### SIMO和MISO信道容量
 
-对于具有一根发射天线、 $N_{\mathrm{R}\mathrm{x}}$ 根接收天线的 SIMO 信道，信道增益为 $h\in {\mathbb{C}}^{N_{\mathrm{R}\mathrm{x}} \times 1}$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{{\mathrm{F}}}^2$ 。不论发射机已知或者未知 CSI，信道容量都为：
+对于具有一根发射天线、 $N_{\mathrm{R}\mathrm{x}}$ 根接收天线的 SIMO 信道，信道增益为 $h\in {\mathbb{C}}^{N_{\mathrm{R}\mathrm{x}} \times 1}$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{\mathrm{F}}^2$ 。不论发射机已知或者未知 CSI，信道容量都为：
 
- $$ C_{\mathrm{S}\mathrm{I}\mathrm{M}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
+ $$ C_{\mathrm{S}\mathrm{I}\mathrm{M}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{\mathrm{F}}^2 ) $$ 
 
 可以看出，信道容量随天线数量对数增加；此外，只能发射一个数据流，且发射机对CSI的获取根本不能改善信道容量。
 
 在 MISO 信道下，信道增益为 $h\in {\mathbb{C}}^{1\times N_{\mathrm{x}} }$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{\mathrm{F}}^2$ 。当发射机未知 CSI时，信道容量为：
 
- $$ C_{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_{Tx} N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
+ $$ C_{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_{Tx} N_0 }\|h{\|}_{\mathrm{F}}^2 ) $$ 
 
 可以看出，MISO信道容量与SISO信道容量相同。人们可能会问:当与单发射天线系统的容量相同时，多发射天线系统的优势是什么?尽管两个系统能够获得相同的最大传输速率，但是有多种方法利用多天线。例如，空时编码技术可以提高传输的可靠性，这将在下一章中进行讨论。
 
-当发射机可以获得CSI(h已知)时，可以把发射功率集中于当前信道的某个特定模式。换句话说，发射 $(h^{{\mathrm{H}}} /\|h\|)x$ 而不是直接发射x。接收信号可以表示为：
+当发射机可以获得CSI(h已知)时，可以把发射功率集中于当前信道的某个特定模式。换句话说，发射 $(h^{\mathrm{H}} /\|h\|)x$ 而不是直接发射x。接收信号可以表示为：
 
- $$ y=\sqrt{E_x }h\cdot \frac{h^{{\mathrm{H}}} }{\|h\|}x+z=\sqrt{E_x }\|h\|x+z $$ 
+ $$ y=\sqrt{E_x }h\cdot \frac{h^{\mathrm{H}} }{\|h\|}x+z=\sqrt{E_x }\|h\|x+z $$ 
 
 上式中接收信号的功率提高了NTx倍，因此信道容量为：
 
@@ -428,11 +428,11 @@ MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO
 
 # 空间复用MIMO系统的信号检测
 
-与上一章中使用天线分集技术的MIMO系统相比，空间复用MIMO(SM(spatial modulation)\-MIMO)系统能够以更高的速率发送数据。对于SM\-MIMO系统，接收机的空间解复用或信号检测是一项具有挑战的任务。在这一章中,我们讨论SM\-MIMO系统的信号检测技术。考虑下图中的 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ MIMO系统。令H表示一个信道矩阵，其中第(j,i)个元素hji表示第i根发射天线和第j根接收天线之间的信道增益， $j=1,2,\cdots,N_{\textrm{Rx}}，i=1,2,\cdots,N_{\textrm{Tx}}$ 。将空间复用的用户数据和相应的接收信号分别表示为 $\mathit{\mathbf{x}}={\left\lbrack x_1 ,x_2 ,\cdots ,x_{{\mathrm{N}}_{\mathrm{Tx}} } \right\rbrack }^T$ 和 $\mathit{\mathbf{y}}={\left\lbrack y_1 ,y_2 ,\cdots ,y_{{\mathrm{N}}_{\textrm{Rx}} } \right\rbrack }^T$ ，其中 $x_i$ 和 $y_j$ 为分别表示第i根发射天线的发射信号和第j根接收天线的接收信号。令 $z_j$ 表示第j根接收天线的加性高斯白噪声，方差为 $\sigma_z^2$ 。令 $h_i$ 表示信道矩阵H的第i个列向量，那么 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ 的MIMO系统可以表示为：
+与上一章中使用天线分集技术的MIMO系统相比，空间复用MIMO(SM(spatial modulation)\-MIMO)系统能够以更高的速率发送数据。对于SM\-MIMO系统，接收机的空间解复用或信号检测是一项具有挑战的任务。在这一章中,我们讨论SM\-MIMO系统的信号检测技术。考虑下图中的 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ MIMO系统。令H表示一个信道矩阵，其中第(j,i)个元素hji表示第i根发射天线和第j根接收天线之间的信道增益， $j=1,2,\cdots,N_{\textrm{Rx}}，i=1,2,\cdots,N_{\textrm{Tx}}$ 。将空间复用的用户数据和相应的接收信号分别表示为 $\mathit{\mathbf{x}}={\left\lbrack x_1 ,x_2 ,\cdots ,x_{\mathrm{N}_{\mathrm{Tx}} } \right\rbrack }^T$ 和 $\mathit{\mathbf{y}}={\left\lbrack y_1 ,y_2 ,\cdots ,y_{\mathrm{N}_{\textrm{Rx}} } \right\rbrack }^T$ ，其中 $x_i$ 和 $y_j$ 为分别表示第i根发射天线的发射信号和第j根接收天线的接收信号。令 $z_j$ 表示第j根接收天线的加性高斯白噪声，方差为 $\sigma_z^2$ 。令 $h_i$ 表示信道矩阵H的第i个列向量，那么 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ 的MIMO系统可以表示为：
 
  $$ y=Hx+z=h_1 x_1 +h_2 x_2 +\cdots +h_{N_{\mathrm{T}\mathrm{x}} } x_{N_{\mathrm{T}\mathrm{x}} } +z $$ 
 
-其中， $\mathit{\mathbf{z}}={\left\lbrack z_1 ,z_2 ,\cdots ,z_{{\mathrm{N}}_{\textrm{Rx}} } \right\rbrack }^T$ 。
+其中， $\mathit{\mathbf{z}}={\left\lbrack z_1 ,z_2 ,\cdots ,z_{\mathrm{N}}_{\textrm{Rx} } \right\rbrack }^T$ 。
 
 ![空间复用MIMO系统](./img/Fig_11.1.png)
 
