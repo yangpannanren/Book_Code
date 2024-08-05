@@ -318,15 +318,15 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 ## 确定性MIMO信道容量
 
-对于 $N_{\mathrm{Tx}}$ 根发射天线和 $N_{\mathrm{Rx}}$ 根接收天线的MIMO 系统，时不变窄带无线信道可以表示成 $N_{\mathrm{Rx}}$ x $N_{\mathrm{Tx}}$ 的确定性矩阵 $H\in {\mathbb{C}}^{N_{\mathrm{Rx}} \times N_{\mathrm{Tx}} }$ 。对于由 $N_{{\mathrm{T}\mathrm{x}}}$ 个独立符号 $x_1 ,x_1 ,\cdots ,x_{N_{{\mathrm{T}\mathrm{x}}} }$ 构成的发射符号向量 $x\in {\mathbb{C}}^{N_{{\mathrm{T}\mathrm{x}}} \times 1}$ ，接收信号 $y\in {\mathbb{C}}^{N_{{\mathrm{R}\mathrm{x}}} \times 1}$ 可以表示为：
+对于 $N_{\mathrm{Tx}}$ 根发射天线和 $N_{\mathrm{Rx}}$ 根接收天线的MIMO 系统，时不变窄带无线信道可以表示成 $N_{\mathrm{Rx}}$ x $N_{\mathrm{Tx}}$ 的确定性矩阵 $H\in {\mathbb{C}}^{N_{\mathrm{Rx}} \times N_{\mathrm{Tx}} }$ 。对于由 $N_{\mathrm{T}\mathrm{x}}$ 个独立符号 $x_1 ,x_1 ,\cdots ,x_{N_{\mathrm{T}\mathrm{x}} }$ 构成的发射符号向量 $x\in {\mathbb{C}}^{N_{\mathrm{T}\mathrm{x}} \times 1}$ ，接收信号 $y\in {\mathbb{C}}^{N_{\mathrm{R}\mathrm{x}} \times 1}$ 可以表示为：
 
- $$ y=\sqrt{\frac{E_x }{N_{{\mathrm{T}\mathrm{x}}} }}Hx+z $$ 
+ $$ y=\sqrt{\frac{E_x }{N_{\mathrm{T}\mathrm{x}} }}Hx+z $$ 
 
-其中， $z=(z_1 ,z_1 ,\cdots ,z_{N_{{\mathrm{R}\mathrm{x}}} } )^{{\mathrm{T}}} \in {\mathbb{C}}^{N_{Rx} \times 1}$ 是噪声向量，假设服从零均值循环对称复高斯(Zero Mean Circular Symmetric Complex Gaussian，ZMCSCG)分布。对于任意的θ，当 $e^{j\theta } z$ 与z具有相同的分布时，向量z被称为是循环对称的。发送信号向量的自相关矩阵定义为：
+其中， $z=(z_1 ,z_1 ,\cdots ,z_{N_{\mathrm{R}\mathrm{x}} } )^{\mathrm{T}} \in {\mathbb{C}}^{N_{Rx} \times 1}$ 是噪声向量，假设服从零均值循环对称复高斯(Zero Mean Circular Symmetric Complex Gaussian，ZMCSCG)分布。对于任意的θ，当 $e^{j\theta } z$ 与z具有相同的分布时，向量z被称为是循环对称的。发送信号向量的自相关矩阵定义为：
 
- $$ R_{xx} =E\lbrace xx^{{\mathrm{H}}} \rbrace $$ 
+ $$ R_{xx} =E\lbrace xx^{\mathrm{H}} \rbrace $$ 
 
-当假设每一根发射天线的发射功率为1时，有 ${\mathrm{T}\mathrm{r}}(R_{xx} )=N_{{\mathrm{T}\mathrm{x}}}$ 。
+当假设每一根发射天线的发射功率为1时，有 ${\mathrm{T}\mathrm{r}}(R_{xx} )=N_{\mathrm{T}\mathrm{x}}$ 。
 
 ### 发射端已知CSI时的信道容量
 
