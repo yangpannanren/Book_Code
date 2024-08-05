@@ -448,11 +448,11 @@ MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO
 
 ZF 技术使用下面的加权矩阵消除干扰（相当于逆转信道）：
 
- $$ W_{{\mathrm{Z}\mathrm{F}}} ={\left(H^{{\mathrm{H}}} H\right)}^{-1} H^{{\mathrm{H}}} $$ 
+ $$ W_{\mathrm{Z}\mathrm{F}} ={\left(H^{\mathrm{H}} H\right)}^{-1} H^{\mathrm{H}} $$ 
 
 检测后的噪声功率的期望值为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 } $$ 
+ $$ E\lbrace \|{\tilde{z} }_{\mathrm{Z}\mathrm{F}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 } $$ 
 
 其中， $\sigma_i$ 为矩阵 ${\tilde{z} }_{\textrm{ZF}}$ 的奇异值。
 
@@ -460,7 +460,7 @@ ZF 技术使用下面的加权矩阵消除干扰（相当于逆转信道）：
 
 MMSE能够最大化检测后的SINR，其加权矩阵为：
 
- $$ W_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} =(H^{{\mathrm{H}}} H+\sigma_z^2 I)^{-1} H^{{\mathrm{H}}} $$ 
+ $$ W_{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} =(H^{\mathrm{H}} H+\sigma_z^2 I)^{-1} H^{\mathrm{H}} $$ 
 
 注意MMSE接收机需要噪声的统计信息 $\sigma_z^2$ 。检测后的噪声功率的期望值为：
 
@@ -470,9 +470,9 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 当信道矩阵的条件数很大，即最小的奇异值非常小时，在线性滤波的过程中噪声增强的影响将会更加显著。对于ZF和MMSE线性检测器，由最小奇异值引起噪声增强的影响分别为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 }\approx \frac{\sigma_z^2 }{\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 },{\mathrm{Z}\mathrm{F}} $$ 
+ $$ E\lbrace \|{\tilde{z} }_{\mathrm{Z}\mathrm{F}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 }\approx \frac{\sigma_z^2 }{\sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 },{\mathrm{Z}\mathrm{F}} $$ 
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 }{{\left(\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 +\sigma_z^2 \right)}^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
+ $$ E\lbrace \|{\tilde{z} }_{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 }{{\left(\sigma_{\mathrm{m}\mathrm{i}\mathrm{n}}^2 +\sigma_z^2 \right)}^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
 
 其中， $\sigma_{\min }^2 =\min \left\lbrace \sigma_1^2 ,\sigma_2^2 ,\cdots ,\sigma_{N_{\mathrm{T}\mathrm{x}} }^2 \right\rbrace$ 。观察上面两式，很明显噪声增强的影响在ZF滤波中比在MMSE滤波中更加显著。如果 $\sigma_{\min }^2 \gg \sigma_z^2$ ，那么 $\sigma_{\min }^2 +\sigma_z^2 \approx \sigma_{\min }^2$ ，所以在两种线性滤波中噪声增强的影响是相同的。由于ZF技术实现的分集阶数为N\-N+1,在单发射天线和多接收天线的情况下，ZF接收机相当于一个最大比合并(MRC)接收机，可以实现的分集阶数为Nx。
 
