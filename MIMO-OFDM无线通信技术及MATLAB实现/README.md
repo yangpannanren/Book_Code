@@ -350,7 +350,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 ### 发射端未知CSI时的信道容量
 
-当发射机未知H时，在所有发射天线上平均分配功率。也就是说，发射信号向量x的自相关函数为 $R_{xx} =I_{N_{{\mathrm{T}\mathrm{x}}} }$ ，在这种情况下，信道容量可以表示为：
+当发射机未知H时，在所有发射天线上平均分配功率。也就是说，发射信号向量x的自相关函数为 $R_{xx} =I_{N_{\mathrm{T}\mathrm{x}} }$ ，在这种情况下，信道容量可以表示为：
 
  $$ C=\log_2 \det (I_{N_{\mathrm{R}\mathrm{x}} } +\frac{E_x }{N_{\mathrm{T}\mathrm{x}} N_0 }HH^{\mathrm{H}} ) $$ 
 
@@ -366,7 +366,7 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 可以看出，信道容量随天线数量对数增加；此外，只能发射一个数据流，且发射机对CSI的获取根本不能改善信道容量。
 
-在 MISO 信道下，信道增益为 $h\in {\mathbb{C}}^{1\times N_{\mathrm{T}\mathrm{x}} }$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{\mathrm{F}}^2$ 。当发射机未知 CSI时，信道容量为：
+在 MISO 信道下，信道增益为 $h\in {\mathbb{C}}^{1\times N_{\mathrm{x}} }$ ，因此r=1， $\lambda_1 ={\left\|h\right\|}_{\mathrm{F}}^2$ 。当发射机未知 CSI时，信道容量为：
 
  $$ C_{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}} =\log_2 (1+\frac{E_x }{N_{Tx} N_0 }\|h{\|}_{{\mathrm{F}}}^2 ) $$ 
 
@@ -378,19 +378,19 @@ IFDMA和LFDMA与没有进行DF扩频的OFDMA相比，PAPR降低。
 
 上式中接收信号的功率提高了NTx倍，因此信道容量为：
 
- $$ C_{{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 )=\log_2 (1+\frac{E_x }{N_0 }N_{{\mathrm{T}\mathrm{x}}} ) $$ 
+ $$ C_{{\mathrm{M}\mathrm{I}\mathrm{S}\mathrm{O}}} =\log_2 (1+\frac{E_x }{N_0 }\|h{\|}_{{\mathrm{F}}}^2 )=\log_2 (1+\frac{E_x }{N_0 }N_{\mathrm{T}\mathrm{x}} ) $$ 
 
 ## 随机MIMO信道容量
 
 MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO 信道的容量也是随机时变的。换句话说，MIMO 信道的容量可以通过它的时间平均给出。在实际中，假设随机信道是遍历过程。然后，考虑MIMO信道容量的统计概念：
 
- $$ \overline{C} =E\lbrace C(H)\rbrace =E\lbrace \max_{{\mathrm{T}\mathrm{r}}(R_{{\mathrm{x}\mathrm{x}}} )=N_{{\mathrm{T}\mathrm{x}}} } \log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_{{\mathrm{x}}} }{N_{{\mathrm{T}\mathrm{x}}} N_0 }{HR}_{{\mathrm{x}\mathrm{x}}} H^{{\mathrm{H}}} )\rbrace $$ 
+ $$ \overline{C} =E\lbrace C(H)\rbrace =E\lbrace \max_{\mathrm{T}\mathrm{r}(R_{{\mathrm{x}\mathrm{x}}} )=N_{\mathrm{T}\mathrm{x}} } \log_2 \det (I_{N_{{\mathrm{R}\mathrm{x}}} } +\frac{E_{{\mathrm{x}}} }{N_{\mathrm{T}\mathrm{x}} N_0 }{HR}_{{\mathrm{x}\mathrm{x}}} H^{{\mathrm{H}}} )\rbrace $$ 
 
  $\bar{C}$ 通常被称为遍历信道容量。
 
 信道容量的另一个统计概念是信道的中断容量。中断概率定义为：
 
- $$ P_{{\mathrm{o}\mathrm{u}\mathrm{t}}} (R)=\Pr (C\left(H\right)<R) $$ 
+ $$ P_{\mathrm{o}\mathrm{u}\mathrm{t}} (R)=\Pr (C\left(H\right)<R) $$ 
 
 换句话说，如果对传输速率为R bps/Hz的数据，不能实现任意小的译码差错概率，那么这个系统就处于中断状态。信道的ε中断容量定义为：使上式的中断概率小于ε的可能的最大数据速率。换句话说，信道的中断容量就是满足 $P(C(H)≤C\epsilon)=\epsilon$ 所对应的Cε。
 
@@ -430,7 +430,7 @@ MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO
 
 与上一章中使用天线分集技术的MIMO系统相比，空间复用MIMO(SM(spatial modulation)\-MIMO)系统能够以更高的速率发送数据。对于SM\-MIMO系统，接收机的空间解复用或信号检测是一项具有挑战的任务。在这一章中,我们讨论SM\-MIMO系统的信号检测技术。考虑下图中的 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ MIMO系统。令H表示一个信道矩阵，其中第(j,i)个元素hji表示第i根发射天线和第j根接收天线之间的信道增益， $j=1,2,\cdots,N_{\textrm{Rx}}，i=1,2,\cdots,N_{\textrm{Tx}}$ 。将空间复用的用户数据和相应的接收信号分别表示为 $\mathit{\mathbf{x}}={\left\lbrack x_1 ,x_2 ,\cdots ,x_{{\mathrm{N}}_{\mathrm{Tx}} } \right\rbrack }^T$ 和 $\mathit{\mathbf{y}}={\left\lbrack y_1 ,y_2 ,\cdots ,y_{{\mathrm{N}}_{\textrm{Rx}} } \right\rbrack }^T$ ，其中 $x_i$ 和 $y_j$ 为分别表示第i根发射天线的发射信号和第j根接收天线的接收信号。令 $z_j$ 表示第j根接收天线的加性高斯白噪声，方差为 $\sigma_z^2$ 。令 $h_i$ 表示信道矩阵H的第i个列向量，那么 $N_{\textrm{Rx}} \times N_{\textrm{Tx}}$ 的MIMO系统可以表示为：
 
- $$ y=Hx+z=h_1 x_1 +h_2 x_2 +\cdots +h_{N_{{\mathrm{T}\mathrm{x}}} } x_{N_{{\mathrm{T}\mathrm{x}}} } +z $$ 
+ $$ y=Hx+z=h_1 x_1 +h_2 x_2 +\cdots +h_{N_{\mathrm{T}\mathrm{x}} } x_{N_{\mathrm{T}\mathrm{x}} } +z $$ 
 
 其中， $\mathit{\mathbf{z}}={\left\lbrack z_1 ,z_2 ,\cdots ,z_{{\mathrm{N}}_{\textrm{Rx}} } \right\rbrack }^T$ 。
 
@@ -440,7 +440,7 @@ MIMO 信道通常是随机变化的，因此H是随机矩阵，这意味着 MIMO
 
 线性信号检测方法将来自目标发射天线的期望信息流当做有用信息，同时把其他发射信号当做干扰。因此，在检测来自目标发射天线的期望信号的过程中，要最小化或消除来自其他发送天线的干扰信号。为了检测来自每根天线的期望信号，利用一个加权矩阵实现逆转信道的作用：
 
- $$ \tilde{x} =[{\tilde{x} }_1 ~{\tilde{x} }_2 ~\cdots ~{\tilde{x} }_{N_T } ]^{{\mathrm{T}}} =Wy $$ 
+ $$ \tilde{x} =[{\tilde{x} }_1 ~{\tilde{x} }_2 ~\cdots ~{\tilde{x} }_{N_T } ]^{\mathrm{T}} =Wy $$ 
 
 也就是说，由接收信号的一个线性组合完成对每个符号的检测。基本的线性检测方法包括迫零(ZF)技术和最小均方误差(MMSE)技术。
 
@@ -452,7 +452,7 @@ ZF 技术使用下面的加权矩阵消除干扰（相当于逆转信道）：
 
 检测后的噪声功率的期望值为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{{\mathrm{T}\mathrm{x}}} } \frac{\sigma_z^2 }{\sigma_i^2 } $$ 
+ $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 } $$ 
 
 其中， $\sigma_i$ 为矩阵 ${\tilde{z} }_{\textrm{ZF}}$ 的奇异值。
 
@@ -464,17 +464,17 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 注意MMSE接收机需要噪声的统计信息 $\sigma_z^2$ 。检测后的噪声功率的期望值为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{{\mathrm{T}\mathrm{x}}} } \frac{\sigma_z^2 \sigma_i^2 }{(\sigma_i^2 +\sigma_z^2 )^2 } $$ 
+ $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{(\sigma_i^2 +\sigma_z^2 )^2 } $$ 
 
 其中， $\sigma_i$ 为矩阵 ${\tilde{z} }_{\textrm{MMSE}}$ 的奇异值。
 
 当信道矩阵的条件数很大，即最小的奇异值非常小时，在线性滤波的过程中噪声增强的影响将会更加显著。对于ZF和MMSE线性检测器，由最小奇异值引起噪声增强的影响分别为：
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{{\mathrm{T}\mathrm{x}}} } \frac{\sigma_z^2 }{\sigma_i^2 }\approx \frac{\sigma_z^2 }{\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 },{\mathrm{Z}\mathrm{F}} $$ 
+ $$ E\lbrace \|{\tilde{z} }_{{\mathrm{Z}\mathrm{F}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 }{\sigma_i^2 }\approx \frac{\sigma_z^2 }{\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 },{\mathrm{Z}\mathrm{F}} $$ 
 
- $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{{\mathrm{T}\mathrm{x}}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 }{{\left(\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 +\sigma_z^2 \right)}^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
+ $$ E\lbrace \|{\tilde{z} }_{{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}}} {\|}_2^2 \rbrace =\sum_{i=1}^{N_{\mathrm{T}\mathrm{x}} } \frac{\sigma_z^2 \sigma_i^2 }{{\left(\sigma_i^2 +\sigma_z^2 \right)}^2 }\approx \frac{\sigma_z^2 \sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 }{{\left(\sigma_{{\mathrm{m}\mathrm{i}\mathrm{n}}}^2 +\sigma_z^2 \right)}^2 },{\mathrm{M}\mathrm{M}\mathrm{S}\mathrm{E}} $$ 
 
-其中， $\sigma_{\min }^2 =\min \left\lbrace \sigma_1^2 ,\sigma_2^2 ,\cdots ,\sigma_{N_{{\mathrm{T}\mathrm{x}}} }^2 \right\rbrace$ 。观察上面两式，很明显噪声增强的影响在ZF滤波中比在MMSE滤波中更加显著。如果 $\sigma_{\min }^2 \gg \sigma_z^2$ ，那么 $\sigma_{\min }^2 +\sigma_z^2 \approx \sigma_{\min }^2$ ，所以在两种线性滤波中噪声增强的影响是相同的。由于ZF技术实现的分集阶数为N\-N+1,在单发射天线和多接收天线的情况下，ZF接收机相当于一个最大比合并(MRC)接收机，可以实现的分集阶数为Nx。
+其中， $\sigma_{\min }^2 =\min \left\lbrace \sigma_1^2 ,\sigma_2^2 ,\cdots ,\sigma_{N_{\mathrm{T}\mathrm{x}} }^2 \right\rbrace$ 。观察上面两式，很明显噪声增强的影响在ZF滤波中比在MMSE滤波中更加显著。如果 $\sigma_{\min }^2 \gg \sigma_z^2$ ，那么 $\sigma_{\min }^2 +\sigma_z^2 \approx \sigma_{\min }^2$ ，所以在两种线性滤波中噪声增强的影响是相同的。由于ZF技术实现的分集阶数为N\-N+1,在单发射天线和多接收天线的情况下，ZF接收机相当于一个最大比合并(MRC)接收机，可以实现的分集阶数为Nx。
 
 ## OSIC信号检测
 
@@ -495,7 +495,7 @@ MMSE能够最大化检测后的SINR，其加权矩阵为：
 
 最大似然(Maximum likelihood，ML)检测计算接收信号向量和所有可能的后处理向量(所有可能的发射信号向量和给定信道H的乘积)之间的欧氏距离，并找到一个最小的距离。令C和 $N_{\textrm{Tx}}$ 分别表示信号的星座集和发射天线数。ML检测将发射的信号向量x估计为：
 
- $$ {\hat{x} }_{{\mathrm{M}\mathrm{L}}} =\arg \min_{x\in C^{N_{{\mathrm{T}\mathrm{x}}} } } \|y-Hx{\|}^2 $$ 
+ $$ {\hat{x} }_{{\mathrm{M}\mathrm{L}}} =\arg \min_{x\in C^{N_{\mathrm{T}\mathrm{x}} } } \|y-Hx{\|}^2 $$ 
 
 其中， $\|y-Hx{\|}^2$ 是ML的度量。当所有的发射向量等可能时，ML方法达到最大后验概率(MAP)检测的最佳性能。然而它的复杂度随调制阶数和/或发射天线数量的增加而上升，总共需要计算 $|C|^{N_{\mathrm{T}\mathrm{x}} }$ 个ML度量，呈指数上升。
 
@@ -565,7 +565,7 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 对所有可能的天线组合计算上式，可以实现Q根天线的最优选择。为了最大化系统容，必须选择具有最大容量的天线，即：
 
- $$ \lbrace p_1^{{\mathrm{o}\mathrm{p}\mathrm{t}}} ,p_1^{{\mathrm{o}\mathrm{p}\mathrm{t}}} ,\cdots ,p_Q^{{\mathrm{o}\mathrm{p}\mathrm{t}}} \rbrace =\underset{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace \in A_Q }{\arg \max } C_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } $$ 
+ $$ \lbrace p_1^{\mathrm{o}\mathrm{p}\mathrm{t}} ,p_1^{\mathrm{o}\mathrm{p}\mathrm{t}} ,\cdots ,p_Q^{\mathrm{o}\mathrm{p}\mathrm{t}} \rbrace =\underset{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace \in A_Q }{\arg \max } C_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } $$ 
 
 其中， $A_Q$ 表示由Q根选定天线所有可能的组合形成的集合。注意 $|A_Q |={\left(\begin{array}{c} N_{\mathrm{T}\mathrm{x}} \\ Q \end{array}\right)}$ ，考虑上式中所有可能的天线组合涉及极高的复杂度，特别是当 $N_{\textrm{Tx}}$ 很大时。因此，需要设计一些能够降低复杂度的方法。
 
@@ -579,11 +579,11 @@ MIMO系统的优点是在不增加额外发射功率和频谱资源的前提下�
 
 在上节中，将信道容量作为天线选择的设计准则。也可以将差错性能作为设计准则。换句话说，选择发射天线以使差错概率最小。令 $\mathrm{Pr}\left(C_i \to C_j \right|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } )$ 表示在给定信道的条件下，发射空\-时码字为 $C_i$ ,而解码为 $C_j$ 的成对差错概率。对于一个由H的Q列组成的有效信道 $H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace }$ ，OSTBC的成对差错概率的上限为：
 
- $$ {\mathrm{P}\mathrm{r}}\biggl(C_i \to C_j \bigg|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \biggr)=Q\left(\sqrt{\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{2N_{{\mathrm{T}\mathrm{x}}} }}\right)\le \exp \left(-\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{4N_{{\mathrm{T}\mathrm{x}}} }\right) $$ 
+ $$ {\mathrm{P}\mathrm{r}}\biggl(C_i \to C_j \bigg|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } \biggr)=Q\left(\sqrt{\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{2N_{\mathrm{T}\mathrm{x}} }}\right)\le \exp \left(-\frac{\rho {\|H_{\lbrace p_1 ,p_2 ,\cdots ,p_Q \rbrace } E_{i,j} \|}_{{\mathrm{F}}}^2 }{4N_{\mathrm{T}\mathrm{x}} }\right) $$ 
 
 选择Q根发射天线，使上式中的上限最小，或等价于：
 
- $$ \left\lbrace p_1^{{\mathrm{o}\mathrm{p}\mathrm{t}}} ,p_2^{{\mathrm{o}\mathrm{p}\mathrm{t}}} ,\cdots ,p_Q^{{\mathrm{o}\mathrm{p}\mathrm{t}}} \right\rbrace =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } E_{i,j} \right\|}_{{\mathrm{F}}}^2 =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } \right\|}_{{\mathrm{F}}}^2 $$ 
+ $$ \left\lbrace p_1^{\mathrm{o}\mathrm{p}\mathrm{t}} ,p_2^{\mathrm{o}\mathrm{p}\mathrm{t}} ,\cdots ,p_Q^{\mathrm{o}\mathrm{p}\mathrm{t}} \right\rbrace =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } E_{i,j} \right\|}_{{\mathrm{F}}}^2 =\arg \max_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace \in A_Q } {\left\|H_{\left\lbrace p_1 ,p_2 ,\cdots ,p_Q \right\rbrace } \right\|}_{{\mathrm{F}}}^2 $$ 
 
 在的推导过程中使用了误差矩阵 $E_{i,j}$ ，的性质： $E_{i,j} E_{i,j}^{\mathrm{H}} =aI$ ，其中a是常数。从上式可以看出，为了最小化差错概率，选择最高列范数对应的天线。在接收端，选择的Q根天线 $\lbrace p_i \rbrace_{i=1}^Q$ 的平均SNR为：
 
