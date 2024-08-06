@@ -4,7 +4,7 @@
 
 > 《MIMO-OFDM无线通信技术及MATLAB实现》书籍笔记及代码
 
-> 代码链接：[Code_Link](https://github.com/yangpannanren/Book_Code/tree/main/MIMO-OFDM-Wireless-Communication)
+> 代码链接：[Code_Link](https://github.com/yangpannanren/Book_Code/tree/main/MIMO-OFDM无线通信技术及MATLAB实现)
 
 [TOC]
 
