@@ -1,4 +1,4 @@
-﻿# 电子战辐射源检测与定位 / Nicholas A. O'Donoughue 编著
+﻿# 电子战辐射源检测与定位 / Nicholas A. O'Donoughue
 
 作者：洋盘男人
 

@@ -1,4 +1,4 @@
-# Basic Radar Analysis (2nd)
+# Basic Radar Analysis (2nd) / Mervin Budge, Shawn German
 
 作者：洋盘男人
 

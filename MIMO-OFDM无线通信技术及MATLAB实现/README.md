@@ -1,4 +1,4 @@
-﻿# MIMO-OFDM无线通信技术及MATLAB实现
+﻿# MIMO-OFDM无线通信技术及MATLAB实现 / Yong Soo Cho, Jaekwon Kim, Won Young Yang, Chung G.Kang
 
 作者：洋盘男人
 
