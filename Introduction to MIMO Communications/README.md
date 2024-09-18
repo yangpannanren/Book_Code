@@ -1,4 +1,10 @@
-# Introduction to MIMO Communications by Hampton - Code Repository
+﻿# Introduction to MIMO Communications / Jerry R. Hampton
+
+作者：洋盘男人
+
+> 《Introduction to MIMO Communications》代码
+
+> 代码地址：[Code_Link](https://github.com/yangpannanren/Book_Code/tree/main/Introduction%20to%20MIMO%20Communications)
 
 ## Overview
 This repository comprises all the code files associated with the problems present in each chapter of the book "Introduction to MIMO Communications" by Jerry R. Hampton. The repository is designed to provide practical insights to readers who are looking to understand the theories presented in the book and apply them in real-world scenarios.
