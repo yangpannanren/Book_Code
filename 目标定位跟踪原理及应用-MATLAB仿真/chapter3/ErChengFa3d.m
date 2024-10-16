@@ -48,5 +48,5 @@ axis square;view(3);grid on;
 
 %子函数,计算两点间的距离
 function [dist,dist2]= DIST(A,B)
-dist2=(A.x-B.x)*2+(A.y-B.y)^2+(A.z-B.z)^2;
+dist2=(A.x-B.x)^2+(A.y-B.y)^2+(A.z-B.z)^2;
 dist=sqrt(dist2);
